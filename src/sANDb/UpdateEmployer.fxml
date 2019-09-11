@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="537.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdateEmployerController">
+   <children>
+      <Label fx:id="image" layoutX="14.0" layoutY="54.0" prefHeight="180.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;" />
+      <Button id="rich-blue" fx:id="update" layoutX="14.0" layoutY="247.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="UPDATE IMAGE">
+          
+          <graphic>
+              
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/update-file.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>
+          
+      </Button>
+      <Button id="round-red" fx:id="cancel" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="79.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+          <graphic>
+              
+            <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/return.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>         
+      </Button>
+      <Button id="green" fx:id="save" layoutX="323.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="SAVE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+          <graphic>
+              
+            <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>         
+      </Button>
+      <TextField fx:id="fullname" layoutX="251.0" layoutY="54.0" prefHeight="40.0" prefWidth="250.0" promptText="Fullname" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="phone" layoutX="251.0" layoutY="111.0" prefHeight="40.0" prefWidth="250.0" promptText="Phone Number" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="salary" layoutX="251.0" layoutY="166.0" prefHeight="40.0" prefWidth="250.0" promptText="Salary" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <CheckBox fx:id="admin" layoutX="251.0" layoutY="301.0" mnemonicParsing="false" text="Make an admin" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </CheckBox>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/name.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/phone.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/salary.png" />
+         </image>
+      </ImageView>
+      <DatePicker fx:id="joinedDate" editable="false" layoutX="251.0" layoutY="248.0" prefHeight="40.0" prefWidth="250.0" />
+      <Label layoutX="251.0" layoutY="222.0" prefHeight="20.0" prefWidth="91.0" text="JOINED :" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

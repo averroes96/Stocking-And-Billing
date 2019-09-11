@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="993.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.EmployerRecordsController">
+   <children>
+      <TableView fx:id="recordsTable" layoutX="279.0" layoutY="48.0" prefHeight="320.0" prefWidth="699.0" style="-fx-background-color: white;">
+        <columns>
+          <TableColumn fx:id="date" prefWidth="164.0" text="Date" />
+            <TableColumn fx:id="payment" prefWidth="143.0" text="Payment" />
+          <TableColumn fx:id="absPres" prefWidth="147.0" text="Present/Absent" />
+            <TableColumn fx:id="recordAct1" prefWidth="121.0" text="Action 1" />
+            <TableColumn fx:id="recordAct2" prefWidth="120.0" text="Action 2" />
+        </columns>
+      </TableView>
+      <ChoiceBox fx:id="selectedMonth" layoutX="798.0" layoutY="381.0" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: white; -fx-cursor: hand;" />
+      <Pane layoutX="17.0" layoutY="48.0" prefHeight="472.0" prefWidth="249.0" style="-fx-background-color: white;">
+         <children>
+            <Label fx:id="fullname" layoutX="25.0" layoutY="20.0" prefHeight="40.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="image" layoutX="25.0" layoutY="72.0" prefHeight="150.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="phone" layoutX="75.0" layoutY="236.0" prefHeight="40.0" prefWidth="150.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button id="green" fx:id="newRecordButton" layoutX="25.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="NEW RECORD">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/add.png" />
+                     </image>
+                  </ImageView>             
+                   
+               </graphic>         
+            </Button>
+            <Label fx:id="joinDate" layoutX="75.0" layoutY="286.0" prefHeight="40.0" prefWidth="150.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="33.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/joined-blue.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="33.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/phone-blue.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="salary" layoutX="75.0" layoutY="336.0" prefHeight="40.0" prefWidth="150.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="32.0" fitWidth="31.0" layoutX="30.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/salary-blue.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <TitledPane animated="false" layoutX="279.0" layoutY="381.0" prefHeight="139.0" prefWidth="515.0" style="-fx-animated: true;" text="STATS">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Days Absent this month :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total paid amount this month :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products sold this month :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="daysAbsent" layoutX="227.0" layoutY="9.0" prefHeight="30.0" prefWidth="100.0" style="-fx-alignment: center;">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="paidAmount" layoutX="227.0" layoutY="39.0" prefHeight="30.0" prefWidth="100.0" style="-fx-alignment: center;">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="prodSold" layoutX="227.0" layoutY="69.0" prefHeight="30.0" prefWidth="100.0" style="-fx-alignment: center;">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TitledPane>
+      <Button id="round-red" layoutX="447.0" layoutY="556.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="100.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/return.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>          
+         
+      </Button>
+   </children>
+   <stylesheets>
+      <URL value="@Layout/custom.css" />
+      <URL value="@Layout/buttons.css" />
+   </stylesheets>
+</AnchorPane>

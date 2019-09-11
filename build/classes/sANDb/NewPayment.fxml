@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="396.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewPaymentController">
+   <children>
+      <TextField fx:id="paidField" layoutX="79.0" layoutY="29.0" prefHeight="37.0" prefWidth="250.0" promptText="Paid" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="restField" layoutX="79.0" layoutY="81.0" prefHeight="37.0" prefWidth="250.0" promptText="Rest" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="referenceField" layoutX="79.0" layoutY="205.0" prefHeight="37.0" prefWidth="250.0" promptText="Reference" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="colorField" layoutX="79.0" layoutY="257.0" prefHeight="37.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Slider fx:id="sizeSlider" layoutX="130.0" layoutY="311.0" prefHeight="14.0" prefWidth="175.0" />
+      <Button id="green" fx:id="addPayment" layoutX="106.0" layoutY="377.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="196.0" text="ADD PAYMENT">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="85.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>
+      </Button>
+      <Button id="round-red" fx:id="cancel" layoutX="172.0" layoutY="424.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="35.0" prefWidth="65.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="85.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/return.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>         
+      </Button>
+      <Label layoutX="85.0" layoutY="160.0" prefHeight="35.0" prefWidth="232.0" style="-fx-alignment: CENTER; -fx-text-fill: #ddd;" stylesheets="@Layout/buttons.css" text="PRODUCT INFORMATION">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentSize" layoutX="308.0" layoutY="301.0" prefHeight="35.0" prefWidth="42.0" style="-fx-alignment: CENTER; -fx-text-fill: #ddd;" stylesheets="@Layout/buttons.css">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="79.0" layoutY="301.0" prefHeight="35.0" prefWidth="48.0" style="-fx-alignment: CENTER; -fx-text-fill: #ddd;" stylesheets="@Layout/buttons.css" text="SIZE :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="85.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/payment.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="85.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/debt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="85.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/reference.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="85.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/color.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

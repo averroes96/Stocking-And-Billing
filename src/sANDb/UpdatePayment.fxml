@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="371.0" prefWidth="400.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdatePaymentController">
+   <children>
+      <Button id="green" fx:id="saveButton" layoutX="113.0" layoutY="256.0" mnemonicParsing="false" onAction="#updatePay" prefHeight="40.0" prefWidth="200.0" text="SAVE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+             
+            <ImageView fitHeight="22.0" fitWidth="20.0" layoutX="94.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>
+      </Button>
+      <Button id="round-red" fx:id="cancelButton" layoutX="113.0" layoutY="309.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="200.0" text="CANCEL">
+          
+         <graphic>
+             
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="94.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/cancel.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>          
+          
+      </Button>      
+      <TextField fx:id="paidField" layoutX="88.0" layoutY="32.0" prefHeight="40.0" prefWidth="250.0" promptText="Paid" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="restField" layoutX="88.0" layoutY="92.0" prefHeight="40.0" prefWidth="250.0" promptText="Rest" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="dateField" editable="false" layoutX="138.0" layoutY="151.0" prefHeight="40.0" prefWidth="150.0" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="94.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/payment.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="94.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/debt.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

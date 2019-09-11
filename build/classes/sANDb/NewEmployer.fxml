@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="466.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewEmployerController">
+   <children>
+      <Label fx:id="image" layoutX="14.0" layoutY="56.0" prefHeight="150.0" prefWidth="180.0" style="-fx-alignment: center; -fx-background-color: #ddd;" />
+      <Button id="rich-blue" fx:id="upload" layoutX="14.0" layoutY="216.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="40.0" prefWidth="180.0" text="UPLOAD IMAGE">
+          
+          <graphic>
+            <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/upload.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>          
+          
+      </Button>
+      <TextField fx:id="fullname" layoutX="213.0" layoutY="56.0" prefHeight="41.0" prefWidth="240.0" promptText="Fullname" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="phone" layoutX="213.0" layoutY="111.0" prefHeight="41.0" prefWidth="240.0" promptText="Phone" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="salary" layoutX="213.0" layoutY="165.0" prefHeight="41.0" prefWidth="240.0" promptText="Salary" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="129.0" layoutY="14.0" text="PERSONAL INFORMATION" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="admin" layoutX="156.0" layoutY="425.0" mnemonicParsing="false" text="Make him an admin" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </CheckBox>
+      <TextField fx:id="username" layoutX="109.0" layoutY="318.0" prefHeight="41.0" prefWidth="250.0" promptText="Set Username" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="109.0" layoutY="367.0" prefHeight="41.0" prefWidth="250.0" promptText="Set Password" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </PasswordField>
+      <Label layoutX="131.0" layoutY="278.0" text="ACCOUNT INFORMATION" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button id="round-red" fx:id="cancel" cancelButton="true" layoutX="14.0" layoutY="505.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="73.0">
+          <graphic>
+            <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/return.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>
+          
+          
+      </Button>
+      <Button id="green" fx:id="sava" defaultButton="true" layoutX="272.0" layoutY="505.0" mnemonicParsing="false" onAction="#insertEmployer" prefHeight="40.0" prefWidth="180.0" text="ADD EMPLOYER">
+          
+          <graphic>
+            <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>          
+          
+      </Button>
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="219.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/name.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="220.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/salary.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="220.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/phone.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="115.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/username.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/password2.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

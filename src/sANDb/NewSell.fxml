@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="388.0" prefWidth="279.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewSellController">
+   <children>
+      <Button id="green" fx:id="addSell" layoutX="73.0" layoutY="285.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" stylesheets="@Layout/buttons.css" text="ADD SELL">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+             
+            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>          
+         
+      </Button>
+      <Button id="round-red" fx:id="cancel" layoutX="105.0" layoutY="342.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="35.0" prefWidth="70.0" stylesheets="@Layout/buttons.css">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+             
+            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/return.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>          
+         
+      </Button>
+      <TextField fx:id="reference" layoutX="32.0" layoutY="93.0" prefHeight="35.0" prefWidth="216.0" promptText="Reference" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="color" layoutX="32.0" layoutY="144.0" prefHeight="35.0" prefWidth="216.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Slider fx:id="size" layoutX="32.0" layoutY="216.0" prefHeight="35.0" prefWidth="216.0" />
+      <Label layoutX="121.0" layoutY="187.0" text="SIZE" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="price" layoutX="32.0" layoutY="44.0" prefHeight="35.0" prefWidth="216.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextField>
+      <Label fx:id="selectedSize" layoutX="122.0" layoutY="238.0" prefHeight="27.0" prefWidth="37.0" style="-fx-alignment: center;" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="42.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/price.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="42.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/reference.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="42.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/color.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

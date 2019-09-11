@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="456.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/custom.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.LoginController">
+   <children>
+      <TextField fx:id="username" layoutX="103.0" layoutY="145.0" prefHeight="40.0" prefWidth="250.0" promptText="Enter your username" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="103.0" layoutY="199.0" prefHeight="40.0" prefWidth="250.0" promptText="Enter your password" style="-fx-padding: 0 0 0 40;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </PasswordField>
+      <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="109.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/username.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="109.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/password2.png" />
+         </image>
+      </ImageView>
+      <Button id="green" fx:id="loginButton" defaultButton="true" layoutX="103.0" layoutY="263.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="250.0" style="-fx-alignment: center;" stylesheets="@Layout/buttons.css" text="LOGIN" textAlignment="CENTER">
+         <font>
+            <Font name="Ebrima Bold" size="18.0" />
+         </font>
+         <graphic>
+      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/login.png" />
+         </image>
+      </ImageView>             
+             
+         </graphic>
+      </Button>
+      <ImageView fitHeight="128.0" fitWidth="192.0" layoutX="164.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/hslogo.png" />
+         </image>
+      </ImageView>
+      <Label id="options" fx:id="closeButton" layoutX="416.0" layoutY="5.0" onMouseClicked="#close" prefHeight="28.0" prefWidth="40.0" style="-fx-alignment: center;">
+          
+          <graphic>
+             
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="428.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/close.png" />
+               </image>
+            </ImageView>          
+                         
+              
+          </graphic>        
+          
+      </Label>
+      <Label id="options" fx:id="reduceButton" layoutX="376.0" layoutY="5.0" onMouseClicked="#minimize" prefHeight="28.0" prefWidth="40.0" style="-fx-alignment: center;">
+      
+          <graphic>
+             
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="428.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reduce.png" />
+               </image>
+            </ImageView>          
+                         
+              
+          </graphic>        
+
+          
+      </Label>
+        
+
+   </children>
+</AnchorPane>

@@ -118,7 +118,7 @@ public class MainController implements Initializable {
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton;
-    @FXML private Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords;
+    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn;
     
     ObservableList<Product> data = FXCollections.observableArrayList();
     ObservableList<Sell> sellsList = FXCollections.observableArrayList(); 
@@ -684,11 +684,15 @@ public class MainController implements Initializable {
 
             Connection con = getConnection();
 
-            String query = "UPDATE employers SET active = 0 WHERE emp_id = ?";
+            String query = "UPDATE employers SET active = 0, joined_date = ? WHERE emp_id = ?";
 
             PreparedStatement ps = con.prepareStatement(query);
 
-            ps.setInt(1, selectedEmployer.getEmpID());
+            ps.setInt(2, selectedEmployer.getEmpID());
+            LocalDate todayLocalDate = LocalDate.now();
+            Date sqlDate = Date.valueOf(todayLocalDate);
+
+            ps.setDate(1, sqlDate);            
 
             ps.executeUpdate();
 
@@ -1177,6 +1181,30 @@ public class MainController implements Initializable {
                 
 
 
+        });
+        
+        exBtn.setOnAction(Action -> {
+            
+                        try {            
+
+                            ((Node)Action.getSource()).getScene().getWindow().hide();
+                            Stage stage = new Stage();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("ExEmployers.fxml"));
+                            AnchorPane root = (AnchorPane)loader.load();
+                            ExEmployersController ueControl = (ExEmployersController)loader.getController();
+                            ueControl.getInfo(this.thisEmployer);
+                            Scene scene = new Scene(root);
+                            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                            stage.initStyle(StageStyle.TRANSPARENT);
+                            scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                            scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                            stage.setScene(scene);                         
+                            stage.show();
+                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                        }                            
+        
         });
         
         seeRecords.setOnAction(Action -> {

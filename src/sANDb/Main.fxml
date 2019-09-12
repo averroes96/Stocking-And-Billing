@@ -332,7 +332,7 @@
             <DatePicker fx:id="payDateField" layoutX="651.0" layoutY="535.0" prefHeight="40.0" prefWidth="174.0" promptText="Select a date" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
+      <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
          <children>
             <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="657.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -479,7 +479,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="bevel-grey" fx:id="addEmployerButton1" layoutX="599.0" layoutY="13.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="188.0" stylesheets="@Layout/buttons.css" text="EX-EMPLOYERS">
+            <Button id="bevel-grey" fx:id="exBtn" layoutX="599.0" layoutY="13.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="188.0" stylesheets="@Layout/buttons.css" text="EX-EMPLOYERS">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -493,7 +493,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <TableView fx:id="sellsTable" layoutX="68.0" layoutY="78.0" prefHeight="427.0" prefWidth="734.0" style="-fx-background-color: white;" stylesheets="@Layout/custom.css">
               <columns>

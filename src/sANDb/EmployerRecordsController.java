@@ -8,6 +8,7 @@ package sANDb;
 import Data.Employer;
 import Data.Record;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class EmployerRecordsController implements Initializable {
     @FXML public TableColumn<Record, String> absPres;
     @FXML public TableColumn<Record, Integer> payment;
     @FXML public TableColumn recordAct1,recordAct2;
-    @FXML public Label fullname,image,phone,daysAbsent,paidAmount,prodSold,salary,joinDate;
+    @FXML public Label fullname,image,phone,daysAbsent,paidAmount,prodSold,salary,joinDate,minButton;
     @FXML public Button newRecordButton,returnButton;
     
     private SpecialAlert alert = new SpecialAlert();
@@ -415,7 +416,13 @@ public class EmployerRecordsController implements Initializable {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        });        
+        });
+
+        minButton.setOnMouseClicked(Action ->{
+        
+            minimize(Action);
+        
+        });
         
     }    
     

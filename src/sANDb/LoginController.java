@@ -97,7 +97,7 @@ public class LoginController implements Initializable {
     public boolean exists(String username, String password) throws SQLException{
         
         Connection con = getConnection();
-        String query = "SELECT * FROM employers WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM employers WHERE username = ? AND password = ? AND active = 1";
 
         PreparedStatement stmt;
         ResultSet rs;

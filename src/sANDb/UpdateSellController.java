@@ -4,6 +4,7 @@ package sANDb;
 import Data.Employer;
 import Data.Sell;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +46,7 @@ public class UpdateSellController implements Initializable {
     @FXML private TextField reference,price,color;
     @FXML private Slider size;
     @FXML private DatePicker date;
-    @FXML private Label selectedSize;
+    @FXML private Label selectedSize,minimize;
   
     
     Employer employer = new Employer();
@@ -256,8 +257,14 @@ public class UpdateSellController implements Initializable {
         
         fillFields(sell);
         
-        date.setConverter(dateFormatter());        
-               
+        date.setConverter(dateFormatter());
+        
+        minimize.setOnMouseClicked(Action -> {
+        
+            minimize(Action);
+            
+        });        
+        
         
         
     }    

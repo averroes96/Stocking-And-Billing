@@ -7,6 +7,7 @@ package sANDb;
 
 import Data.Employer;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +43,7 @@ public class NewSellController implements Initializable {
 
     @FXML private TextField price,reference,color;
     @FXML private Slider size;
-    @FXML private Label selectedSize;
+    @FXML private Label selectedSize,minimize;
     @FXML private Button addSell,cancel;
     
         SpecialAlert alert = new SpecialAlert();
@@ -207,6 +208,12 @@ public class NewSellController implements Initializable {
         addSell.setOnAction(Action -> {
             insertSell();
         });
+        
+        minimize.setOnMouseClicked(Action -> {
+        
+            minimize(Action);
+            
+        });        
 
         
         

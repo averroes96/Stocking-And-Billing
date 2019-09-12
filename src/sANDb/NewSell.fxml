@@ -79,5 +79,18 @@
             <Image url="@images/color.png" />
          </image>
       </ImageView>
+      <Label id="options" fx:id="minimize" layoutX="248.0" layoutY="4.0" prefHeight="21.0" prefWidth="28.0" style="-fx-alignment: center;">
+          
+          <graphic>
+              
+            <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="312.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reduce.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>
+          
+      </Label>      
    </children>
 </AnchorPane>

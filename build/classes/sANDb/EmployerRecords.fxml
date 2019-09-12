@@ -138,6 +138,18 @@
          </graphic>          
          
       </Button>
+      <Label fx:id="minButton" layoutX="964.0" layoutY="-2.0" prefHeight="31.0" prefWidth="31.0">
+          
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reduce.png" />
+               </image>
+            </ImageView>             
+             
+         </graphic>        
+             
+      </Label>
    </children>
    <stylesheets>
       <URL value="@Layout/custom.css" />

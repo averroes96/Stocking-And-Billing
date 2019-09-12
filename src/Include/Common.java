@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -162,6 +163,12 @@ public class Common implements Init {
     
     
     }
+    
+    public static void minimize(MouseEvent event){
+        
+        ((Stage)((Label)event.getSource()).getScene().getWindow()).setIconified(true);
+        
+    }    
         
     
 }

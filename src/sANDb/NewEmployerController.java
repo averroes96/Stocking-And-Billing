@@ -158,7 +158,7 @@ public class NewEmployerController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", "IS that you ?", Alert.AlertType.ERROR);
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
             return 0;
         }       
        
@@ -240,7 +240,7 @@ public class NewEmployerController implements Initializable {
             }
         }
             else{
-                alert.show("+Error", "This username is already taken by another employer ! Please specify another one", Alert.AlertType.ERROR);
+                alert.show("Error", "This username is already taken by another employer ! Please specify another one", Alert.AlertType.ERROR);
             }
         }
 

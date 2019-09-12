@@ -7,6 +7,7 @@ package sANDb;
 
 import Data.Employer;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import static Include.Common.saveSelectedImage;
 import Include.SpecialAlert;
 import java.io.File;
@@ -50,7 +51,7 @@ public class NewProductController implements Initializable {
     
         @FXML public TextField refField,brandField,priceField,colorField;
         @FXML public ChoiceBox catField;
-        @FXML public Label imgField,selectedSize;
+        @FXML public Label imgField,selectedSize,minimize;
         @FXML public Button addProduct,addPhoto,cancel;
         @FXML public Slider sizeField;
 
@@ -230,7 +231,13 @@ public class NewProductController implements Initializable {
 
         addProduct.setOnAction(Action -> {
             insertProduct();
-        }); 
+        });
+        
+        minimize.setOnMouseClicked(Action -> {
+        
+            minimize(Action);
+            
+        });
     }    
     
 }

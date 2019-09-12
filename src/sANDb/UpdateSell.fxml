@@ -10,24 +10,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="491.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdateSellController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="378.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/custom.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdateSellController">
    <children>
-      <TextField fx:id="reference" layoutX="132.0" layoutY="32.0" prefHeight="41.0" prefWidth="250.0" promptText="Reference" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="reference" layoutX="64.0" layoutY="38.0" prefHeight="41.0" prefWidth="250.0" promptText="Reference" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="color" layoutX="132.0" layoutY="90.0" prefHeight="41.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="color" layoutX="64.0" layoutY="96.0" prefHeight="41.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="price" layoutX="132.0" layoutY="147.0" prefHeight="41.0" prefWidth="250.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="price" layoutX="64.0" layoutY="153.0" prefHeight="41.0" prefWidth="250.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <DatePicker fx:id="date" layoutX="182.0" layoutY="268.0" prefHeight="41.0" prefWidth="150.0" />
-      <Button id="green" fx:id="saveButton" layoutX="297.0" layoutY="352.0" mnemonicParsing="false" onAction="#updateSell" prefHeight="35.0" prefWidth="182.0" stylesheets="@Layout/buttons.css" text="SAVE">
+      <DatePicker fx:id="date" layoutX="114.0" layoutY="274.0" prefHeight="41.0" prefWidth="150.0" />
+      <Button id="green" fx:id="saveButton" layoutX="214.0" layoutY="352.0" mnemonicParsing="false" onAction="#updateSell" prefHeight="35.0" prefWidth="150.0" stylesheets="@Layout/buttons.css" text="SAVE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
                 <graphic>
 
@@ -40,7 +40,7 @@
                 </graphic>         
       
       </Button>
-      <Button id="round-red" fx:id="cancel" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="182.0" stylesheets="@Layout/buttons.css" text="RETURN">
+      <Button id="round-red" fx:id="cancel" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="83.0" stylesheets="@Layout/buttons.css">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -55,31 +55,45 @@
                 </graphic>      
       
       </Button>
-      <Label layoutX="129.0" layoutY="210.0" text="SIZE :" textFill="#dddddd">
+      <Label layoutX="61.0" layoutY="216.0" text="SIZE :" textFill="#dddddd">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Slider fx:id="size" layoutX="169.0" layoutY="210.0" prefHeight="20.0" prefWidth="175.0" />
-      <Label fx:id="selectedSize" layoutX="352.0" layoutY="204.0" prefHeight="26.0" prefWidth="36.0" style="-fx-alignment: cenrer;" textFill="#dddddd">
+      <Slider fx:id="size" layoutX="101.0" layoutY="216.0" prefHeight="20.0" prefWidth="175.0" />
+      <Label fx:id="selectedSize" layoutX="282.0" layoutY="213.0" prefHeight="26.0" prefWidth="36.0" style="-fx-alignment: cenrer;" textFill="#dddddd">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="139.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="71.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/reference.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="36.0" layoutX="139.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="36.0" layoutX="71.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/color.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="139.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="71.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/price.png" />
          </image>
       </ImageView>
+      <Label id="options" fx:id="minimize" layoutX="344.0" layoutY="4.0" prefHeight="21.0" prefWidth="28.0" style="-fx-alignment: center;">
+          
+          <graphic>
+              
+            <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="312.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reduce.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>
+          
+      </Label>        
+      
    </children>
 </AnchorPane>

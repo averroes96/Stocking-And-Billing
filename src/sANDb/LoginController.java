@@ -114,7 +114,7 @@ public class LoginController implements Initializable {
                 
   
         } catch (SQLException ex) {
-            Logger.getLogger(ex.getClass().getName()).log(Level.SEVERE, null, ex);
+            alert.show("Database down !", "An error occured while trying to connect to the database !", Alert.AlertType.ERROR);
             return false;
         }
 

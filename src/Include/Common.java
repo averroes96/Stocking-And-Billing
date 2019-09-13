@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -34,6 +35,8 @@ public class Common implements Init {
     private static double  xOffset;
     private static double yOffset;
     
+    private static SpecialAlert alert = new SpecialAlert();
+    
     final static String dateFormat = "yyyy-MM-dd";     
 
     public static Connection getConnection()
@@ -45,7 +48,8 @@ public class Common implements Init {
             return con;
         }
         catch (SQLException ex) {
-            return null;
+            alert.show("Database down !", "An error occured while trying to connect to the database !", Alert.AlertType.ERROR);
+            return null;            
         }
     }
     

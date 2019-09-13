@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -44,11 +45,19 @@
           </graphic>
           
       </Button>
-      <ImageView fitHeight="24.0" fitWidth="30.0" layoutX="621.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" styleClass="options">
-         <image>
-            <Image url="@images/reduce.png" />
-         </image>
-      </ImageView>
+      <Label id="options" layoutX="622.0" layoutY="2.0" prefHeight="24.0" prefWidth="30.0">
+          
+          <graphic>
+              
+            <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="236.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reduce.png" />
+               </image>
+            </ImageView>              
+              
+          </graphic>          
+          
+      </Label>
    </children>
    <stylesheets>
       <URL value="@Layout/custom.css" />

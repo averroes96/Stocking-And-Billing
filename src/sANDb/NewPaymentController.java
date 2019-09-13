@@ -7,6 +7,7 @@ package sANDb;
 
 import Data.Employer;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +43,7 @@ public class NewPaymentController implements Initializable {
     
     @FXML private TextField paidField,restField,referenceField,colorField;
     @FXML Slider sizeSlider;
-    @FXML Label currentSize;
+    @FXML Label currentSize,min;
     @FXML Button addPayment,cancel;
     
         SpecialAlert alert = new SpecialAlert();
@@ -225,6 +226,12 @@ public class NewPaymentController implements Initializable {
         
         addPayment.setOnAction(Action -> {
             insertPayment();
+        });
+
+        min.setOnMouseClicked(Action -> {
+        
+            minimize(Action);
+        
         });        
         
     }    

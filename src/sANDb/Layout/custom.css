@@ -51,6 +51,8 @@
 #options{
     
     -fx-background-radius: 50;
+    -fx-alignment: center;
+    -fx-animated: true;
     
 }
 #options:hover{

@@ -16,17 +16,17 @@
 
 <AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="993.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.EmployerRecordsController">
    <children>
-      <TableView fx:id="recordsTable" layoutX="279.0" layoutY="48.0" prefHeight="320.0" prefWidth="699.0" style="-fx-background-color: white;">
+      <TableView fx:id="recordsTable" layoutX="279.0" layoutY="87.0" prefHeight="341.0" prefWidth="699.0" style="-fx-background-color: white;">
         <columns>
-          <TableColumn fx:id="date" prefWidth="164.0" text="Date" />
-            <TableColumn fx:id="payment" prefWidth="143.0" text="Payment" />
+          <TableColumn fx:id="date" prefWidth="156.0" text="Date" />
+            <TableColumn fx:id="payment" prefWidth="151.0" text="Payment" />
           <TableColumn fx:id="absPres" prefWidth="147.0" text="Present/Absent" />
             <TableColumn fx:id="recordAct1" prefWidth="121.0" text="Action 1" />
             <TableColumn fx:id="recordAct2" prefWidth="120.0" text="Action 2" />
         </columns>
       </TableView>
-      <ChoiceBox fx:id="selectedMonth" layoutX="798.0" layoutY="381.0" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: white; -fx-cursor: hand;" />
-      <Pane layoutX="17.0" layoutY="48.0" prefHeight="472.0" prefWidth="249.0" style="-fx-background-color: white;">
+      <ChoiceBox fx:id="selectedMonth" layoutX="15.0" layoutY="84.0" prefHeight="40.0" prefWidth="249.0" style="-fx-background-color: white; -fx-cursor: hand;" />
+      <Pane layoutX="15.0" layoutY="134.0" prefHeight="442.0" prefWidth="249.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="fullname" layoutX="25.0" layoutY="20.0" prefHeight="40.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
                <font>
@@ -38,12 +38,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="phone" layoutX="75.0" layoutY="236.0" prefHeight="40.0" prefWidth="150.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+            <Label fx:id="phone" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="236.0" prefHeight="40.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button id="green" fx:id="newRecordButton" layoutX="25.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="NEW RECORD">
+            <Button id="green" fx:id="newRecordButton" layoutX="25.0" layoutY="389.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="NEW RECORD">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -56,7 +56,7 @@
                    
                </graphic>         
             </Button>
-            <Label fx:id="joinDate" layoutX="75.0" layoutY="286.0" prefHeight="40.0" prefWidth="150.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+            <Label fx:id="joinDate" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="286.0" prefHeight="40.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -71,7 +71,7 @@
                   <Image url="@images/phone-blue.png" />
                </image>
             </ImageView>
-            <Label fx:id="salary" layoutX="75.0" layoutY="336.0" prefHeight="40.0" prefWidth="150.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+            <Label fx:id="salary" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="336.0" prefHeight="40.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -83,7 +83,7 @@
             </ImageView>
          </children>
       </Pane>
-      <TitledPane animated="false" layoutX="279.0" layoutY="381.0" prefHeight="139.0" prefWidth="515.0" style="-fx-animated: true;" text="STATS">
+      <TitledPane animated="false" layoutX="280.0" layoutY="437.0" prefHeight="139.0" prefWidth="699.0" style="-fx-animated: true;" text="STATS">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -124,7 +124,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TitledPane>
-      <Button id="round-red" layoutX="447.0" layoutY="556.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="100.0">
+      <Button id="round-red" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#cancel" prefHeight="31.0" prefWidth="91.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -138,7 +138,7 @@
          </graphic>          
          
       </Button>
-      <Label fx:id="minButton" layoutX="964.0" layoutY="-2.0" prefHeight="31.0" prefWidth="31.0">
+      <Label id="options" fx:id="minButton" layoutX="964.0" layoutY="-2.0" prefHeight="31.0" prefWidth="31.0">
           
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
@@ -149,6 +149,11 @@
              
          </graphic>        
              
+      </Label>
+      <Label fx:id="header" layoutX="398.0" layoutY="19.0" prefHeight="40.0" prefWidth="300.0" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
       </Label>
    </children>
    <stylesheets>

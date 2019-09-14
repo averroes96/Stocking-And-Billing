@@ -7,6 +7,7 @@ package sANDb;
 
 import Data.Employer;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import static Include.Common.saveSelectedImage;
 import Include.SpecialAlert;
 import java.io.File;
@@ -49,7 +50,7 @@ public class NewEmployerController implements Initializable {
     @FXML TextField fullname,salary,phone,username;
     @FXML PasswordField password;
     @FXML CheckBox admin;
-    @FXML Label image;
+    @FXML Label image,min;
     
     Employer employer = new Employer();
     
@@ -249,7 +250,13 @@ public class NewEmployerController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        min.setOnMouseClicked(Action ->{
+        
+            minimize(Action);
+        
+        });
+        
     }    
     
 }

@@ -54,7 +54,7 @@ public class EmployerRecordsController implements Initializable {
     @FXML public TableColumn<Record, String> absPres;
     @FXML public TableColumn<Record, Integer> payment;
     @FXML public TableColumn recordAct1,recordAct2;
-    @FXML public Label fullname,image,phone,daysAbsent,paidAmount,prodSold,salary,joinDate,minButton;
+    @FXML public Label fullname,image,phone,daysAbsent,paidAmount,prodSold,salary,joinDate,minButton,header;
     @FXML public Button newRecordButton,returnButton;
     
     private SpecialAlert alert = new SpecialAlert();
@@ -423,6 +423,8 @@ public class EmployerRecordsController implements Initializable {
             minimize(Action);
         
         });
+        
+        header.setText(selectedEmployer.getFullname() + "'s Records");
         
     }    
     

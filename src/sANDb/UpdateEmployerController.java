@@ -4,6 +4,7 @@ package sANDb;
 import Data.Employer;
 import Include.Common;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class UpdateEmployerController implements Initializable {
 
     @FXML Button update,save,cancel;
     @FXML TextField fullname,phone,salary;
-    @FXML Label image;
+    @FXML Label image,min;
     @FXML DatePicker joinedDate;
     @FXML CheckBox admin;
     
@@ -287,7 +288,14 @@ public class UpdateEmployerController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(UpdateEmployerController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });        
+        });
+
+        min.setOnMouseClicked(Action ->{
+        
+            minimize(Action);
+        
+        });
+                
 
 
     }    

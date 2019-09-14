@@ -888,7 +888,7 @@ public class MainController implements Initializable {
                 case "Soiree" : productsTable.getItems().clear(); fillTheTable(" AND category = 'Soiree'"); break;
                 case "Sabot" : productsTable.getItems().clear(); fillTheTable(" AND category = 'Sabot'"); break;
                 case "Chaussure" : productsTable.getItems().clear(); fillTheTable(" AND category = 'Chaussure'"); break;
-                case "Moccasin" : productsTable.getItems().clear(); fillTheTable(" AND category = 'Moccasin"); break;
+                case "Moccasin" : productsTable.getItems().clear(); fillTheTable(" AND category = 'Moccasin'"); break;
                 
             }
         
@@ -1223,6 +1223,7 @@ public class MainController implements Initializable {
                             erControl.fillTheTable(employer,ldt.getMonth().getValue());
                             erControl.fillFields(employer);
                             erControl.stats(employer, ldt.getMonth().getValue());
+                            erControl.header.setText(employer.getFullname() + "'s Records");
                             Scene scene = new Scene(root);
                             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
                             stage.initStyle(StageStyle.TRANSPARENT);

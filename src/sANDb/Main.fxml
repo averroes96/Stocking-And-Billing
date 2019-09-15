@@ -535,7 +535,7 @@
 
                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                       <image>
-                         <Image url="@images/add.png" />
+                         <Image url="@images/icons8_sell_52px_1.png" />
                       </image>
                    </ImageView>             
 
@@ -581,6 +581,22 @@
                 </Tab>
               </tabs>
             </TabPane>
+            <Pane fx:id="billPane" layoutX="374.0" layoutY="27.0" prefHeight="53.0" prefWidth="216.0">
+               <children>
+                  <Button id="green" fx:id="newBillBtn" layoutX="11.0" layoutY="7.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" stylesheets="@Layout/buttons.css" text="NEW BILL">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_bill_60px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
    </children>

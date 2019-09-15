@@ -60,3 +60,9 @@
     -fx-background-color: tomato;
     -fx-cursor: hand;
 }
+
+TextArea{
+    
+    -fx-alignment: center;
+    
+}

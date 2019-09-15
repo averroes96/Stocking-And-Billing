@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -41,11 +42,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -118,7 +121,8 @@ public class MainController implements Initializable {
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton;
-    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn;
+    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn;
+    @FXML public Pane billPane;
     
     ObservableList<Product> data = FXCollections.observableArrayList();
     ObservableList<Sell> sellsList = FXCollections.observableArrayList(); 
@@ -841,7 +845,53 @@ public class MainController implements Initializable {
     public void close(MouseEvent event){
         
         System.exit(0);
-    }     
+    }
+    
+    @FXML
+    private int insertBill()
+    {
+            try {
+
+                Connection con = getConnection();
+
+                if(con == null) {
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                }
+
+                PreparedStatement ps;
+
+                    ps = con.prepareStatement("INSERT INTO facture(facture_date, sum) values(now(),?)",PreparedStatement.RETURN_GENERATED_KEYS);
+
+
+                ps.setInt(1, 0);
+
+                ps.executeUpdate();
+                
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                
+                int key = 0;
+
+                if (generatedKeys.next()) {
+                    
+                    key = generatedKeys.getInt(1);
+                    
+                    }
+                    else {
+                        throw new SQLException("Creating key failed, no ID obtained.");
+                    }                
+                
+                con.close();
+                
+                return key;
+
+                
+            }
+            catch (Exception e) {
+                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            }
+        return 0;
+
+    }    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1364,12 +1414,9 @@ public class MainController implements Initializable {
                         scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
                         stage.setScene(scene);
                         stage.show();
-                        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                stage.setX(event.getScreenX() - xOffset);
-                                stage.setY(event.getScreenY() - yOffset);
-                            }
+                        root.setOnMouseDragged((MouseEvent event) -> {
+                            stage.setX(event.getScreenX() - xOffset);
+                            stage.setY(event.getScreenY() - yOffset);
                         });                         
             } catch (IOException ex) {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1377,8 +1424,90 @@ public class MainController implements Initializable {
 
         });
         
+        sellsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
+        newBillBtn.disableProperty().bind(Bindings.size(sellsTable.getSelectionModel().getSelectedIndices()).isEqualTo(0));
+        
+        Tooltip.install(
+                billPane, 
+                new Tooltip("In order to add a new bill select the sells you want to bill"));
+        
+        newBillBtn.setOnAction(Action -> {
+            ObservableList<Sell> billList = sellsTable.getSelectionModel().getSelectedItems();
+            int billID = insertBill();
+            int factureSum = 0;
+     
+            for(Sell e : billList){
+            try {
+
+                Connection con = getConnection();
+
+                if(con == null) {
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                }
+
+                    PreparedStatement ps;
+
+                    ps = con.prepareStatement("UPDATE sell SET facture_id = ? WHERE sell_id = ?");
+                    ps.setInt(1, billID);
+                    ps.setInt(2, e.getSellID());
+
+                    ps.executeUpdate();               
                 
+                    con.close();
+                    
+                    factureSum += e.getSellPrice();
+                
+            }
+            catch (SQLException ex) {
+                alert.show("Error", ex.getMessage(), Alert.AlertType.ERROR);
+            }
+            }
+
+            try {
+
+                Connection con = getConnection();
+
+                if(con == null) {
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                }
+
+                    PreparedStatement ps;
+
+                    ps = con.prepareStatement("UPDATE facture SET sum = ? WHERE facture_id = ?");
+                    ps.setInt(1, factureSum);
+                    ps.setInt(2, billID);
+
+                    ps.executeUpdate();               
+                
+                    con.close();
+                
+            }
+            catch (SQLException ex) {
+                alert.show("Error", ex.getMessage(), Alert.AlertType.ERROR);
+            }            
+            
+            String headerMsg = "-----------------------  H.S.Fashion's Bill Number : " + billID + "  -----------------------";
+            headerMsg += "\n\n\n Date :  " + LocalDate.now().toString();
+            
+            String footerMsg = "\n\t\t\t\t\t\t Total : " + factureSum;
+            footerMsg += "\n\n----------------------------  Thanks for your visit :)  ----------------------------";
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBill.fxml"));
+                AnchorPane root = (AnchorPane)loader.load();
+                NewBillController upControl = (NewBillController)loader.getController();
+                upControl.setInfo(billList,headerMsg,footerMsg);
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                stage.setScene(scene);            
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        });
         
        
     }

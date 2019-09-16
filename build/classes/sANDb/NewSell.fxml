@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
@@ -9,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="388.0" prefWidth="279.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewSellController">
+<AnchorPane id="AnchorPane" prefHeight="427.0" prefWidth="279.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewSellController">
    <children>
-      <Button id="green" fx:id="addSell" layoutX="73.0" layoutY="285.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" stylesheets="@Layout/buttons.css" text="ADD SELL">
+      <Button id="green" fx:id="addSell" layoutX="73.0" layoutY="321.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" stylesheets="@Layout/buttons.css" text="ADD SELL">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -26,7 +27,7 @@
          </graphic>          
          
       </Button>
-      <Button id="round-red" fx:id="cancel" layoutX="105.0" layoutY="342.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="35.0" prefWidth="70.0" stylesheets="@Layout/buttons.css">
+      <Button id="round-red" fx:id="cancel" layoutX="105.0" layoutY="378.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="35.0" prefWidth="70.0" stylesheets="@Layout/buttons.css">
          <font>
             <Font size="14.0" />
          </font>
@@ -91,6 +92,7 @@
               
           </graphic>
           
-      </Label>      
+      </Label>
+      <DatePicker fx:id="date" layoutX="32.0" layoutY="265.0" prefHeight="35.0" prefWidth="216.0" />      
    </children>
 </AnchorPane>

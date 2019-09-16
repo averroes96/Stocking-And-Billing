@@ -35,6 +35,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -115,13 +116,13 @@ public class MainController implements Initializable {
     @FXML private DatePicker sellDateField;
     @FXML private DatePicker payDateField;    
     @FXML private Label productImg,picLabel,fullnameLabel,phoneLabel,salaryLabel,joinedLabel;
-    @FXML private Label idField,selectedSize,sum,totalProdSold;    
+    @FXML private Label idField,selectedSize,sum,totalProdSold,weekSum,weekSells,monthSum,monthSells,allSum,allSells,revSum,revTotal;    
     @FXML private Button addProd;
     @FXML private Button updateImage;
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton;
-    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn;
+    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total;
     @FXML public Pane billPane;
     
     ObservableList<Product> data = FXCollections.observableArrayList();
@@ -551,7 +552,58 @@ public class MainController implements Initializable {
         }
     }
     
-    public void getSellsStats(String selectedDate){
+    public void getSellStats(String selectedDate, String type){
+        
+        Connection con = getConnection();
+        String query = "";
+        PreparedStatement st;
+        ResultSet rs;        
+        if(selectedDate.equals("")){
+            if(type.equals("ALL")){
+                query = "SELECT count(*), SUM(sellPrice) FROM sell";
+            }
+            else if(type.equals("MONTH")){
+                query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ";
+            }
+            else if(type.equals("WEEK")){
+                query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ";
+            }
+        }
+        else{
+            query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date = ? ";
+        }
+
+
+
+        try {
+            st = con.prepareStatement(query);
+            if(!selectedDate.equals("")){
+            st.setString(1,selectedDate);
+            }
+            rs = st.executeQuery();
+            
+            int priceSum = 0;
+            int totals = 0;
+
+            while (rs.next()) {
+                
+                priceSum = rs.getInt("SUM(sellPrice)");
+                totals = rs.getInt("count(*)");
+                
+            }
+            
+            revSum.setText(String.valueOf(priceSum) + " DA");
+            revTotal.setText(String.valueOf(totals) + " Sell(s)");
+
+            con.close();
+        }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }        
+        
+    }    
+    
+    /*public void getSellsStats(String selectedDate){
         
         Connection con = getConnection();
         String query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date = ? ";
@@ -584,6 +636,105 @@ public class MainController implements Initializable {
         }        
         
     }
+    
+    public void getSellsWeekStats(){
+        
+        Connection con = getConnection();
+        String query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ";
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            rs = st.executeQuery();
+            
+            int priceSum = 0;
+            int total = 0;
+
+            while (rs.next()) {
+                
+                priceSum = rs.getInt("SUM(sellPrice)");
+                total = rs.getInt("count(*)");
+                
+            }
+            
+            weekSum.setText(String.valueOf(priceSum) + " DA");
+            weekSells.setText(String.valueOf(total) + " Sell(s)");
+
+            con.close();
+        }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }         
+        
+    }
+    
+    public void getSellsMonthStats(){
+        
+        Connection con = getConnection();
+        String query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ";
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            rs = st.executeQuery();
+            
+            int priceSum = 0;
+            int total = 0;
+
+            while (rs.next()) {
+                
+                priceSum = rs.getInt("SUM(sellPrice)");
+                total = rs.getInt("count(*)");
+                
+            }
+            
+            monthSum.setText(String.valueOf(priceSum) + " DA");
+            monthSells.setText(String.valueOf(total) + " Sell(s)");
+
+            con.close();
+        }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }         
+        
+    }
+
+    public void getAllSellsStats(){
+        
+        Connection con = getConnection();
+        String query = "SELECT count(*), SUM(sellPrice) FROM sell";
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            rs = st.executeQuery();
+            
+            int priceSum = 0;
+            int total = 0;
+
+            while (rs.next()) {
+                
+                priceSum = rs.getInt("SUM(sellPrice)");
+                total = rs.getInt("count(*)");
+                
+            }
+            
+            allSum.setText(String.valueOf(priceSum) + " DA");
+            allSells.setText(String.valueOf(total) + " Sell(s)");
+
+            con.close();
+        }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }         
+        
+    }     */
   
 
     private void deleteSell(Sell selectedSell)
@@ -601,12 +752,26 @@ public class MainController implements Initializable {
             ps.setInt(1, selectedSell.getSellID());
 
             ps.executeUpdate();
+            
+            query = "UPDATE product SET sold = 0 WHERE prod_id = ?";
+            
+            ps = con.prepareStatement(query);
+            
+            ps.setInt(1, selectedSell.getProduct().getId());
+            
+            ps.executeUpdate();
 
             con.close();
+            
+            productsTable.getItems().add(selectedSell.getProduct());
             
             sellsList.remove(selectedSell);
             
             sellsTable.refresh();
+            
+            getSellStats(sellDateField.getEditor().getText(),"");
+            
+            alert.show("Sell deleted", "Sell was successfully delete !", Alert.AlertType.INFORMATION);
             
         }
         catch (Exception e) {
@@ -1003,7 +1168,7 @@ public class MainController implements Initializable {
         // SELLS TAB
         
         getAllSells(sellDateField.getEditor().getText());
-        getSellsStats(sellDateField.getEditor().getText());
+        getSellStats(sellDateField.getEditor().getText(),"");
         
         sellID.setCellValueFactory(new PropertyValueFactory<>("sellID"));
         sellRef.setCellValueFactory(new PropertyValueFactory<>("sellRef"));
@@ -1137,7 +1302,7 @@ public class MainController implements Initializable {
         sellDateField.setOnAction(Action -> {
             sellsTable.getItems().clear();
             getAllSells(sellDateField.getEditor().getText());
-            getSellsStats(sellDateField.getEditor().getText());
+            getSellStats(sellDateField.getEditor().getText(),"");
             sellsTable.setItems(sellsList);
         });        
 
@@ -1509,6 +1674,38 @@ public class MainController implements Initializable {
         
         });
         
+        printProducts.setOnAction(Action -> {
+        
+            print(productsTable);
+            
+        } );
+        
+        day.setOnAction(Action -> {
+        
+            getSellStats(sellDateField.getEditor().getText(),"");
+        
+        });
+        
+        week.setOnAction(Action -> {
+        
+            getSellStats("","WEEK");
+        
+        });
+
+        month.setOnAction(Action -> {
+        
+            getSellStats("","MONTH");
+        
+        });
+
+        total.setOnAction(Action -> {
+        
+            getSellStats("","ALL");
+        
+        });        
+        
+        
+        
        
     }
 
@@ -1619,5 +1816,41 @@ public class MainController implements Initializable {
         
         
     }
+    
+    private void print(Node node) 
+    {
+        // Define the Job Status Message
+        printProducts.textProperty().unbind();
+        printProducts.setText("Creating a printer job...");
+         
+        // Create a printer job for the default printer
+        PrinterJob job = PrinterJob.createPrinterJob();
+         
+        if (job != null) 
+        {
+            // Show the printer job status
+            printProducts.textProperty().bind(job.jobStatusProperty().asString());
+             
+            // Print the node
+            boolean printed = job.printPage(node);
+ 
+            if (printed) 
+            {
+                // End the printer job
+                job.endJob();
+            } 
+            else
+            {
+                // Write Error Message
+                printProducts.textProperty().unbind();
+                printProducts.setText("Printing failed.");
+            }
+        } 
+        else
+        {
+            // Write Error Message
+            printProducts.setText("Could not create a printer job.");
+        }
+    }    
     
 }

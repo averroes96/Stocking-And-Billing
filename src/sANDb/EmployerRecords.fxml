@@ -124,7 +124,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TitledPane>
-      <Button id="round-red" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#cancel" prefHeight="31.0" prefWidth="91.0">
+      <Button id="return-btn" layoutY="3.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: transparent;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -138,10 +138,10 @@
          </graphic>          
          
       </Button>
-      <Label id="options" fx:id="minButton" layoutX="964.0" layoutY="-2.0" prefHeight="31.0" prefWidth="31.0">
+      <Label id="options" fx:id="minButton" layoutX="951.0" layoutY="-2.0" prefHeight="40.0" prefWidth="44.0">
           
          <graphic>
-            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="30.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/reduce.png" />
                </image>

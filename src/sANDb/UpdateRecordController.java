@@ -165,7 +165,8 @@ public class UpdateRecordController implements Initializable {
                         mControl.getInfo(selectedEmp, employer);
                         mControl.fillTheTable(selectedEmp,LocalDate.now().getMonth().getValue());
                         mControl.fillFields(selectedEmp);
-                        mControl.stats(selectedEmp, LocalDate.now().getMonth().getValue());                        
+                        mControl.stats(selectedEmp, LocalDate.now().getMonth().getValue());
+                        mControl.header.setText(selectedEmp.getFullname() + "'s Records");
                         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
                         stage.initStyle(StageStyle.TRANSPARENT);
                         scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());

@@ -8,20 +8,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="701.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.MainController">
    <children>
-      <AnchorPane fx:id="products" layoutY="85.0" prefHeight="616.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" styleClass="topbar" stylesheets="@Layout/custom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="86.0">
+      <AnchorPane fx:id="products" layoutY="85.0" prefHeight="616.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" stylesheets="@Layout/custom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="86.0">
          <children>
             <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="51.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -30,14 +30,14 @@
             </ImageView>
             <TableView fx:id="productsTable" layoutX="21.0" layoutY="64.0" prefHeight="297.0" prefWidth="821.0" style="-fx-background-color: white; -fx-border-color: #000;">
               <columns>
-                <TableColumn fx:id="id" prefWidth="58.0" text="ID" />
-                <TableColumn fx:id="reference" prefWidth="123.0" text="REFERENCE" />
-                  <TableColumn fx:id="size" prefWidth="63.0" text="SIZE" />
-                  <TableColumn fx:id="color" prefWidth="78.0" text="COLOR" />
-                  <TableColumn fx:id="brand" prefWidth="115.0" text="BRAND" />
-                  <TableColumn fx:id="price" prefWidth="101.0" text="PRICE" />
-                  <TableColumn fx:id="addDate" prefWidth="141.0" text="DATE" />
-                  <TableColumn fx:id="category" prefWidth="135.0" text="CATEGORY" />
+                <TableColumn fx:id="id" maxWidth="58.0" prefWidth="58.0" text="ID" />
+                <TableColumn fx:id="reference" maxWidth="123.0" prefWidth="123.0" text="REFERENCE" />
+                  <TableColumn fx:id="size" maxWidth="63.0" prefWidth="63.0" text="SIZE" />
+                  <TableColumn fx:id="color" maxWidth="87.0" prefWidth="87.0" text="COLOR" />
+                  <TableColumn fx:id="brand" maxWidth="112.0" prefWidth="112.0" text="BRAND" />
+                  <TableColumn fx:id="price" maxWidth="106.0" prefWidth="106.0" text="PRICE" />
+                  <TableColumn fx:id="addDate" maxWidth="155.0" prefWidth="144.0" text="DATE" />
+                  <TableColumn fx:id="category" maxWidth="121.0" prefWidth="121.0" text="CATEGORY" />
               </columns>
             </TableView>
             <Button id="green" fx:id="addProd" layoutX="682.0" layoutY="11.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="160.0" stylesheets="@Layout/buttons.css" text="NEW PRODUCT" textFill="#3c4854">
@@ -68,7 +68,7 @@
              
          </graphic>           
             </Button>
-            <Button id="rich-blue" layoutX="482.0" layoutY="11.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="181.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE" textFill="#3c4854">
+            <Button id="rich-blue" fx:id="printProducts" disable="true" layoutX="482.0" layoutY="11.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="181.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE" textFill="#3c4854">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -175,7 +175,7 @@
                </image>
             </ImageView>
             <Slider fx:id="sizeField" layoutX="618.0" layoutY="393.0" prefHeight="14.0" prefWidth="174.0" />
-            <Label fx:id="selectedSize" layoutX="792.0" layoutY="387.0" prefHeight="27.0" prefWidth="72.0" textFill="#dddddd">
+            <Label fx:id="selectedSize" layoutX="792.0" layoutY="387.0" prefHeight="27.0" prefWidth="60.0" textFill="#dddddd">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -183,7 +183,7 @@
             <ChoiceBox fx:id="catChoice" layoutX="229.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="topBar" layoutX="-1.0" layoutY="-8.0" prefHeight="84.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="topBar" layoutY="-8.0" prefHeight="84.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
          <children>
             <Label fx:id="btn_sells" accessibleRole="BUTTON" layoutX="203.0" layoutY="8.0" onDragDetected="#selectMenu" onMouseClicked="#selectMenu" prefHeight="76.0" prefWidth="200.0" style="-fx-alignment: center;" styleClass="topbar" stylesheets="@Layout/custom.css" text="SELLS" textFill="#dddddd">
                 
@@ -315,7 +315,7 @@
                 </graphic>                
                
             </Button>
-            <Button id="rich-blue" layoutX="35.0" layoutY="534.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
+            <Button id="rich-blue" disable="true" layoutX="35.0" layoutY="534.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -348,7 +348,7 @@
                   <TableColumn fx:id="joinDate" prefWidth="176.0" text="JOINED" />
               </columns>
             </TableView>
-            <Button id="rich-blue" layoutX="75.0" layoutY="11.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
+            <Button id="rich-blue" disable="true" layoutX="75.0" layoutY="11.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
                 
                       <graphic>
       
@@ -430,7 +430,7 @@
       
                          </graphic>                   
                   </Button>
-                  <Button id="rich-blue" layoutX="538.0" layoutY="122.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="160.0" text="PRINT">
+                  <Button id="rich-blue" disable="true" layoutX="538.0" layoutY="122.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="160.0" text="PRINT">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -513,7 +513,7 @@
                   <Font name="System Bold" size="14.0" />
                </font></TextField>
             <DatePicker fx:id="sellDateField" editable="false" layoutX="648.0" layoutY="34.0" prefHeight="40.0" prefWidth="181.0" style="-fx-cursor: hand;" />
-            <Button id="rich-blue" layoutX="428.0" layoutY="537.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
+            <Button id="rich-blue" disable="true" layoutX="41.0" layoutY="537.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -527,7 +527,7 @@
 
                 </graphic>                
             </Button>
-            <Button id="green" fx:id="newSellButton" layoutX="632.0" layoutY="540.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="NEW SELL">
+            <Button id="green" fx:id="newSellButton" layoutX="659.0" layoutY="540.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="NEW SELL">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -551,36 +551,6 @@
                   <Image url="@images/search.png" />
                </image>
             </ImageView>
-            <TabPane layoutX="41.0" layoutY="522.0" prefHeight="76.0" prefWidth="188.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Total">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #3D4956;">
-                           <children>
-                              <Label fx:id="totalProdSold" layoutX="34.0" layoutY="10.0" prefHeight="27.0" prefWidth="120.0" style="-fx-alignment: center;">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Sum">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #3D4956;">
-                           <children>
-                              <Label fx:id="sum" layoutX="34.0" layoutY="10.0" prefHeight="27.0" prefWidth="120.0" style="-fx-alignment: center;">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
             <Pane fx:id="billPane" layoutX="374.0" layoutY="27.0" prefHeight="53.0" prefWidth="216.0">
                <children>
                   <Button id="green" fx:id="newBillBtn" layoutX="11.0" layoutY="7.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" stylesheets="@Layout/buttons.css" text="NEW BILL">
@@ -597,6 +567,50 @@
                   </Button>
                </children>
             </Pane>
+            <BorderPane layoutX="234.0" layoutY="512.0" prefHeight="96.0" prefWidth="402.0">
+               <top>
+                  <HBox prefHeight="34.0" prefWidth="407.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button id="bevel-grey" fx:id="day" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Selected day">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="bevel-grey" fx:id="week" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="This week">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="bevel-grey" fx:id="month" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="This month">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button id="bevel-grey" fx:id="total" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Total">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <Pane prefHeight="68.0" prefWidth="402.0" style="-fx-background-color: white; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="revTotal" layoutX="14.0" layoutY="13.0" prefHeight="37.0" prefWidth="150.0" style="-fx-alignment: center;">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="revSum" layoutX="238.0" layoutY="13.0" prefHeight="37.0" prefWidth="150.0" style="-fx-alignment: center;">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </center>
+            </BorderPane>
          </children>
       </AnchorPane>
    </children>

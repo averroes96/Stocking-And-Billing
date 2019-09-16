@@ -6,6 +6,7 @@
 package sANDb;
 
 import Data.Employer;
+import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
 import static Include.Common.minimize;
 import Include.SpecialAlert;
@@ -27,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -45,10 +47,12 @@ public class NewSellController implements Initializable {
     @FXML private Slider size;
     @FXML private Label selectedSize,minimize;
     @FXML private Button addSell,cancel;
+    @FXML public DatePicker date;
     
         SpecialAlert alert = new SpecialAlert();
         
-        Employer employer = new Employer();
+        Employer employer = new Employer();       
+      
         
 
     public void getEmployer(Employer employer){
@@ -59,7 +63,7 @@ public class NewSellController implements Initializable {
    public int productExist(){
        
         Connection con = getConnection();
-        String query = "SELECT * FROM product WHERE reference = ? AND color = ? AND size = ?";
+        String query = "SELECT * FROM product WHERE reference = ? AND color = ? AND size = ? AND sold = 0";
 
         PreparedStatement st;
         ResultSet rs;
@@ -149,10 +153,7 @@ public class NewSellController implements Initializable {
                 ps.setInt(1, Integer.parseInt(price.getText()));
                 ps.setInt(4, productExist());
 
-                LocalDate todayLocalDate = LocalDate.now();
-                Date sqlDate = Date.valueOf(todayLocalDate);
-
-                ps.setDate(2, sqlDate);
+                ps.setDate(2, Date.valueOf(date.getEditor().getText()));
 
                 ps.executeUpdate();
                 
@@ -204,6 +205,8 @@ public class NewSellController implements Initializable {
         size.setValue(36);
         selectedSize.setText(String.valueOf(size.getValue()));
         selectedSize.textProperty().bindBidirectional(size.valueProperty(), NumberFormat.getIntegerInstance());
+        date.setConverter(dateFormatter());
+        date.getEditor().setText(LocalDate.now().toString());
         
         addSell.setOnAction(Action -> {
             insertSell();

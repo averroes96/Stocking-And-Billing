@@ -129,7 +129,7 @@ public class UpdateSellController implements Initializable {
    public int productExist(){
        
         Connection con = getConnection();
-        String query = "SELECT * FROM product WHERE reference = ? AND color = ? AND size = ?";
+        String query = "SELECT * FROM product WHERE reference = ? AND color = ? AND size = ? AND sold = 0";
 
         PreparedStatement st;
         ResultSet rs;

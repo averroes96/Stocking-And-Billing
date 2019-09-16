@@ -83,6 +83,7 @@ public class NewRecordController implements Initializable {
                             erControl.fillTheTable(selectedEmployer,ldt.getMonth().getValue());
                             erControl.fillFields(selectedEmployer);
                             erControl.stats(selectedEmployer, ldt.getMonth().getValue());
+                            erControl.header.setText(selectedEmployer.getFullname() + "'s Records");
                             Scene scene = new Scene(root);
                             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
                             stage.initStyle(StageStyle.TRANSPARENT);

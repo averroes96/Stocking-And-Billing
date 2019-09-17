@@ -32,11 +32,11 @@
             <Image url="@images/icons8_exit_60px.png" />
          </image>
       </ImageView>
-      <Button id="round-red" fx:id="returnBtn" layoutX="291.0" layoutY="373.0" mnemonicParsing="false" onAction="#cancel" prefHeight="39.0" prefWidth="70.0">
+      <Button id="return-btn" fx:id="returnBtn" layoutX="2.0" layoutY="1.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="61.0" style="-fx-background-color: transparent;">
           
           <graphic>
               
-            <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="236.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="236.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/return.png" />
                </image>
@@ -45,7 +45,7 @@
           </graphic>
           
       </Button>
-      <Label id="options" layoutX="622.0" layoutY="2.0" prefHeight="24.0" prefWidth="30.0">
+      <Label id="options" layoutX="616.0" layoutY="3.0" prefHeight="24.0" prefWidth="30.0">
           
           <graphic>
               

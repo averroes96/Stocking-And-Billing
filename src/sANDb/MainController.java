@@ -160,7 +160,7 @@ public class MainController implements Initializable {
     {
         Connection con = getConnection();
         
-        String query = "SELECT * FROM product WHERE sold = 0" + category;
+        String query = "SELECT * FROM product WHERE sold = 0" + category + " ORDER BY prod_id DESC";
 
         Statement st;
         ResultSet rs;
@@ -513,7 +513,7 @@ public class MainController implements Initializable {
     private void getAllSells(String selectedDate)
     {
         Connection con = getConnection();
-        String query = "SELECT * FROM sell INNER JOIN product ON sell.prod_id = product.prod_id WHERE date(sell_date) = ? ORDER BY sell.sell_date";
+        String query = "SELECT * FROM sell INNER JOIN product ON sell.prod_id = product.prod_id WHERE date(sell_date) = ? ORDER BY sell.sell_id DESC";
 
         PreparedStatement st;
         ResultSet rs;

@@ -67,16 +67,18 @@ TextArea{
     
 }
 
-#return-btn{
+#return-btn,#menu-btn{
 
     -fx-background-color: transparent;
+    -fx-background-radius: 0;
 
 }
 
-#return-btn:hover{
+#return-btn:hover,#menu-btn:hover{
 
     -fx-background-color: tomato;
     -fx-cursor: hand;
 
 }
+
 

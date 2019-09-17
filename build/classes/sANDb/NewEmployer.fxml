@@ -66,9 +66,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button id="round-red" fx:id="cancel" cancelButton="true" layoutX="14.0" layoutY="505.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="73.0">
+      <Button id="return-btn" fx:id="cancel" cancelButton="true" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="55.0">
           <graphic>
-            <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/return.png" />
                </image>

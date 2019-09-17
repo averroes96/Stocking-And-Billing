@@ -49,7 +49,7 @@
             <Image url="@images/hslogo.png" />
          </image>
       </ImageView>
-      <Label id="options" fx:id="closeButton" layoutX="416.0" layoutY="5.0" onMouseClicked="#close" prefHeight="28.0" prefWidth="40.0" style="-fx-alignment: center;">
+      <Label id="options" fx:id="closeButton" layoutX="428.0" layoutY="5.0" onMouseClicked="#close" prefHeight="28.0" prefWidth="28.0" style="-fx-alignment: center;">
           
           <graphic>
              
@@ -63,7 +63,7 @@
           </graphic>        
           
       </Label>
-      <Label id="options" fx:id="reduceButton" layoutX="376.0" layoutY="5.0" onMouseClicked="#minimize" prefHeight="28.0" prefWidth="40.0" style="-fx-alignment: center;">
+      <Label id="options" fx:id="reduceButton" layoutX="400.0" layoutY="5.0" onMouseClicked="#minimize" prefHeight="28.0" prefWidth="28.0" style="-fx-alignment: center;">
       
           <graphic>
              

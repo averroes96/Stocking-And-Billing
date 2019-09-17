@@ -32,6 +32,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,10 +56,14 @@ public class NewProductController implements Initializable {
         @FXML public Label imgField,selectedSize,minimize;
         @FXML public Button addProduct,addPhoto,cancel;
         @FXML public Slider sizeField;
+        @FXML public Spinner<Integer> minSize,maxSize;
 
         SpecialAlert alert = new SpecialAlert();
 
         File selectedFile = null;
+        
+        SpinnerValueFactory<Integer> minVals = new SpinnerValueFactory.IntegerSpinnerValueFactory(15, 45);
+        SpinnerValueFactory<Integer> maxVals = new SpinnerValueFactory.IntegerSpinnerValueFactory(15, 45); 
         
     public ObservableList<Integer> sizes = FXCollections.observableArrayList();
     
@@ -113,7 +119,13 @@ public class NewProductController implements Initializable {
         else if (colorField.getText().trim().equals("")) {
             alert.show("Missing required Fields", "Please enter product's color", Alert.AlertType.WARNING);
             return false;
-        }       
+        }
+        else if(minSize.getValue() > maxSize.getValue()){
+            
+            alert.show("Size range", "Minimal size cannot be bigger than maximal size", Alert.AlertType.WARNING);
+            return false;            
+            
+        }
         
         try {
             Integer.parseInt(priceField.getText());
@@ -161,6 +173,8 @@ public class NewProductController implements Initializable {
     private void insertProduct()
     {
         if (checkInputs()) {
+            
+            for(int cpt = minSize.getValue();cpt <= maxSize.getValue();cpt++){
             try {
 
                 Connection con = getConnection();
@@ -182,7 +196,7 @@ public class NewProductController implements Initializable {
                 }
 
                 ps.setString(1, refField.getText());
-                ps.setInt(2, (int)sizeField.getValue());
+                ps.setInt(2, cpt);
                 ps.setString(3, brandField.getText());
                 ps.setInt(4, Integer.parseInt(priceField.getText()));
                 ps.setString(6, catField.getValue().toString());
@@ -196,15 +210,16 @@ public class NewProductController implements Initializable {
                 ps.executeUpdate();
                 con.close();
 
-                resetWindow();
                 
-                alert.show("Product Added", "Your product was successfully added !", Alert.AlertType.INFORMATION);
-
 
             }
             catch (Exception e) {
                 alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
             }
+            }
+            
+            alert.show("Product Added", "Your product was successfully added !", Alert.AlertType.INFORMATION);
+            resetWindow();
         }
 
     }        
@@ -212,16 +227,13 @@ public class NewProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        categories.addAll("Sandal","Fillete","Soiree","Sabot","Chaussure","Moccasin");
-        
-        sizeField.valueProperty().addListener((obs, oldval, newVal) -> 
-        sizeField.setValue(newVal.intValue()));      
-        sizeField.setMax(45);
-        sizeField.setMin(15);
-        sizeField.setValue(36);
-        selectedSize.setText(String.valueOf(sizeField.getValue()));
-        selectedSize.textProperty().bindBidirectional(sizeField.valueProperty(), NumberFormat.getIntegerInstance());
-        catField.setItems(categories); 
+        categories.addAll("Other","Sandal","Fillete","Soiree","Sabot","Chaussure","Moccasin");
+        catField.setItems(categories);
+        catField.setValue("Other");
+        minSize.setValueFactory(minVals);
+        maxSize.setValueFactory(maxVals);
+        minSize.getValueFactory().setValue(15);
+        maxSize.getValueFactory().setValue(45);
         
         refField.requestFocus();
         

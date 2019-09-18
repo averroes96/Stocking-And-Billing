@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -82,7 +83,7 @@
                    
                </graphic>                    
                   </Button>
-                  <Button id="menu-btn" fx:id="addProd1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="150.0" text="STATS" textFill="#dddddd">
+                  <Button id="menu-btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="150.0" text="STATS" textFill="#dddddd">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -169,7 +170,7 @@
                   </Label>
                   <ChoiceBox fx:id="catField" layoutX="338.0" layoutY="65.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: grey;" />
                   <Slider fx:id="sizeField" layoutX="336.0" layoutY="28.0" prefHeight="14.0" prefWidth="170.0" />
-                  <Button id="rich-blue" fx:id="updateProduct" layoutX="338.0" layoutY="187.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="132.0" stylesheets="@Layout/buttons.css" text="UPDATE" textFill="#3c4854">
+                  <Button id="rich-blue" fx:id="updateProduct" layoutX="278.0" layoutY="184.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="132.0" stylesheets="@Layout/buttons.css" text="UPDATE" textFill="#3c4854">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -181,7 +182,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="round-red" fx:id="deleteProduct" layoutX="488.0" layoutY="189.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="110.0" stylesheets="@Layout/buttons.css" text="DELETE" textFill="#3c4854">
+                  <Button id="round-red" fx:id="deleteProduct" layoutX="428.0" layoutY="183.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="110.0" stylesheets="@Layout/buttons.css" text="DELETE" textFill="#3c4854">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -528,34 +529,20 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TableView>
-            <TextField fx:id="sellSearch" layoutX="41.0" layoutY="33.0" prefHeight="41.0" prefWidth="250.0" promptText="Search by reference " style="-fx-padding: 0 0 0 40;" stylesheets="@Layout/custom.css">
+            <TextField fx:id="sellSearch" layoutX="41.0" layoutY="33.0" prefHeight="41.0" prefWidth="222.0" promptText="Search by reference " style="-fx-padding: 0 0 0 40;" stylesheets="@Layout/custom.css">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></TextField>
-            <DatePicker fx:id="sellDateField" editable="false" layoutX="648.0" layoutY="34.0" prefHeight="40.0" prefWidth="181.0" style="-fx-cursor: hand;" />
-            <Button id="rich-blue" disable="true" layoutX="41.0" layoutY="537.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
+            <DatePicker fx:id="sellDateField" editable="false" layoutX="41.0" layoutY="543.0" prefHeight="40.0" prefWidth="181.0" style="-fx-cursor: hand;" />
+            <Button id="rich-blue" disable="true" layoutX="648.0" layoutY="537.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="181.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
                 <graphic>
 
-                   <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                   <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                          <Image url="@images/print.png" />
-                      </image>
-                   </ImageView>             
-
-                </graphic>                
-            </Button>
-            <Button id="green" fx:id="newSellButton" layoutX="659.0" layoutY="540.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="NEW SELL">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-                <graphic>
-
-                   <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                         <Image url="@images/icons8_sell_52px_1.png" />
                       </image>
                    </ImageView>             
 
@@ -571,58 +558,16 @@
                   <Image url="@images/search.png" />
                </image>
             </ImageView>
-            <Pane fx:id="billPane" layoutX="374.0" layoutY="27.0" prefHeight="53.0" prefWidth="216.0">
-               <children>
-                  <Button id="green" fx:id="newBillBtn" layoutX="11.0" layoutY="7.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" stylesheets="@Layout/buttons.css" text="NEW BILL">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8_bill_60px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </Pane>
             <BorderPane layoutX="234.0" layoutY="512.0" prefHeight="96.0" prefWidth="402.0">
-               <top>
-                  <HBox prefHeight="34.0" prefWidth="407.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button id="bevel-grey" fx:id="day" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Selected day">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button id="bevel-grey" fx:id="week" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="This week">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button id="bevel-grey" fx:id="month" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="This month">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button id="bevel-grey" fx:id="total" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Total">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </top>
                <center>
                   <Pane prefHeight="68.0" prefWidth="402.0" style="-fx-background-color: white; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="revTotal" layoutX="14.0" layoutY="13.0" prefHeight="37.0" prefWidth="150.0" style="-fx-alignment: center;">
+                        <Label fx:id="revTotal" layoutX="14.0" layoutY="23.0" prefHeight="50.0" prefWidth="160.0" style="-fx-alignment: center; -fx-text-fill: #3D4956;">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="revSum" layoutX="238.0" layoutY="13.0" prefHeight="37.0" prefWidth="150.0" style="-fx-alignment: center;">
+                        <Label fx:id="revSum" layoutX="228.0" layoutY="23.0" prefHeight="50.0" prefWidth="160.0" style="-fx-alignment: center; -fx-text-fill: #3D4956;">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -631,6 +576,52 @@
                   </Pane>
                </center>
             </BorderPane>
+            <ToolBar layoutX="330.0" layoutY="5.0" prefHeight="68.0" prefWidth="500.0" style="-fx-background-color: #3D4956; -fx-padding: 0;">
+               <items>
+                  <Pane fx:id="billPane" prefHeight="55.0" prefWidth="150.0">
+                     <children>
+                        <Button id="menu-btn" fx:id="newBillBtn" mnemonicParsing="false" prefHeight="67.0" prefWidth="150.0" stylesheets="@Layout/buttons.css" text="NEW BILL" textFill="#dddddd">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/icons8_bill_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Button id="menu-btn" fx:id="newSellButton" mnemonicParsing="false" prefHeight="67.0" prefWidth="150.0" stylesheets="@Layout/buttons.css" text="NEW SELL" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                      <graphic>
+      
+                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                               <Image url="@images/payment.png" />
+                            </image>
+                         </ImageView>             
+      
+                      </graphic>                
+                  </Button>
+                  <Button id="menu-btn" fx:id="sellStats" mnemonicParsing="false" prefHeight="67.0" prefWidth="150.0" text="STATS" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_statistics_filled_100px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>                     
+                  </Button>
+               </items>
+            </ToolBar>
          </children>
       </AnchorPane>
    </children>

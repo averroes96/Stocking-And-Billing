@@ -122,7 +122,7 @@ public class MainController implements Initializable {
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton;
-    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total;
+    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total,sellStats;
     @FXML public Pane billPane;
     
     ObservableList<Product> data = FXCollections.observableArrayList();
@@ -601,7 +601,7 @@ public class MainController implements Initializable {
             alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
         }        
         
-    }    
+    }   
     
     /*public void getSellsStats(String selectedDate){
         
@@ -1664,6 +1664,8 @@ public class MainController implements Initializable {
                 NewBillController upControl = (NewBillController)loader.getController();
                 upControl.setInfo(billList,headerMsg,footerMsg);
                 Scene scene = new Scene(root);
+                scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);                
                 scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
                 scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
                 stage.setScene(scene);            
@@ -1680,7 +1682,7 @@ public class MainController implements Initializable {
             
         } );
         
-        day.setOnAction(Action -> {
+    /*    day.setOnAction(Action -> {
         
             getSellStats(sellDateField.getEditor().getText(),"");
         
@@ -1702,7 +1704,30 @@ public class MainController implements Initializable {
         
             getSellStats("","ALL");
         
-        });        
+        }); */
+
+        sellStats.setOnAction(Action -> {
+        
+            try {
+                Stage stage = new Stage();
+                AnchorPane root = FXMLLoader.load(getClass().getResource("SellStats.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                stage.setScene(scene);
+                stage.show();
+                root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        stage.setX(event.getScreenX() - xOffset);
+                        stage.setY(event.getScreenY() - yOffset);
+                    } 
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
         
         
         

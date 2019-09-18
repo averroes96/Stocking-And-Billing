@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="656.0" prefWidth="823.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.SellStatsController">
+   <children>
+      <Text fill="#dddddd" layoutX="360.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELL'S STATS" wrappingWidth="156.228515625">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="307.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/buy2.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="12.0" layoutY="92.0" prefHeight="140.0" prefWidth="800.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+               <children>
+                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="WEEK SELLS" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        
+                        <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="307.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_week_view_48px.png" />
+                           </image>
+                        </ImageView>                          
+                         
+                     </graphic>
+                  </Label>
+                  <Label fx:id="weekSells" layoutX="6.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="weekSum" layoutX="100.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="20.0" style="-fx-background-color: #3D4956;" />
+            <Pane layoutX="200.0" layoutY="10.0" prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+               <children>
+                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="MONTH SELLS" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        
+                        <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="307.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_month_view_64px.png" />
+                           </image>
+                        </ImageView>                          
+                         
+                     </graphic>                     
+                  </Label>
+                  <Label fx:id="monthSells" layoutX="7.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="monthSum" layoutX="101.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="390.0" layoutY="10.0" prefHeight="100.0" prefWidth="20.0" style="-fx-background-color: #3D4956;" />
+            <Pane layoutX="220.0" layoutY="10.0" prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+               <children>
+                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="YEAR SELLS" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        
+                        <ImageView fitHeight="46.0" fitWidth="61.0" layoutX="307.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_year_view_48px.png" />
+                           </image>
+                        </ImageView>                          
+                         
+                     </graphic>                     
+                  </Label>
+                  <Label fx:id="yearSells" layoutX="7.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="yearSum" layoutX="101.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="20.0" style="-fx-background-color: #3D4956;" />
+            <Pane layoutX="430.0" layoutY="10.0" prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+               <children>
+                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="TOTAL SELLS" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        
+                        <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="307.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_total_sales_1_60px.png" />
+                           </image>
+                        </ImageView>                          
+                         
+                     </graphic>                     
+                  </Label>
+                  <Label fx:id="totalSells" layoutX="7.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalSum" layoutX="101.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <LineChart fx:id="sellLineChart" layoutX="12.0" layoutY="306.0" prefHeight="250.0" prefWidth="800.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Text fill="WHITE" layoutX="260.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER OF SELLS PER DAY">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

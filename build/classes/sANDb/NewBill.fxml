@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="447.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewBillController">
+<AnchorPane id="AnchorPane" prefHeight="587.0" prefWidth="464.0" style="-fx-background-color: #ddd;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewBillController">
    <children>
-      <BorderPane fx:id="billPane" layoutX="15.0" layoutY="81.0" prefHeight="400.0" prefWidth="418.0" style="-fx-background-color: white;">
+      <BorderPane fx:id="billPane" layoutX="23.0" layoutY="81.0" prefHeight="400.0" prefWidth="418.0" style="-fx-background-color: white;">
          <center>
             <TableView fx:id="billTable" prefHeight="218.0" prefWidth="408.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
               <columns>
@@ -40,7 +40,7 @@
             <Pane prefHeight="221.0" prefWidth="5.0" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
-      <Button id="rich-blue" fx:id="print" layoutX="149.0" layoutY="495.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="PRINT">
+      <Button id="rich-blue" fx:id="print" layoutX="157.0" layoutY="495.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="PRINT">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -52,29 +52,29 @@
             </ImageView>             
          </graphic>         
       </Button>
-      <Button id="return-btn" fx:id="cancel" layoutX="400.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0">
+      <Button id="return-btn" fx:id="cancel" layoutX="420.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="39.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="166.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/cancel.png" />
+                  <Image url="@images/icons8_delete_sign_64px_1.png" />
                </image>
             </ImageView>             
          </graphic>
       </Button>
-      <Text fill="#dddddd" layoutX="199.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW BILL">
+      <Text fill="#3d4956" layoutX="207.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW BILL">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="166.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="174.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/icons8_bill_48px.png" />
+            <Image url="@images/icons8_document_48px_1.png" />
          </image>
       </ImageView>
-      <Label fx:id="jobStatus" layoutX="144.0" layoutY="569.0" prefHeight="34.0" prefWidth="159.0" style="-fx-alignment: center; -fx-background-color: #ddd;" text="WAITING..">
+      <Label fx:id="jobStatus" layoutX="182.0" layoutY="544.0" prefHeight="34.0" prefWidth="100.0" style="-fx-alignment: center; -fx-background-color: #ddd;" text="WAITING.." textFill="#3d4956">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

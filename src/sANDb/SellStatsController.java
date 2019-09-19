@@ -13,11 +13,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +41,11 @@ public class SellStatsController implements Initializable {
     
     @FXML Label weekSells,weekSum,monthSells,monthSum,yearSells,yearSum,totalSells,totalSum ;
     @FXML LineChart sellLineChart ;
+    @FXML PieChart sellPieChart;
+    @FXML ChoiceBox statsFilter;
+    @FXML ChoiceBox statsFilter2;
+    @FXML ObservableList<Data> list = FXCollections.observableArrayList();
+    @FXML ObservableList<String> statsList = FXCollections.observableArrayList("Last Week", "Last Month", "Last Year","Total");
     
     SpecialAlert alert = new SpecialAlert();
     
@@ -123,10 +137,10 @@ public class SellStatsController implements Initializable {
         
     }
     
-    public void loadLineChart(){
+    public void loadLineChart(String selectedDate){
         
         Connection con = getConnection();
-        String query = "SELECT sell_date, count(*) FROM sell Group by sell_date ORDER BY sell_date LIMIT 7";
+        String query = "SELECT sell_date, count(*) FROM sell " + selectedDate + " Group by sell_date ORDER BY sell_date";
         PreparedStatement st;
         ResultSet rs;
         
@@ -164,12 +178,84 @@ public class SellStatsController implements Initializable {
         
     }
     
+    public void loadPieChart(String selectedDate){
+        
+        try {
+            Connection con = getConnection();
+            String query = "SELECT category, count(category) FROM product,sell WHERE sold = 1 " + selectedDate + " AND product.prod_id = sell.prod_id Group by category";
+            PreparedStatement st;
+            ResultSet rs;
+            
+            st = con.prepareStatement(query);
+            rs = st.executeQuery();
+            
+            System.out.println(query);
+            
+            
+            while(rs.next()){
+                
+                list.add(new PieChart.Data(rs.getString("category"),rs.getInt("count(category)")));
+                
+            }
+            
+            sellPieChart.setData(list);
+            for(final PieChart.Data data : sellPieChart.getData()){
+                
+                data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {        
+                    Tooltip.install(data.getNode(), new Tooltip(String.valueOf((int)data.getPieValue())));//To change body of generated methods, choose Tools | Templates.
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellStatsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         getAllStats();
-        loadLineChart();
+        loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
+        loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
+        
+        statsFilter.setOnAction(Action -> {
+
+                switch(statsFilter.getValue().toString()){
+                    
+                    case "Last Week" : sellLineChart.getData().clear();
+                    sellPieChart.getData().clear();
+                    loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
+                    loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
+                    break;
+                    
+                    case "Last Month": sellLineChart.getData().clear();
+                    sellPieChart.getData().clear();
+                    loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ");
+                    loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ");
+                    break;
+                    
+                    case "Last Year": sellLineChart.getData().clear();
+                    sellPieChart.getData().clear();
+                    loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 365 day ) ");
+                    loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 365 day ) ");
+                    break;
+                    
+                    case "Total": sellLineChart.getData().clear();
+                    sellPieChart.getData().clear();
+                    loadLineChart("");
+                    loadPieChart("");
+                    break;
+                }   
+            
+        });
+
+        statsFilter.setItems(statsList);
+        statsFilter.getSelectionModel().select(0);
+        
+       
+        
+        
         // TODO
     }    
     

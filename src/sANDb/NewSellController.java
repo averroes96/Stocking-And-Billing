@@ -6,6 +6,7 @@
 package sANDb;
 
 import Data.Employer;
+import Data.Product;
 import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
 import static Include.Common.minimize;
@@ -33,6 +34,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -45,7 +47,7 @@ public class NewSellController implements Initializable {
 
     @FXML private TextField price,reference,color;
     @FXML private Slider size;
-    @FXML private Label selectedSize,minimize;
+    @FXML private Label selectedSize,minimize,refStatus,priceStatus;
     @FXML private Button addSell,cancel;
     @FXML public DatePicker date;
     
@@ -193,7 +195,75 @@ public class NewSellController implements Initializable {
                         stage.setScene(scene);
                         stage.show();               
             
-    }     
+    }
+    
+    public int getPrice(String ref){
+        
+        Connection con = getConnection();
+        String query = "SELECT * FROM product WHERE reference = ? LIMIT 1";
+        int targetedPrice = 0;
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            st.setString(1, ref);
+            rs = st.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                
+                targetedPrice = rs.getInt("price");
+                
+            }
+            
+            con.close();
+            
+            return targetedPrice;
+
+
+        }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            return 0;
+        }         
+        
+    }
+    
+    public boolean refExist(String ref){
+        
+        Connection con = getConnection();
+        String query = "SELECT * FROM product WHERE reference = ? LIMIT 1";
+        boolean found = false ;
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            st.setString(1, ref);
+            rs = st.executeQuery();
+            int count = 0;
+            
+            if(rs.next()){
+                
+                found = true;
+            }
+            
+            con.close();
+            
+            return found;
+
+
+        }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            return false;
+        }         
+        
+    }    
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -216,8 +286,96 @@ public class NewSellController implements Initializable {
         
             minimize(Action);
             
-        });        
+        });
 
+        reference.setOnKeyTyped(event -> {
+            
+            price.setText(String.valueOf(getPrice(reference.getText())));
+            
+        });
+        reference.setOnKeyReleased(event -> {
+            
+            price.setText(String.valueOf(getPrice(reference.getText())));
+            if(refExist(reference.getText())){
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }            
+            
+        });
+        reference.setOnKeyPressed(event -> {
+            
+            price.setText(String.valueOf(getPrice(reference.getText())));
+            if(refExist(reference.getText())){
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }            
+            
+        });
+        
+        price.setOnKeyReleased(event -> {
+            
+            try{
+                
+                Integer.parseInt(price.getText());
+                
+                if(Integer.parseInt(price.getText()) < 0){
+                    
+                    priceStatus.setVisible(true);
+                    
+                }
+                else{
+                    
+                    priceStatus.setVisible(false);
+                    
+                }
+                        
+            }
+            catch(NumberFormatException e){
+                
+                    priceStatus.setVisible(true);
+            }
+            
+        });
+        price.setOnKeyPressed(event -> {
+
+            try{
+                
+                Integer.parseInt(price.getText());
+                
+                if(Integer.parseInt(price.getText()) < 0){
+                    
+                    priceStatus.setVisible(true);
+                    
+                }
+                else{
+                    
+                    priceStatus.setVisible(false);
+                    
+                }
+                        
+            }
+            catch(NumberFormatException e){
+                
+                    priceStatus.setVisible(true);
+            }         
+            
+        });        
         
         
     }    

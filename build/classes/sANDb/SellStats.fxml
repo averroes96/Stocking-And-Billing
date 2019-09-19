@@ -3,6 +3,8 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,23 +14,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="656.0" prefWidth="823.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.SellStatsController">
+<AnchorPane id="AnchorPane" prefHeight="656.0" prefWidth="1200.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.SellStatsController">
    <children>
-      <Text fill="#dddddd" layoutX="360.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELL'S STATS" wrappingWidth="156.228515625">
+      <Text fill="#dddddd" layoutX="549.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELL'S STATS" wrappingWidth="156.228515625">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="307.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="495.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/buy2.png" />
          </image>
       </ImageView>
-      <HBox layoutX="12.0" layoutY="92.0" prefHeight="140.0" prefWidth="800.0">
+      <HBox layoutX="70.0" layoutY="82.0" prefHeight="150.0" prefWidth="1060.0">
          <children>
-            <Pane prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+            <Pane prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
                <children>
-                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="WEEK SELLS" textAlignment="CENTER" textFill="WHITE">
+                  <Label contentDisplay="TOP" prefHeight="104.0" prefWidth="150.0" style="-fx-alignment: center;" text="WEEK SELLS" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -42,12 +44,12 @@
                          
                      </graphic>
                   </Label>
-                  <Label fx:id="weekSells" layoutX="6.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="weekSells" layoutY="104.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="weekSum" layoutX="100.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="weekSum" layoutX="130.0" layoutY="104.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -55,9 +57,9 @@
                </children>
             </Pane>
             <Pane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="20.0" style="-fx-background-color: #3D4956;" />
-            <Pane layoutX="200.0" layoutY="10.0" prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+            <Pane layoutX="200.0" layoutY="10.0" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
                <children>
-                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="MONTH SELLS" textFill="WHITE">
+                  <Label contentDisplay="TOP" prefHeight="104.0" prefWidth="150.0" style="-fx-alignment: center;" text="MONTH SELLS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -71,12 +73,12 @@
                          
                      </graphic>                     
                   </Label>
-                  <Label fx:id="monthSells" layoutX="7.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="monthSells" layoutY="104.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="monthSum" layoutX="101.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="monthSum" layoutX="125.0" layoutY="104.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -84,9 +86,9 @@
                </children>
             </Pane>
             <Pane layoutX="390.0" layoutY="10.0" prefHeight="100.0" prefWidth="20.0" style="-fx-background-color: #3D4956;" />
-            <Pane layoutX="220.0" layoutY="10.0" prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+            <Pane layoutX="220.0" layoutY="10.0" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
                <children>
-                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="YEAR SELLS" textFill="WHITE">
+                  <Label contentDisplay="TOP" prefHeight="104.0" prefWidth="150.0" style="-fx-alignment: center;" text="YEAR SELLS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -100,12 +102,12 @@
                          
                      </graphic>                     
                   </Label>
-                  <Label fx:id="yearSells" layoutX="7.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="yearSells" layoutY="102.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="yearSum" layoutX="101.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="yearSum" layoutX="129.0" layoutY="102.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -113,9 +115,9 @@
                </children>
             </Pane>
             <Pane layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="20.0" style="-fx-background-color: #3D4956;" />
-            <Pane layoutX="430.0" layoutY="10.0" prefHeight="100.0" prefWidth="190.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
+            <Pane layoutX="430.0" layoutY="10.0" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
                <children>
-                  <Label contentDisplay="TOP" layoutX="16.0" layoutY="14.0" prefHeight="39.0" prefWidth="156.0" style="-fx-alignment: center;" text="TOTAL SELLS" textFill="WHITE">
+                  <Label contentDisplay="TOP" prefHeight="104.0" prefWidth="150.0" style="-fx-alignment: center;" text="TOTAL SELLS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -129,12 +131,12 @@
                          
                      </graphic>                     
                   </Label>
-                  <Label fx:id="totalSells" layoutX="7.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="totalSells" layoutY="102.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="totalSum" layoutX="101.0" layoutY="94.0" prefHeight="32.0" prefWidth="80.0" textFill="WHITE">
+                  <Label fx:id="totalSum" layoutX="126.0" layoutY="102.0" prefHeight="32.0" prefWidth="120.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -143,7 +145,7 @@
             </Pane>
          </children>
       </HBox>
-      <LineChart fx:id="sellLineChart" layoutX="12.0" layoutY="306.0" prefHeight="250.0" prefWidth="800.0">
+      <LineChart fx:id="sellLineChart" layoutX="12.0" layoutY="306.0" prefHeight="332.0" prefWidth="600.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -151,10 +153,17 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <Text fill="WHITE" layoutX="260.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER OF SELLS PER DAY">
+      <Text fill="WHITE" layoutX="193.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER OF SELLS PER DAY">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
+      <PieChart fx:id="sellPieChart" layoutX="644.0" layoutY="321.0" prefHeight="322.0" prefWidth="500.0" />
+      <Text fill="WHITE" layoutX="798.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOLD PRODUCTS TYPE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="statsFilter" layoutX="525.0" layoutY="262.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>

@@ -16,11 +16,11 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="color" layoutX="64.0" layoutY="96.0" prefHeight="41.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="color" layoutX="64.0" layoutY="167.0" prefHeight="41.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="price" layoutX="64.0" layoutY="153.0" prefHeight="41.0" prefWidth="250.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="price" layoutX="64.0" layoutY="105.0" prefHeight="41.0" prefWidth="250.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
@@ -71,12 +71,12 @@
             <Image url="@images/reference.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="36.0" layoutX="71.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="36.0" layoutX="71.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/color.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="71.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="71.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/price.png" />
          </image>

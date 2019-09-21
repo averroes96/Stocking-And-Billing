@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,7 +123,7 @@ public class MainController implements Initializable {
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton;
-    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total,sellStats;
+    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total,sellStats,employerStats;
     @FXML public Pane billPane;
     
     ObservableList<Product> data = FXCollections.observableArrayList();
@@ -1729,12 +1730,35 @@ public class MainController implements Initializable {
             
         });
         
+        employerStats.setOnAction(Action -> {
+        
+            try {
+                Stage stage = new Stage();
+                AnchorPane root = FXMLLoader.load(getClass().getResource("EmployerStats.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                stage.setScene(scene);
+                stage.show();
+                root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        stage.setX(event.getScreenX() - xOffset);
+                        stage.setY(event.getScreenY() - yOffset);
+                    } 
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
+                
         
         
        
     }
 
-    public void selectMenu(MouseEvent event) throws IOException{
+    public void selectMenu(Event event) throws IOException{
         
         if(event.getTarget() == btn_products){
             products.setVisible(true);

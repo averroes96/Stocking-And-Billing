@@ -88,4 +88,9 @@ TextArea{
     
 }
 
+ListView {
+    
+    -fx-text-fill:  #3D4956;
+}
+
 

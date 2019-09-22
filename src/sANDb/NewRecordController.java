@@ -9,6 +9,7 @@ import Data.Employer;
 import Data.Record;
 import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +19,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +35,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -54,6 +55,7 @@ public class NewRecordController implements Initializable {
     @FXML public TextField paid;
     @FXML public ChoiceBox absPres;
     @FXML public Button addButton,returnButton;
+    @FXML public Label min;
     
     private Employer employer = new Employer();
     private Employer selectedEmployer = new Employer();
@@ -286,6 +288,12 @@ public class NewRecordController implements Initializable {
             }
             
         });
+        
+        min.setOnMouseClicked(Action ->{
+        
+            minimize(Action);
+        
+        });        
         
         
         

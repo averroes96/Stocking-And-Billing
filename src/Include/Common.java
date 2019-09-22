@@ -141,10 +141,12 @@ public class Common implements Init {
         return converter;
     }
     
-    public static boolean adminsCount(){
+    public static int adminsCount(){
     
         try {
             Connection con = getConnection();
+            
+            int count = 0 ;
 
             String query = "SELECT count(*) FROM employers WHERE admin = 1";
 
@@ -152,17 +154,17 @@ public class Common implements Init {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                if(rs.getInt("count(*)") <= 1){
-                    return true;
-                }
+                
+                count = rs.getInt("count(*)");
+                
             }
 
             con.close();
             
-            return false;
+            return count;
         } catch (SQLException ex) {
             Logger.getLogger(Common.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return 0;
         }
     
     

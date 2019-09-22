@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,6 +35,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -50,13 +52,16 @@ public class NewEmployerController implements Initializable {
     @FXML TextField fullname,salary,phone,username;
     @FXML PasswordField password;
     @FXML CheckBox admin;
-    @FXML Label image,min;
+    @FXML Label image,min,fullnameStatus,phoneStatus,salaryStatus;
     
     Employer employer = new Employer();
     
     SpecialAlert alert = new SpecialAlert();
 
-    File selectedFile = null;    
+    File selectedFile = null;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
     
     public void getEmployer(Employer employer){
         
@@ -181,7 +186,21 @@ public class NewEmployerController implements Initializable {
                         scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
                         scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
                         stage.setScene(scene);
-                        stage.show();            
+                        stage.show();
+                        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                xOffset = event.getSceneX();
+                                yOffset = event.getSceneY();
+                            }
+                        });
+                        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                stage.setX(event.getScreenX() - xOffset);
+                                stage.setY(event.getScreenY() - yOffset);
+                            }
+                        });                         
             
     }
 
@@ -256,6 +275,118 @@ public class NewEmployerController implements Initializable {
             minimize(Action);
         
         });
+        
+        fullname.setOnKeyPressed(Action -> {
+            
+        if (fullname.getText().equals("") || !fullname.getText().matches("^[\\p{L} .'-]+$")) {
+            fullnameStatus.setVisible(true);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            fullnameStatus.setVisible(false);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        fullname.setOnKeyTyped(Action -> {
+            
+        if (fullname.getText().equals("") || !fullname.getText().matches("^[\\p{L} .'-]+$")) {
+            fullnameStatus.setVisible(true);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            fullnameStatus.setVisible(false);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }        
+            
+        });
+        fullname.setOnKeyReleased(Action -> {
+            
+        if (fullname.getText().equals("") || !fullname.getText().matches("^[\\p{L} .'-]+$")) {
+            fullnameStatus.setVisible(true);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }        
+        else{
+            fullnameStatus.setVisible(false);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }            
+        });
+
+
+        phone.setOnKeyPressed(Action -> {
+            
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+            phoneStatus.setVisible(true);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            phoneStatus.setVisible(false);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        phone.setOnKeyTyped(Action -> {
+            
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+            phoneStatus.setVisible(true);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            phoneStatus.setVisible(false);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }      
+            
+        });
+        phone.setOnKeyReleased(Action -> {
+            
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+            phoneStatus.setVisible(true);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            phoneStatus.setVisible(false);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }           
+        });
+        
+        salary.setOnKeyPressed(Action -> {
+            
+        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+            salaryStatus.setVisible(true);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            salaryStatus.setVisible(false);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        salary.setOnKeyTyped(Action -> {
+            
+        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+            salaryStatus.setVisible(true);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            salaryStatus.setVisible(false);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        }); 
+        salary.setOnKeyReleased(Action -> {
+            
+        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+            salaryStatus.setVisible(true);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            salaryStatus.setVisible(false);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });         
+
+        
         
     }    
     

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sANDb;
 
 import Data.Employer;
@@ -439,7 +435,7 @@ public class MainController implements Initializable {
             picLabel.setText("");
             picLabel.setGraphic(new ImageView(new Image(
                     new File(employersList.get(index).getImage()).toURI().toString(),
-                    170, 170, true, true)));
+                    200, 200, true, true)));
         }        
         
         
@@ -1363,7 +1359,7 @@ public class MainController implements Initializable {
             
                         try {
                             Employer employer = employersTable.getSelectionModel().getSelectedItem();
-                            ((Node)Action.getSource()).getScene().getWindow().hide();
+                            ((Node)Action.getSource()).getParent().getScene().getWindow().hide();
                             Stage stage = new Stage();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateEmployer.fxml"));
                             AnchorPane root = (AnchorPane)loader.load();
@@ -1819,7 +1815,7 @@ public class MainController implements Initializable {
                                 stage.setX(event.getScreenX() - xOffset);
                                 stage.setY(event.getScreenY() - yOffset);
                             }
-                        });                         
+                        });                                                 
                         
         }
         

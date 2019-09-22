@@ -195,20 +195,7 @@ public class EmployerRecordsController implements Initializable {
     @FXML
     public void cancel(ActionEvent event) throws IOException {
 
-                        ((Node)event.getSource()).getScene().getWindow().hide();
-                        Stage stage = new Stage();
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
-                        AnchorPane root = (AnchorPane)loader.load();
-                        MainController mControl = (MainController)loader.getController();
-                        mControl.getEmployer(this.employer);
-                        mControl.returnMenu("employers");
-                        Scene scene = new Scene(root);
-                        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
-                        scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
-                        stage.setScene(scene);
-                        stage.show();            
+                        ((Node)event.getSource()).getScene().getWindow().hide();           
             
     }    
     

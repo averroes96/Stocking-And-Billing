@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="537.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdateEmployerController">
+<AnchorPane id="AnchorPane" prefHeight="485.0" prefWidth="580.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdateEmployerController">
    <children>
-      <Label fx:id="image" layoutX="14.0" layoutY="54.0" prefHeight="180.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;" />
-      <Button id="rich-blue" fx:id="update" layoutX="14.0" layoutY="247.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="UPDATE IMAGE">
+      <Label fx:id="image" layoutX="14.0" layoutY="54.0" prefHeight="217.0" prefWidth="250.0" style="-fx-alignment: center; -fx-background-color: #ddd;" />
+      <Button id="rich-blue" fx:id="update" layoutX="14.0" layoutY="277.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="250.0" text="UPDATE IMAGE">
           
           <graphic>
               
@@ -27,13 +27,13 @@
           </graphic>
           
       </Button>
-      <Button id="round-red" fx:id="cancel" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="79.0">
+      <Button id="return-btn" fx:id="cancel" cancelButton="true" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="51.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
           <graphic>
               
-            <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="34.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/return.png" />
                </image>
@@ -41,7 +41,7 @@
               
           </graphic>         
       </Button>
-      <Button id="green" fx:id="save" layoutX="323.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="SAVE">
+      <Button id="green" fx:id="save" defaultButton="true" layoutX="195.0" layoutY="431.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="SAVE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -55,48 +55,48 @@
               
           </graphic>         
       </Button>
-      <TextField fx:id="fullname" layoutX="251.0" layoutY="54.0" prefHeight="40.0" prefWidth="250.0" promptText="Fullname" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="fullname" layoutX="290.0" layoutY="54.0" prefHeight="40.0" prefWidth="250.0" promptText="Fullname" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="phone" layoutX="251.0" layoutY="111.0" prefHeight="40.0" prefWidth="250.0" promptText="Phone Number" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="phone" layoutX="289.0" layoutY="131.0" prefHeight="40.0" prefWidth="250.0" promptText="Phone Number" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="salary" layoutX="251.0" layoutY="166.0" prefHeight="40.0" prefWidth="250.0" promptText="Salary" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="salary" layoutX="289.0" layoutY="204.0" prefHeight="40.0" prefWidth="250.0" promptText="Salary" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <CheckBox fx:id="admin" layoutX="251.0" layoutY="301.0" mnemonicParsing="false" text="Make an admin" textFill="#dddddd">
+      <CheckBox fx:id="admin" layoutX="289.0" layoutY="355.0" mnemonicParsing="false" text="Make an admin" textFill="#dddddd">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </CheckBox>
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="295.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/name.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="294.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/phone.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="294.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/salary.png" />
          </image>
       </ImageView>
-      <DatePicker fx:id="joinedDate" editable="false" layoutX="251.0" layoutY="248.0" prefHeight="40.0" prefWidth="250.0" />
-      <Label layoutX="251.0" layoutY="222.0" prefHeight="20.0" prefWidth="91.0" text="JOINED :" textFill="#dddddd">
+      <DatePicker fx:id="joinedDate" editable="false" layoutX="289.0" layoutY="309.0" prefHeight="40.0" prefWidth="250.0" />
+      <Label layoutX="289.0" layoutY="289.0" prefHeight="20.0" prefWidth="91.0" text="JOINED :" textFill="#dddddd">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label id="options" fx:id="min" layoutX="509.0" layoutY="1.0" prefHeight="26.0" prefWidth="28.0">
+      <Label id="options" fx:id="min" layoutX="550.0" prefHeight="26.0" prefWidth="28.0">
           
           <graphic>
               
@@ -108,6 +108,21 @@
               
           </graphic>            
           
+      </Label>
+      <Label fx:id="fullnameStatus" focusTraversable="false" layoutX="290.0" layoutY="100.0" prefHeight="17.0" prefWidth="250.0" style="-fx-alignment: center; -fx-background-color: red; -fx-background-radius: 10;" text="Please specify a valid name !" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="phoneStatus" focusTraversable="false" layoutX="291.0" layoutY="177.0" prefHeight="17.0" prefWidth="250.0" style="-fx-alignment: center; -fx-background-color: red; -fx-background-radius: 10;" text="Please specify a valid phone number !" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="salaryStatus" focusTraversable="false" layoutX="289.0" layoutY="250.0" prefHeight="17.0" prefWidth="250.0" style="-fx-alignment: center; -fx-background-color: red; -fx-background-radius: 10;" text="Salary must be a decimal number" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
       </Label>
    </children>
    <stylesheets>

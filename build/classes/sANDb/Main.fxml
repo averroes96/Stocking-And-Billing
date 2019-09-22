@@ -370,55 +370,13 @@
                   <TableColumn fx:id="salary" prefWidth="141.0" text="SALARY (MONTH)" />
                   <TableColumn fx:id="joinDate" prefWidth="176.0" text="JOINED" />
               </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </TableView>
             <Pane layoutX="76.0" layoutY="378.0" prefHeight="229.0" prefWidth="712.0" style="-fx-background-color: white; -fx-background-radius: 10;" stylesheets="@Layout/buttons.css">
                <children>
-                  <Label fx:id="picLabel" layoutX="14.0" layoutY="21.0" prefHeight="190.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="fullnameLabel" layoutX="228.0" layoutY="24.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: white; -fx-alignment: center;" textFill="#3d4956">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="phoneLabel" layoutX="228.0" layoutY="74.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: white; -fx-alignment: center;" textFill="#3d4956">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="salaryLabel" layoutX="228.0" layoutY="123.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: white; -fx-alignment: center;" textFill="#3d4956">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="joinedLabel" layoutX="228.0" layoutY="172.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: white; -fx-alignment: center;" textFill="#3d4956">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="40.0" fitWidth="37.0" layoutX="231.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/name-blue.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="236.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/phone-blue.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="233.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/salary-blue.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="238.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/joined-blue.png" />
-                     </image>
-                  </ImageView>
-                  <MenuButton alignment="CENTER" layoutX="495.0" layoutY="25.0" mnemonicParsing="false" popupSide="TOP" prefHeight="49.0" prefWidth="150.0" style="-fx-text-fill: #ddd; -fx-alignment: center;" text="ACTIONS" textAlignment="CENTER" textFill="#dddddd">
+                  <MenuButton alignment="CENTER" layoutX="538.0" layoutY="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" style="-fx-text-fill: #ddd; -fx-alignment: center;" text="ACTIONS" textAlignment="CENTER" textFill="#dddddd">
                     <items>
                       <MenuItem mnemonicParsing="false">
                            <graphic>
@@ -436,24 +394,6 @@
                               </Button>
                            </graphic>
                         </MenuItem>
-                      <MenuItem mnemonicParsing="false">
-                           <graphic>
-                              <Button id="rich-blue" fx:id="updateEmployer" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" text="UPDATE">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                                <graphic>
-                  
-                                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                   <image>
-                                      <Image url="@images/update.png" />
-                                   </image>
-                                </ImageView>             
-                  
-                                     </graphic>                      
-                              </Button>
-                           </graphic>
-                        </MenuItem>
                         <MenuItem mnemonicParsing="false">
                            <graphic>
                               <Button id="round-red" fx:id="deleteEmployer" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="DELETE">
@@ -462,7 +402,7 @@
                                  </font>
                                 <graphic>
                   
-                                      <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                    <image>
                                       <Image url="@images/cancel.png" />
                                    </image>
@@ -480,7 +420,7 @@
                                  </font>
                                 <graphic>
                   
-                                      <ImageView fitHeight="17.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="17.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                    <image>
                                       <Image url="@images/print.png" />
                                    </image>
@@ -495,6 +435,69 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
+                  <Button id="rich-blue" fx:id="updateEmployer" layoutX="543.0" layoutY="170.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" text="UPDATE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                    <graphic>
+      
+                                                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                          <Image url="@images/update.png" />
+                       </image>
+                    </ImageView>             
+      
+                         </graphic>                      
+                  </Button>
+                  <Pane layoutX="14.0" layoutY="8.0" prefHeight="214.0" prefWidth="500.0" style="-fx-background-color: #ddd; -fx-background-radius: 10;">
+                     <children>
+                        <Label fx:id="picLabel" layoutX="12.0" layoutY="10.0" prefHeight="190.0" prefWidth="210.0" style="-fx-alignment: center; -fx-background-color: #ddd;">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="fullnameLabel" layoutX="233.0" layoutY="13.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #ddd; -fx-alignment: center;" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="phoneLabel" layoutX="233.0" layoutY="63.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #ddd; -fx-alignment: center;" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="salaryLabel" layoutX="233.0" layoutY="112.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #ddd; -fx-alignment: center;" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="joinedLabel" layoutX="233.0" layoutY="161.0" prefHeight="37.0" prefWidth="210.0" style="-fx-background-color: #ddd; -fx-alignment: center;" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="40.0" fitWidth="37.0" layoutX="236.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/name-blue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="241.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/phone-blue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="238.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/salary-blue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="243.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/joined-blue.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <ButtonBar layoutX="87.0" layoutY="11.0" prefHeight="53.0" prefWidth="688.0">

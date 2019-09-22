@@ -3,6 +3,8 @@ package sANDb;
 
 import Data.Employer;
 import Include.Common;
+import static Include.Common.adminsCount;
+import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
 import static Include.Common.minimize;
 import Include.SpecialAlert;
@@ -18,6 +20,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,12 +34,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.StringConverter;
-
 /**
  * FXML Controller class
  *
@@ -46,7 +48,7 @@ public class UpdateEmployerController implements Initializable {
 
     @FXML Button update,save,cancel;
     @FXML TextField fullname,phone,salary;
-    @FXML Label image,min;
+    @FXML Label image,min,fullnameStatus,phoneStatus,salaryStatus;
     @FXML DatePicker joinedDate;
     @FXML CheckBox admin;
     
@@ -55,35 +57,12 @@ public class UpdateEmployerController implements Initializable {
     Employer employer = new Employer();
     
     Employer selectedEmployer = new Employer();
-        
-    final String dateFormat = "yyyy-MM-dd";
     
     File selectedFile = null;
-        
-        
-    public StringConverter dateFormatter()
-    {
-        StringConverter converter = new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
-
-            @Override
-            public String toString(LocalDate date) {
-                if (date != null) {
-                    return dateFormatter.format(date);
-                }
-                return "";
-            }
-
-            @Override
-            public LocalDate fromString(String string) {
-                if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, dateFormatter);
-                }
-                return null;
-            }
-        };
-        return converter;
-    }
+    
+    private double xOffset = 0;
+    private double yOffset = 0;    
+   
 
     public void getInfo(Employer employer, Employer selected){
         
@@ -187,6 +166,12 @@ public class UpdateEmployerController implements Initializable {
     public void updateEmployer(ActionEvent event) {
 
         if (checkInputs()) {
+            if(!admin.isSelected() && adminsCount() == 1 && selectedEmployer.getAdmin() == 1){
+            
+                alert.show("Last Admin !", "This employer is the last administrator, In order to take his admin's previliges create another admin or promote another one !", Alert.AlertType.INFORMATION);                            
+                
+            }
+            else{
             try {
 
                 Connection con = getConnection();
@@ -249,6 +234,8 @@ public class UpdateEmployerController implements Initializable {
             catch (Exception e) {
                 alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
             }
+            }
+
         }        
         
     }      
@@ -285,6 +272,20 @@ public class UpdateEmployerController implements Initializable {
                 scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
                 stage.setScene(scene);  
                 stage.show();
+                        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                xOffset = event.getSceneX();
+                                yOffset = event.getSceneY();
+                            }
+                        });
+                        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                stage.setX(event.getScreenX() - xOffset);
+                                stage.setY(event.getScreenY() - yOffset);
+                            }
+                        });                
             } catch (IOException ex) {
                 Logger.getLogger(UpdateEmployerController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -295,6 +296,116 @@ public class UpdateEmployerController implements Initializable {
             minimize(Action);
         
         });
+        
+        fullname.setOnKeyPressed(Action -> {
+            
+        if (fullname.getText().equals("") || !fullname.getText().matches("^[\\p{L} .'-]+$")) {
+            fullnameStatus.setVisible(true);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            fullnameStatus.setVisible(false);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        fullname.setOnKeyTyped(Action -> {
+            
+        if (fullname.getText().equals("") || !fullname.getText().matches("^[\\p{L} .'-]+$")) {
+            fullnameStatus.setVisible(true);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            fullnameStatus.setVisible(false);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }        
+            
+        });
+        fullname.setOnKeyReleased(Action -> {
+            
+        if (fullname.getText().equals("") || !fullname.getText().matches("^[\\p{L} .'-]+$")) {
+            fullnameStatus.setVisible(true);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }        
+        else{
+            fullnameStatus.setVisible(false);
+            fullname.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }            
+        });
+
+
+        phone.setOnKeyPressed(Action -> {
+            
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+            phoneStatus.setVisible(true);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            phoneStatus.setVisible(false);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        phone.setOnKeyTyped(Action -> {
+            
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+            phoneStatus.setVisible(true);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            phoneStatus.setVisible(false);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }      
+            
+        });
+        phone.setOnKeyReleased(Action -> {
+            
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+            phoneStatus.setVisible(true);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            phoneStatus.setVisible(false);
+            phone.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }           
+        });
+        
+        salary.setOnKeyPressed(Action -> {
+            
+        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+            salaryStatus.setVisible(true);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            salaryStatus.setVisible(false);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        salary.setOnKeyTyped(Action -> {
+            
+        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+            salaryStatus.setVisible(true);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            salaryStatus.setVisible(false);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        }); 
+        salary.setOnKeyReleased(Action -> {
+            
+        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+            salaryStatus.setVisible(true);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            salaryStatus.setVisible(false);
+            salary.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });         
                 
 
 

@@ -120,17 +120,15 @@ public class NewEmployerController implements Initializable {
         else if(!phone.getText().matches("^[5-7]?[0-9]{9}$")){
             alert.show("Phone invalid", "Please enter a valid phone number !", Alert.AlertType.WARNING);
             return false;              
+        }
+        else if(!salary.getText().matches("^[1-9]?[0-9]+$")){
+            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR);
+            return false;           
         }        
 
         try {
             Integer.parseInt(salary.getText());
-            if(Integer.parseInt(salary.getText()) > 0 )
             return true;
-            else
-            {
-            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR);
-            return false;
-            }            
         }
         catch (NumberFormatException e) {
             alert.show("Salary Error", "Salary should be a numeric number (eg: 400, 1000)", Alert.AlertType.ERROR);
@@ -351,7 +349,7 @@ public class NewEmployerController implements Initializable {
         
         salary.setOnKeyPressed(Action -> {
             
-        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+        if (!salary.getText().matches("^[0-9]?[0-9]+$")) {
             salaryStatus.setVisible(true);
             salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -363,7 +361,7 @@ public class NewEmployerController implements Initializable {
         });
         salary.setOnKeyTyped(Action -> {
             
-        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+        if (!salary.getText().matches("^[0-9]?[0-9]+$")) {
             salaryStatus.setVisible(true);
             salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -375,7 +373,7 @@ public class NewEmployerController implements Initializable {
         }); 
         salary.setOnKeyReleased(Action -> {
             
-        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+        if (!salary.getText().matches("^[0-9]?[0-9]+$")) {
             salaryStatus.setVisible(true);
             salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }

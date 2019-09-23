@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTogglePane?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -208,58 +207,11 @@
       </AnchorPane>
       <AnchorPane fx:id="topBar" layoutY="-8.0" prefHeight="84.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
          <children>
-            <Label fx:id="btn_sells" accessibleRole="BUTTON" layoutX="203.0" layoutY="8.0" onDragDetected="#selectMenu" onMouseClicked="#selectMenu" prefHeight="76.0" prefWidth="200.0" style="-fx-alignment: center;" styleClass="topbar" stylesheets="@Layout/custom.css" text="SELLS" textFill="#dddddd">
-                
-         <graphic>
-             
-                  <ImageView fitHeight="58.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/buy2.png" />
-               </image>
-            </ImageView>             
-             
-         </graphic>
-               <font>
-                  <Font name="Ebrima Bold" size="14.0" />
-               </font>                 
-                
-                
-            </Label>
-            <Label fx:id="btn_payment" accessibleRole="BUTTON" layoutX="410.0" layoutY="8.0" onDragDetected="#selectMenu" onMouseClicked="#selectMenu" prefHeight="76.0" prefWidth="200.0" style="-fx-alignment: center;" styleClass="topbar" stylesheets="@Layout/custom.css" text="PAYMENTS" textFill="#dddddd">
-                
-         <graphic>
-             
-                        <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/payment.png" />
-               </image>
-            </ImageView>             
-             
-         </graphic>
-               <font>
-                  <Font name="Ebrima Bold" size="14.0" />
-               </font>                 
-                
-                
-            </Label>
-            <Label fx:id="btn_employers" accessibleRole="BUTTON" layoutX="610.0" layoutY="8.0" onDragDetected="#selectMenu" onMouseClicked="#selectMenu" prefHeight="76.0" prefWidth="200.0" style="-fx-alignment: center;" styleClass="topbar" stylesheets="@Layout/custom.css" text="EMPLOYERS" textFill="#dddddd">
-                <graphic>       
-                    <ImageView fitHeight="49.0" fitWidth="42.0" layoutX="593.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/group.png" />
-                     </image>
-                    </ImageView>                
-                </graphic>
-               <font>
-                  <Font name="Ebrima Bold" size="14.0" />
-               </font> 
-                
-            </Label>
             <Label fx:id="btn_close" layoutX="818.0" layoutY="38.0" onDragDetected="#selectMenu" onMouseClicked="#selectMenu" prefHeight="46.0" prefWidth="52.0" style="-fx-alignment: center; -fx-background-radius: 50;" styleClass="topbar" stylesheets="@Layout/custom.css">
                 
          <graphic>
              
-                  <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/shutdown.png" />
                </image>
@@ -268,19 +220,6 @@
          </graphic>                 
                 
                 
-            </Label>
-            <Label fx:id="btn_products" accessibleRole="BUTTON" layoutY="8.0" onDragDetected="#selectMenu" onMouseClicked="#selectMenu" prefHeight="76.0" prefWidth="200.0" style="-fx-alignment: center;" styleClass="topbar" stylesheets="@Layout/custom.css" text="PRODUCTS" textFill="#dddddd">
-               <font>
-                  <Font name="Ebrima Bold" size="14.0" />
-               </font>
-               <graphic>                
-                        <ImageView fitHeight="61.0" fitWidth="42.0" layoutX="42.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/product.png" />
-         </image>
-      </ImageView> 
-      
-      </graphic> 
             </Label>
             <Label fx:id="btn_close1" layoutX="843.0" layoutY="8.0" onDragDetected="#selectMenu" onMouseClicked="#close" prefHeight="27.0" prefWidth="27.0" style="-fx-alignment: center; -fx-background-radius: 50;" styleClass="topbar" stylesheets="@Layout/custom.css">
                <graphic>
@@ -300,6 +239,66 @@
                   </ImageView>
                </graphic>
             </Label>
+            <ButtonBar layoutY="6.0" prefHeight="74.0" prefWidth="800.0">
+               <buttons>
+                  <Button id="menu-btn" fx:id="btn_products" mnemonicParsing="false" onAction="#selectMenu" prefHeight="76.0" prefWidth="200.0" text="PRODUCTS" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                    <graphic>
+
+                       <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                             <Image url="@images/product.png" />
+                          </image>
+                       </ImageView>             
+
+                    </graphic>                     
+                  </Button>
+                  <Button id="menu-btn" fx:id="btn_sells" mnemonicParsing="false" onAction="#selectMenu" prefHeight="75.0" text="SELLS" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                    <graphic>
+
+                       <ImageView fitHeight="47.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                             <Image url="@images/buy2.png" />
+                          </image>
+                       </ImageView>             
+
+                    </graphic>                     
+                  </Button>
+                  <Button id="menu-btn" fx:id="btn_payment" layoutX="400.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectMenu" prefHeight="76.0" prefWidth="200.0" text="PAYMENTS" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                    <graphic>
+
+                       <ImageView fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                             <Image url="@images/salary.png" />
+                          </image>
+                       </ImageView>             
+
+                    </graphic>                     
+                  </Button>
+                  <Button id="menu-btn" fx:id="btn_employers" layoutX="610.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectMenu" prefHeight="76.0" prefWidth="200.0" text="EMPLOYERS" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                    <graphic>
+
+                       <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                             <Image url="@images/group.png" />
+                          </image>
+                       </ImageView>             
+
+                    </graphic>                     
+                  </Button>
+               </buttons>
+            </ButtonBar>
        
 
        
@@ -371,7 +370,6 @@
                   <TableColumn fx:id="joinDate" prefWidth="176.0" text="JOINED" />
               </columns>
                <cursor>
-                  <Cursor fx:constant="HAND" />
                </cursor>
             </TableView>
             <Pane layoutX="76.0" layoutY="378.0" prefHeight="229.0" prefWidth="712.0" style="-fx-background-color: white; -fx-background-radius: 10;" stylesheets="@Layout/buttons.css">
@@ -435,7 +433,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </MenuButton>
-                  <Button id="rich-blue" fx:id="updateEmployer" layoutX="543.0" layoutY="170.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" text="UPDATE">
+                  <Button id="rich-blue" fx:id="updateEmployer" layoutX="538.0" layoutY="94.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" text="UPDATE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -498,6 +496,18 @@
                         </ImageView>
                      </children>
                   </Pane>
+                  <Button id="green" fx:id="updateEmployer1" layoutX="534.0" layoutY="173.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="159.0" text="CHANGE PASSWORD">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_change_60px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </Pane>
             <ButtonBar layoutX="87.0" layoutY="11.0" prefHeight="53.0" prefWidth="688.0">
@@ -572,7 +582,6 @@
                   <TableColumn fx:id="sellActions2" maxWidth="157.0" minWidth="131.0" prefWidth="140.0" text="ACTION 2" />
               </columns>
                <cursor>
-                  <Cursor fx:constant="HAND" />
                </cursor>
             </TableView>
             <TextField fx:id="sellSearch" layoutX="41.0" layoutY="33.0" prefHeight="41.0" prefWidth="222.0" promptText="Search by reference " style="-fx-padding: 0 0 0 40;" stylesheets="@Layout/custom.css">

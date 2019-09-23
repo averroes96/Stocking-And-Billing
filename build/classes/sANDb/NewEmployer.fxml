@@ -66,11 +66,11 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button id="return-btn" fx:id="cancel" cancelButton="true" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="55.0">
+      <Button id="return-btn" fx:id="cancel" cancelButton="true" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="39.0">
           <graphic>
-            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="22.0" layoutX="115.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/return.png" />
+                  <Image url="@images/icons8_left_filled_100px.png" />
                </image>
             </ImageView>              
               

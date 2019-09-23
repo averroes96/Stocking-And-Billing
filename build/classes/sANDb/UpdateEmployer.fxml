@@ -27,7 +27,7 @@
           </graphic>
           
       </Button>
-      <Button id="return-btn" fx:id="cancel" cancelButton="true" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="51.0">
+      <Button id="return-btn" fx:id="cancel" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="41.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -35,13 +35,13 @@
               
             <ImageView fitHeight="21.0" fitWidth="34.0" layoutX="256.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/return.png" />
+                  <Image url="@images/icons8_left_filled_100px.png" />
                </image>
             </ImageView>              
               
           </graphic>         
       </Button>
-      <Button id="green" fx:id="save" defaultButton="true" layoutX="195.0" layoutY="431.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="SAVE">
+      <Button id="green" fx:id="save" layoutX="195.0" layoutY="431.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="SAVE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

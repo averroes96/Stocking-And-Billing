@@ -52,8 +52,6 @@ public class EmployerStatsController implements Initializable {
         ResultSet rs;
         
         sellsPerEmployer.getData().clear();
-        empList.getItems().clear();
-        list.clear();
         XYChart.Series<String,Integer> series = new XYChart.Series<>();
 
         try {
@@ -64,12 +62,10 @@ public class EmployerStatsController implements Initializable {
             while (rs.next()) {
 
                 series.getData().add(new XYChart.Data<>(rs.getString("fullname"),rs.getInt("count(sell_id)")));
-                list.add(rs.getString("fullname") + "\t" + rs.getInt("count(sell_id)"));
                 
             }
             
         sellsPerEmployer.getData().addAll(series);
-        empList.setItems(list);
         
                 for(final XYChart.Data<String, Integer> data : series.getData()){
             
@@ -121,9 +117,7 @@ public class EmployerStatsController implements Initializable {
         ResultSet rs;
         
         
-        sellsPerEmployer.getData().clear();
-        empList.getItems().clear();
-        list.clear();        
+        sellsPerEmployer.getData().clear();      
         XYChart.Series<String,Integer> series = new XYChart.Series<>();
 
         try {
@@ -134,12 +128,10 @@ public class EmployerStatsController implements Initializable {
             while (rs.next()) {
 
                 series.getData().add(new XYChart.Data<>(rs.getString("fullname"),rs.getInt("count(sell_id)")));
-                list.add(rs.getString("fullname") + "\t" + rs.getInt("count(sell_id)"));
                 
             }
             
         sellsPerEmployer.getData().addAll(series);
-        empList.setItems(list);
         
                 for(final XYChart.Data<String, Integer> data : series.getData()){
             

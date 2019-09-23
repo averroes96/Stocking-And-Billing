@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,7 +68,7 @@ import javafx.util.StringConverter;
 public class MainController implements Initializable {
     
     
-    @FXML private Label btn_products, btn_sells, btn_employers, btn_payment,btn_close;
+    @FXML private Label btn_close;
     @FXML private AnchorPane products, sells, employers, payments;
     @FXML private TableView<Product> productsTable ;
     @FXML private TableView<Sell> sellsTable ;
@@ -119,7 +120,7 @@ public class MainController implements Initializable {
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton;
-    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total,sellStats,employerStats;
+    @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total,sellStats,employerStats,btn_products, btn_sells, btn_employers, btn_payment,changePass;
     @FXML public Pane billPane;
     
     ObservableList<Product> data = FXCollections.observableArrayList();
@@ -311,8 +312,23 @@ public class MainController implements Initializable {
     private boolean checkInputs()
     {
         if (refField.getText().equals("") && priceField.getText().equals("")) {
-            alert.show("Missing required Fields", "Reference and Price fields cannot be empty!", Alert.AlertType.WARNING);
-            return false;
+            try {
+                //alert.show("Missing required Fields", "Reference and Price fields cannot be empty!", Alert.AlertType.WARNING);                        ((Node)event.getSource()).getScene().getWindow().hide();
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MyAlert.fxml"));
+                AnchorPane root = (AnchorPane)loader.load();
+                MyAlertController maControl = (MyAlertController)loader.getController();
+                maControl.setAlert("warning_alert", "Missing required Fields", "Reference and Price fields cannot be empty!");
+                        Scene scene = new Scene(root);
+                        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                        stage.setScene(scene);
+                        stage.show();
+                        return false;
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if (refField.getText().equals("")) {
             alert.show("Missing required Fields", "Please enter product name", Alert.AlertType.WARNING);
@@ -846,7 +862,7 @@ public class MainController implements Initializable {
         try {
             
             
-            if(!adminsCount() || selectedEmployer.getAdmin() != 1){            
+            if( adminsCount() > 1 || selectedEmployer.getAdmin() != 1){            
 
             Connection con = getConnection();
 
@@ -1342,13 +1358,20 @@ public class MainController implements Initializable {
                         scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
                         stage.setScene(scene);
                         stage.show();
+                        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                xOffset = event.getSceneX();
+                                yOffset = event.getSceneY();
+                            }
+                        });
                         root.setOnMouseDragged(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
                                 stage.setX(event.getScreenX() - xOffset);
                                 stage.setY(event.getScreenY() - yOffset);
                             }
-                        });                         
+                        });                           
             } catch (IOException ex) {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1359,7 +1382,7 @@ public class MainController implements Initializable {
             
                         try {
                             Employer employer = employersTable.getSelectionModel().getSelectedItem();
-                            ((Node)Action.getSource()).getParent().getScene().getWindow().hide();
+                            ((Node)Action.getSource()).getScene().getWindow().hide();
                             Stage stage = new Stage();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateEmployer.fxml"));
                             AnchorPane root = (AnchorPane)loader.load();
@@ -1371,15 +1394,22 @@ public class MainController implements Initializable {
                             stage.initStyle(StageStyle.TRANSPARENT);
                             scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
                             scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
-                            stage.setScene(scene);                         
+                            stage.setScene(scene);
                             stage.show();
-                        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                stage.setX(event.getScreenX() - xOffset);
-                                stage.setY(event.getScreenY() - yOffset);
-                            }
-                        });                             
+                            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    xOffset = event.getSceneX();
+                                    yOffset = event.getSceneY();
+                                }
+                            });
+                            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    stage.setX(event.getScreenX() - xOffset);
+                                    stage.setY(event.getScreenY() - yOffset);
+                                }
+                            });                            
                             
                         } catch (IOException ex) {
                             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1412,6 +1442,20 @@ public class MainController implements Initializable {
                             scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
                             stage.setScene(scene);                         
                             stage.show();
+                            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    xOffset = event.getSceneX();
+                                    yOffset = event.getSceneY();
+                                }
+                            });
+                            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    stage.setX(event.getScreenX() - xOffset);
+                                    stage.setY(event.getScreenY() - yOffset);
+                                }
+                            });                            
                             
                         } catch (IOException ex) {
                             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1443,13 +1487,42 @@ public class MainController implements Initializable {
                             scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
                             stage.setScene(scene);                         
                             stage.show();
-                        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                stage.setX(event.getScreenX() - xOffset);
-                                stage.setY(event.getScreenY() - yOffset);
-                            }
-                        });                             
+                            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    xOffset = event.getSceneX();
+                                    yOffset = event.getSceneY();
+                                }
+                            });
+                            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    stage.setX(event.getScreenX() - xOffset);
+                                    stage.setY(event.getScreenY() - yOffset);
+                                }
+                            });                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+        });
+
+        changePass.setOnAction(Action -> {
+            
+                        try {
+
+                            Employer employer = employersTable.getSelectionModel().getSelectedItem();
+                            ((Node)Action.getSource()).getScene().getWindow().hide();
+                            Stage stage = new Stage();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployerRecords.fxml"));
+                            AnchorPane root = (AnchorPane)loader.load();
+                            ChangePassController erControl = (ChangePassController)loader.getController();
+                            Scene scene = new Scene(root);
+                            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                            stage.initStyle(StageStyle.TRANSPARENT);
+                            scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                            scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                            stage.setScene(scene);                         
+                            stage.show();                           
                         } catch (IOException ex) {
                             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1809,13 +1882,20 @@ public class MainController implements Initializable {
                         scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
                         stage.setScene(scene);
                         stage.show();
+                        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                xOffset = event.getSceneX();
+                                yOffset = event.getSceneY();
+                            }
+                        });
                         root.setOnMouseDragged(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
                                 stage.setX(event.getScreenX() - xOffset);
                                 stage.setY(event.getScreenY() - yOffset);
                             }
-                        });                                                 
+                        });                                                   
                         
         }
         

@@ -14,8 +14,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,14 +77,13 @@ public class UpdateEmployerController implements Initializable {
         if (selectedEmployer.getImage().equals("")) {
             image.setGraphic(null);
             image.setText("No image found");
-            System.out.print("image");
-            System.out.print(selectedEmployer.getImage());
+
         }
         else {
             image.setText("");
             image.setGraphic(new ImageView(new Image(
                     new File(selectedEmployer.getImage()).toURI().toString(),
-                    150, 150, true, true)));
+                    200, 200, true, true)));
         }
 
         joinedDate.getEditor().setText(selectedEmployer.getJoinDate());
@@ -144,18 +141,16 @@ public class UpdateEmployerController implements Initializable {
         else if(!fullname.getText().matches("^[\\p{L} .'-]+$")){
             alert.show("Fullname not valid", "Please specify a valid fullname !", Alert.AlertType.WARNING);
             return false;              
-        }        
+        }
+        else if(!salary.getText().matches("^[1-9]?[0-9]+$")){
+            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR);
+            return false;           
+        }
        
         
         try {
             Integer.parseInt(salary.getText());
-            if(Integer.parseInt(salary.getText()) > 0 )
             return true;
-            else
-            {
-            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR);
-            return false;
-            }
         }
         catch (NumberFormatException e) {
             alert.show("Salary Error", "Price should be a decimal number (eg: 400, 1000)", Alert.AlertType.ERROR);
@@ -360,7 +355,7 @@ public class UpdateEmployerController implements Initializable {
         });
         phone.setOnKeyReleased(Action -> {
             
-        if (!phone.getText().matches("^[5-7]?[0-9]{9}$")) {
+        if (!phone.getText().matches("^[5-7]?[0-9]{9}")) {
             phoneStatus.setVisible(true);
             phone.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -372,7 +367,7 @@ public class UpdateEmployerController implements Initializable {
         
         salary.setOnKeyPressed(Action -> {
             
-        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+        if (!salary.getText().matches("^[1-9]?[0-9]$")) {
             salaryStatus.setVisible(true);
             salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -384,7 +379,7 @@ public class UpdateEmployerController implements Initializable {
         });
         salary.setOnKeyTyped(Action -> {
             
-        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+        if (!salary.getText().matches("^[1-9]?[0-9]+$")) {
             salaryStatus.setVisible(true);
             salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -396,7 +391,7 @@ public class UpdateEmployerController implements Initializable {
         }); 
         salary.setOnKeyReleased(Action -> {
             
-        if (!salary.getText().matches("^[0-9]?[0-9]*$")) {
+        if (!salary.getText().matches("^[1-9]?[0-9]+$")) {
             salaryStatus.setVisible(true);
             salary.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }

@@ -14,7 +14,6 @@
     -fx-alignment: CENTER;
     -fx-text-alignment: center;
 
-
 }
 .table-view:row-selection {
     -fx-background-color: transparent;
@@ -102,5 +101,17 @@ ListView {
     -fx-cursor: hand;
     
 }
+
+.choice-box {
+  -fx-background-color: white;
+  -fx-mark-color: #3D4956;
+}
+
+.choice-box > .label { -fx-text-fill: #3D4956; }
+
+.choice-box .context-menu { -fx-background-color:  #3D4956; }
+.choice-box .menu-item:focused { -fx-background-color: orange; }
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused > .label { -fx-text-fill: #3D4956s; }
 
 

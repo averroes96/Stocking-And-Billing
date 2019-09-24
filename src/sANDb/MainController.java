@@ -115,7 +115,7 @@ public class MainController implements Initializable {
     @FXML private DatePicker payDateField;    
     @FXML private Label productImg,picLabel,fullnameLabel,phoneLabel,salaryLabel,joinedLabel;
     @FXML private Label idField,selectedSize,sum,totalProdSold,weekSum,weekSells,monthSum,monthSells,allSum,allSells,revSum,revTotal;    
-    @FXML private Button addProd;
+    @FXML private Button addProd,productStats;
     @FXML private Button updateImage;
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
@@ -1511,11 +1511,11 @@ public class MainController implements Initializable {
                         try {
 
                             Employer employer = employersTable.getSelectionModel().getSelectedItem();
-                            ((Node)Action.getSource()).getScene().getWindow().hide();
                             Stage stage = new Stage();
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployerRecords.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("ChangePass.fxml"));
                             AnchorPane root = (AnchorPane)loader.load();
                             ChangePassController erControl = (ChangePassController)loader.getController();
+                            erControl.getEmployer(employer);
                             Scene scene = new Scene(root);
                             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
                             stage.initStyle(StageStyle.TRANSPARENT);
@@ -1821,6 +1821,29 @@ public class MainController implements Initializable {
             }
             
         });
+        
+        productStats.setOnAction(Action -> {
+        
+            try {
+                Stage stage = new Stage();
+                AnchorPane root = FXMLLoader.load(getClass().getResource("ProductStats.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                stage.setScene(scene);
+                stage.show();
+                root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        stage.setX(event.getScreenX() - xOffset);
+                        stage.setY(event.getScreenY() - yOffset);
+                    } 
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });        
                 
         
         

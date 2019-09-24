@@ -55,7 +55,7 @@
              
             <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="428.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/close.png" />
+                  <Image url="@images/icons8_delete_sign_64px_2.png" />
                </image>
             </ImageView>          
                          

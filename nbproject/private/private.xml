@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/ChangePass.fxml</file>
-            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/UpdateEmployerController.java</file>
+            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/NewProductController.java</file>
+            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/UpdateSellController.java</file>
+            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/NewSellController.java</file>
+            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/Layout/custom.css</file>
             <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/MainController.java</file>
-            <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/ChangePassController.java</file>
             <file>file:/C:/Users/med/Documents/NetBeansProjects/S&amp;B/src/sANDb/NewEmployerController.java</file>
         </group>
     </open-files>

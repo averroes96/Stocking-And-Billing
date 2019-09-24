@@ -60,7 +60,7 @@
              
          </graphic>               
             </Button>
-            <Label fx:id="productImg" layoutX="20.0" layoutY="367.0" prefHeight="190.0" prefWidth="188.0" style="-fx-alignment: center; -fx-background-color: #DDD; -fx-background-radius: 10;" />
+            <Label fx:id="productImg" layoutX="20.0" layoutY="367.0" prefHeight="190.0" prefWidth="188.0" style="-fx-alignment: center; -fx-background-color: darkgrey; -fx-background-radius: 10;" />
             <Label fx:id="idField" layoutX="726.0" layoutY="412.0" prefHeight="17.0" prefWidth="27.0" visible="false" />
             <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="24.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -84,7 +84,7 @@
                    
                </graphic>                    
                   </Button>
-                  <Button id="menu-btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="150.0" text="STATS" textFill="#dddddd">
+                  <Button id="menu-btn" fx:id="productStats" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="150.0" text="STATS" textFill="#dddddd">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -112,7 +112,7 @@
                   </Button>
                </children>
             </HBox>
-            <Pane layoutX="229.0" layoutY="368.0" prefHeight="239.0" prefWidth="612.0" style="-fx-background-color: lightgrey; -fx-background-radius: 10;">
+            <Pane layoutX="229.0" layoutY="368.0" prefHeight="239.0" prefWidth="612.0" style="-fx-background-color: darkgrey; -fx-background-radius: 10;">
                <children>
                   <TextField fx:id="refField" layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0" promptText="Reference" style="-fx-padding: 0 0 0 40; -fx-background-color: white; -fx-border-color: grey;">
                      <font>
@@ -225,7 +225,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/close.png" />
+                        <Image url="@images/icons8_delete_sign_64px_2.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -241,7 +241,7 @@
             </Label>
             <ButtonBar layoutY="6.0" prefHeight="74.0" prefWidth="800.0">
                <buttons>
-                  <Button id="menu-btn" fx:id="btn_products" mnemonicParsing="false" onAction="#selectMenu" prefHeight="76.0" prefWidth="200.0" text="PRODUCTS" textFill="#dddddd">
+                  <Button id="menu-btn" fx:id="btn_products" mnemonicParsing="false" onAction="#selectMenu" prefHeight="74.0" prefWidth="200.0" text="PRODUCTS" textFill="#dddddd">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -354,7 +354,7 @@
             <DatePicker fx:id="payDateField" editable="false" layoutX="651.0" layoutY="535.0" prefHeight="40.0" prefWidth="174.0" promptText="Select a date" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="657.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -187,9 +187,6 @@ public class SellStatsController implements Initializable {
             st = con.prepareStatement(query);
             rs = st.executeQuery();
             
-            System.out.println(query);
-            
-            
             while(rs.next()){
                 
                 list.add(new PieChart.Data(rs.getString("category"),rs.getInt("count(category)")));

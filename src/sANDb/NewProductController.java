@@ -16,7 +16,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -53,7 +52,7 @@ public class NewProductController implements Initializable {
     
         @FXML public TextField refField,brandField,priceField,colorField;
         @FXML public ChoiceBox catField;
-        @FXML public Label imgField,selectedSize,minimize;
+        @FXML public Label imgField,selectedSize,minimize,priceStatus;
         @FXML public Button addProduct,addPhoto,cancel;
         @FXML public Slider sizeField;
         @FXML public Spinner<Integer> minSize,maxSize;
@@ -250,6 +249,45 @@ public class NewProductController implements Initializable {
             minimize(Action);
             
         });
+
+        priceField.setOnKeyReleased(event -> {
+            
+        if (!priceField.getText().matches("^[0-9]?[0-9]+$")) {
+            priceStatus.setVisible(true);
+            priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            priceField.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+        });
+        
+        priceField.setOnKeyPressed(event -> {
+
+        if (!priceField.getText().matches("^[0-9]?[0-9]+$")) {
+            priceStatus.setVisible(true);
+            priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            priceField.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }         
+            
+        });
+        
+        priceField.setOnKeyTyped(event -> {
+
+        if (!priceField.getText().matches("^[0-9]?[0-9]+$")) {
+            priceStatus.setVisible(true);
+            priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            priceField.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }         
+            
+        });        
+        
     }    
     
 }

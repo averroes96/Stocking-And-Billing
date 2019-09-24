@@ -1,8 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="sANDb.ProductStatsController">
-    
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.ProductStatsController">
+   <children>
+      <Text fill="#dddddd" layoutX="338.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCT'S STATS" wrappingWidth="196.783203125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="27.0" fitWidth="26.0" layoutX="303.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/icons8_combo_chart_filled_100px.png" />
+         </image>
+      </ImageView>
+      <BorderPane layoutX="60.0" layoutY="73.0" prefHeight="420.0" prefWidth="700.0">
+         <left>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ToolBar focusTraversable="false" orientation="VERTICAL" prefHeight="447.0" prefWidth="174.0" style="-fx-border-color: darkgrey;">
+                     <items>
+                        <Label prefHeight="30.0" prefWidth="150.0" style="-fx-alignment: center;" text="START DATE" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="startDate" prefHeight="40.0" prefWidth="150.0" />
+                        <Label prefHeight="30.0" prefWidth="150.0" style="-fx-alignment: center;" text="END DATE" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="endDate" prefHeight="40.0" prefWidth="150.0" />
+                        <Separator prefHeight="30.0" prefWidth="150.0" />
+                        <Label layoutX="10.0" layoutY="179.0" prefHeight="30.0" prefWidth="150.0" style="-fx-alignment: center;" text="TYPE" textFill="#3d4956">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="type" prefHeight="40.0" prefWidth="150.0" />
+                        <Separator layoutX="10.0" layoutY="284.0" prefHeight="30.0" prefWidth="150.0" />
+                        <Button id="rich-blue" fx:id="filter" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="FILTER">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </items>
+                  </ToolBar>
+               </children>
+            </VBox>
+         </left>
+         <top>
+            <ToolBar focusTraversable="false" prefHeight="53.0" prefWidth="585.0" style="-fx-border-color: darkgrey;" BorderPane.alignment="CENTER">
+               <items>
+                  <RadioButton fx:id="referencce" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Reference" textFill="#3d4956">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="size" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Size" textFill="#3d4956">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="brand" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Brand" textFill="#3d4956">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="category" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Category" textFill="#3d4956">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="color" layoutX="382.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Color" textFill="#3d4956">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </RadioButton>
+               </items>
+            </ToolBar>
+         </top>
+         <center>
+            <PieChart fx:id="myChart" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@Layout/buttons.css" />
+      <URL value="@Layout/custom.css" />
+   </stylesheets>
 </AnchorPane>

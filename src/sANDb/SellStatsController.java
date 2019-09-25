@@ -5,6 +5,7 @@
  */
 package sANDb;
 
+import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
 import Include.SpecialAlert;
 import java.net.URL;
@@ -12,19 +13,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
@@ -39,13 +41,14 @@ public class SellStatsController implements Initializable {
     
     @FXML Label weekSells,weekSum,monthSells,monthSum,yearSells,yearSum,totalSells,totalSum ;
     @FXML LineChart sellLineChart ;
-    @FXML PieChart sellPieChart;
-    @FXML ChoiceBox statsFilter;
-    @FXML ChoiceBox statsFilter2;
+    @FXML LineChart sumLineChart;
+    @FXML DatePicker startDate,endDate;
+    @FXML CheckBox sandal,fillete,soiree,sabot,ballerine,moccasin,chaussure,other;
     @FXML ObservableList<Data> list = FXCollections.observableArrayList();
-    @FXML ObservableList<String> statsList = FXCollections.observableArrayList("Last Week", "Last Month", "Last Year","Total");
-    
+    @FXML Button filter;
     SpecialAlert alert = new SpecialAlert();
+    
+    ArrayList<String> selectedCats = new ArrayList();    
     
     public void getAllStats(){
         
@@ -135,12 +138,48 @@ public class SellStatsController implements Initializable {
         
     }
     
-    public void loadLineChart(String selectedDate){
+    public void loadLineChart(String startDate, String endDate, ArrayList<String> types){
+        
+        String whereClause = "";
+        
+        if(!startDate.equals("")){
+            
+            whereClause += " WHERE sell_date >= '" + startDate + "' " ;
+            
+        }
+        if(!endDate.equals("")){
+            
+            if(whereClause.equals("")){
+                whereClause = " WHERE sell_date <= '" + endDate + "' " ;
+            }
+            else
+            {
+                whereClause += " AND sell_date <= '" + endDate + "' ";
+            }
+            
+        }
+        if(!types.isEmpty()){
+            
+            for(String str : types){
+
+              if(whereClause.equals("")){
+                  whereClause = " WHERE category = '" + str + "' " ;
+              }
+              else
+              {
+                  whereClause = " AND category = '" + str + "' " ;
+              }
+                
+            }
+            
+        }
         
         Connection con = getConnection();
-        String query = "SELECT sell_date, count(*) FROM sell " + selectedDate + " Group by sell_date ORDER BY sell_date";
+        String query = "SELECT sell_date, count(*) FROM sell " + whereClause + "Group by sell_date ORDER BY sell_date";
         PreparedStatement st;
         ResultSet rs;
+        
+        System.out.println(query);
         
         sellLineChart.getData().clear();
         XYChart.Series<String,Integer> series = new XYChart.Series<>();
@@ -161,7 +200,7 @@ public class SellStatsController implements Initializable {
                 for(final XYChart.Data<String, Integer> data : series.getData()){
             
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-                Tooltip.install(data.getNode(), new Tooltip(data.getXValue()));//To change body of generated methods, choose Tools | Templates.
+                Tooltip.install(data.getNode(), new Tooltip(data.getYValue().toString()));
             });
         }            
             
@@ -176,33 +215,77 @@ public class SellStatsController implements Initializable {
         
     }
     
-    public void loadPieChart(String selectedDate){
+    public void loadSumChart(String startDate, String endDate, ArrayList<String> types){
         
-        try {
-            Connection con = getConnection();
-            String query = "SELECT category, count(category) FROM product,sell WHERE sold = 1 " + selectedDate + " AND product.prod_id = sell.prod_id Group by category";
-            PreparedStatement st;
-            ResultSet rs;
+        String whereClause = "";
+        
+        if(!startDate.equals("")){
             
+            whereClause += " WHERE sell_date >= '" + startDate + "' " ;
+            
+        }
+        if(!endDate.equals("")){
+            
+            if(whereClause.equals("")){
+                whereClause = " WHERE sell_date <= '" + endDate + "' " ;
+            }
+            else{
+                whereClause += " AND sell_date <= '" + endDate + "' ";
+            }
+            
+        }
+        if(!types.isEmpty()){
+            
+            for(String str : types){
+
+              if(whereClause.equals("")){
+                  whereClause = " WHERE category = '" + str + "' " ;
+              }
+              else{
+                  whereClause = " AND category = '" + str + "' " ;
+              }
+                
+            }
+            
+        }        
+        
+        Connection con = getConnection();
+        String query = "SELECT sell_date, SUM(sellPrice) FROM sell " + whereClause + " Group by sell_date";
+        PreparedStatement st;
+        ResultSet rs;
+        
+        System.out.println(query);
+        
+        sumLineChart.getData().clear();
+        XYChart.Series<String,Integer> series = new XYChart.Series<>();
+
+        try {
             st = con.prepareStatement(query);
             rs = st.executeQuery();
-            
-            while(rs.next()){
-                
-                list.add(new PieChart.Data(rs.getString("category"),rs.getInt("count(category)")));
+           
+
+            while (rs.next()) {
+
+                series.getData().add(new XYChart.Data<>(rs.getString("sell_date"),rs.getInt("SUM(sellPrice)")));
                 
             }
             
-            sellPieChart.setData(list);
-            for(final PieChart.Data data : sellPieChart.getData()){
-                
-                data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {        
-                    Tooltip.install(data.getNode(), new Tooltip(String.valueOf((int)data.getPieValue())));//To change body of generated methods, choose Tools | Templates.
-                });
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(SellStatsController.class.getName()).log(Level.SEVERE, null, ex);
+        sumLineChart.getData().addAll(series);
+        
+                for(final XYChart.Data<String, Integer> data : series.getData()){
+            
+            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
+                Tooltip.install(data.getNode(), new Tooltip(data.getYValue().toString()));//To change body of generated methods, choose Tools | Templates.
+            });
+        }            
+            
+            con.close();
         }
+        catch (SQLException e) {
+            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+        } 
+
+        series.setName("Total Sum");
         
     }
     
@@ -210,43 +293,62 @@ public class SellStatsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        getAllStats();
-        loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
-        loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
+        startDate.setConverter(dateFormatter());
+        endDate.setConverter(dateFormatter());
+
+        startDate.getEditor().setText(String.valueOf(LocalDate.now().minusWeeks(1)));
+        endDate.getEditor().setText(String.valueOf(LocalDate.now()));
+
+        System.out.println(startDate.getEditor().getText());
+        System.out.println(endDate.getEditor().getText());
         
-        statsFilter.setOnAction(Action -> {
+        getAllStats();
+        loadLineChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
+        loadSumChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
 
-                switch(statsFilter.getValue().toString()){
-                    
-                    case "Last Week" : sellLineChart.getData().clear();
-                    sellPieChart.getData().clear();
-                    loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
-                    loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ");
-                    break;
-                    
-                    case "Last Month": sellLineChart.getData().clear();
-                    sellPieChart.getData().clear();
-                    loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ");
-                    loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ");
-                    break;
-                    
-                    case "Last Year": sellLineChart.getData().clear();
-                    sellPieChart.getData().clear();
-                    loadLineChart(" WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 365 day ) ");
-                    loadPieChart(" AND sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 365 day ) ");
-                    break;
-                    
-                    case "Total": sellLineChart.getData().clear();
-                    sellPieChart.getData().clear();
-                    loadLineChart("");
-                    loadPieChart("");
-                    break;
-                }   
+        filter.setOnAction(Action -> {
             
+        selectedCats.clear();
+            
+        if(sandal.isSelected())
+            selectedCats.add(sandal.getText());
+        if(fillete.isSelected())
+            selectedCats.add(fillete.getText());
+        if(soiree.isSelected())
+            selectedCats.add(soiree.getText());
+        if(sabot.isSelected())
+            selectedCats.add(sabot.getText());
+        if(ballerine.isSelected())
+            selectedCats.add(ballerine.getText());
+        if(moccasin.isSelected())
+            selectedCats.add(moccasin.getText());
+        if(chaussure.isSelected())
+            selectedCats.add(chaussure.getText());
+        if(other.isSelected())
+            selectedCats.add(other.getText());
+        
+        if(endDate.getValue().compareTo(startDate.getValue()) > 0){
+            
+        if(endDate.getValue().compareTo(startDate.getValue()) > 30){    
+        
+        loadLineChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
+        loadSumChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
+        
+       }
+        else {
+            
+            alert.show("LARGE INTERVAL", "The larget allowed interval is 30 days ! Please make sure to select a smaller interval", Alert.AlertType.WARNING);
+            
+        }
+        
+        }
+        else {
+            
+            alert.show("ILLEGAL INTERVAL", "Start date must be inferior than the end date !", Alert.AlertType.WARNING);
+            
+        }        
+        
         });
-
-        statsFilter.setItems(statsList);
-        statsFilter.getSelectionModel().select(0);
         
        
         

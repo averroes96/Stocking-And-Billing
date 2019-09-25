@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="656.0" prefWidth="1200.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.SellStatsController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.SellStatsController">
    <children>
       <Text fill="#dddddd" layoutX="549.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELL'S STATS" wrappingWidth="156.228515625">
          <font>
@@ -26,7 +30,7 @@
             <Image url="@images/buy2.png" />
          </image>
       </ImageView>
-      <HBox layoutX="70.0" layoutY="82.0" prefHeight="150.0" prefWidth="1060.0">
+      <HBox layoutX="74.0" layoutY="79.0" prefHeight="150.0" prefWidth="1060.0">
          <children>
             <Pane prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: tomato; -fx-background-radius: 10;">
                <children>
@@ -145,7 +149,7 @@
             </Pane>
          </children>
       </HBox>
-      <LineChart fx:id="sellLineChart" layoutX="12.0" layoutY="306.0" prefHeight="332.0" prefWidth="600.0">
+      <LineChart fx:id="sellLineChart" layoutX="-6.0" layoutY="406.0" prefHeight="300.0" prefWidth="600.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -153,17 +157,85 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <Text fill="WHITE" layoutX="193.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER OF SELLS PER DAY">
+      <Text fill="WHITE" layoutX="175.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER OF SELLS PER DAY">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <PieChart fx:id="sellPieChart" layoutX="644.0" layoutY="321.0" prefHeight="322.0" prefWidth="500.0" />
-      <Text fill="WHITE" layoutX="798.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOLD PRODUCTS TYPE">
+      <Text fill="WHITE" layoutX="827.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL AMOUNT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="statsFilter" layoutX="525.0" layoutY="262.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" />
+      <LineChart fx:id="sumLineChart" layoutX="607.0" layoutY="406.0" prefHeight="300.0" prefWidth="600.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <ToolBar layoutX="54.0" layoutY="283.0" prefHeight="70.0" prefWidth="1100.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <items>
+            <DatePicker fx:id="startDate" editable="false" prefHeight="40.0" prefWidth="170.0" />
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_filled_sent_32px.png" />
+               </image>
+            </ImageView>
+            <DatePicker fx:id="endDate" editable="false" prefHeight="40.0" prefWidth="170.0" />
+            <Separator orientation="VERTICAL" prefHeight="43.0" prefWidth="30.0" />
+            <CheckBox fx:id="sandal" mnemonicParsing="false" text="Sandal" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="fillete" layoutX="382.0" layoutY="23.0" mnemonicParsing="false" text="Fillete" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="soiree" layoutX="448.0" layoutY="23.0" mnemonicParsing="false" text="Soiree" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="sabot" layoutX="505.0" layoutY="23.0" mnemonicParsing="false" text="Sabot" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="ballerine" layoutX="564.0" layoutY="23.0" mnemonicParsing="false" text="Ballerine" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="moccasin" layoutX="620.0" layoutY="23.0" mnemonicParsing="false" text="Moccasin" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="chaussure" layoutX="691.0" layoutY="23.0" mnemonicParsing="false" text="Chaussure" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="other" layoutX="766.0" layoutY="23.0" mnemonicParsing="false" text="Other" textFill="#3d4956">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <Separator orientation="VERTICAL" prefHeight="60.0" prefWidth="28.0" />
+            <Button id="green" fx:id="filter" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="FILTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
    </children>
+   <stylesheets>
+      <URL value="@Layout/buttons.css" />
+      <URL value="@Layout/custom.css" />
+   </stylesheets>
 </AnchorPane>

@@ -7,6 +7,7 @@ import Data.Product;
 import Data.Sell;
 import Include.Common;
 import static Include.Common.adminsCount;
+import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
 import Include.SpecialAlert;
 import java.io.File;
@@ -20,14 +21,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -59,7 +58,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 /**
  *
@@ -189,31 +187,6 @@ public class MainController implements Initializable {
             alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
-
-
-    public StringConverter dateFormatter()
-    {
-        StringConverter converter = new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
-
-            @Override
-            public String toString(LocalDate date) {
-                if (date != null) {
-                    return dateFormatter.format(date);
-                }
-                return "";
-            }
-
-            @Override
-            public LocalDate fromString(String string) {
-                if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, dateFormatter);
-                }
-                return null;
-            }
-        };
-        return converter;
-    }   
     
     
     private void search()
@@ -499,6 +472,8 @@ public class MainController implements Initializable {
             
             productsTable.refresh();
             
+            alert.show("PRODUCT DELETED", "Product was successfully deleted !", Alert.AlertType.INFORMATION);            
+            
             if(data.size() > 0) {
                 showNextProduct();
             }
@@ -615,139 +590,6 @@ public class MainController implements Initializable {
         }        
         
     }   
-    
-    /*public void getSellsStats(String selectedDate){
-        
-        Connection con = getConnection();
-        String query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date = ? ";
-
-        PreparedStatement st;
-        ResultSet rs;
-
-        try {
-            st = con.prepareStatement(query);
-            st.setString(1,selectedDate);
-            rs = st.executeQuery();
-            
-            int priceSum = 0;
-            int total = 0;
-
-            while (rs.next()) {
-                
-                priceSum = rs.getInt("SUM(sellPrice)");
-                total = rs.getInt("count(*)");
-                
-            }
-            
-            sum.setText(String.valueOf(priceSum) + " DA");
-            totalProdSold.setText(String.valueOf(total) + " Sell(s)");
-
-            con.close();
-        }
-        catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
-        }        
-        
-    }
-    
-    public void getSellsWeekStats(){
-        
-        Connection con = getConnection();
-        String query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 7 day ) ";
-
-        PreparedStatement st;
-        ResultSet rs;
-
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            
-            int priceSum = 0;
-            int total = 0;
-
-            while (rs.next()) {
-                
-                priceSum = rs.getInt("SUM(sellPrice)");
-                total = rs.getInt("count(*)");
-                
-            }
-            
-            weekSum.setText(String.valueOf(priceSum) + " DA");
-            weekSells.setText(String.valueOf(total) + " Sell(s)");
-
-            con.close();
-        }
-        catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
-        }         
-        
-    }
-    
-    public void getSellsMonthStats(){
-        
-        Connection con = getConnection();
-        String query = "SELECT count(*), SUM(sellPrice) FROM sell WHERE sell_date <= curdate() AND sell_date >= date(curdate() - INTERVAL 30 day ) ";
-
-        PreparedStatement st;
-        ResultSet rs;
-
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            
-            int priceSum = 0;
-            int total = 0;
-
-            while (rs.next()) {
-                
-                priceSum = rs.getInt("SUM(sellPrice)");
-                total = rs.getInt("count(*)");
-                
-            }
-            
-            monthSum.setText(String.valueOf(priceSum) + " DA");
-            monthSells.setText(String.valueOf(total) + " Sell(s)");
-
-            con.close();
-        }
-        catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
-        }         
-        
-    }
-
-    public void getAllSellsStats(){
-        
-        Connection con = getConnection();
-        String query = "SELECT count(*), SUM(sellPrice) FROM sell";
-
-        PreparedStatement st;
-        ResultSet rs;
-
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            
-            int priceSum = 0;
-            int total = 0;
-
-            while (rs.next()) {
-                
-                priceSum = rs.getInt("SUM(sellPrice)");
-                total = rs.getInt("count(*)");
-                
-            }
-            
-            allSum.setText(String.valueOf(priceSum) + " DA");
-            allSells.setText(String.valueOf(total) + " Sell(s)");
-
-            con.close();
-        }
-        catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
-        }         
-        
-    }     */
   
 
     private void deleteSell(Sell selectedSell)
@@ -885,6 +727,7 @@ public class MainController implements Initializable {
             if(this.thisEmployer.getUsername().equals(selectedEmployer.getUsername())){
                 
                         this.addProd.getScene().getWindow().hide();
+                        
                         Stage stage = new Stage();
                         AnchorPane root = FXMLLoader.load(getClass().getResource("Login.fxml"));
                         Scene scene = new Scene(root);
@@ -917,6 +760,7 @@ public class MainController implements Initializable {
             employersTable.refresh();
             }
                 alert.show("Employer deleted", "Employer was successfully delete !", Alert.AlertType.INFORMATION);
+                Common.deleteImage(selectedEmployer.getImage());                
             }
             else{
                 
@@ -1163,13 +1007,20 @@ public class MainController implements Initializable {
                 stage.initStyle(StageStyle.TRANSPARENT);                
                 scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                 
                 stage.show();
+                        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                xOffset = event.getSceneX();
+                                yOffset = event.getSceneY();
+                            }
+                        });
                         root.setOnMouseDragged(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
                                 stage.setX(event.getScreenX() - xOffset);
                                 stage.setY(event.getScreenY() - yOffset);
                             }
-                        });                 
+                        });
                 
                 
             } catch (IOException ex) {

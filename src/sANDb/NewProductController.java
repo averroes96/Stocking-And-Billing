@@ -252,7 +252,7 @@ public class NewProductController implements Initializable {
 
         priceField.setOnKeyReleased(event -> {
             
-        if (!priceField.getText().matches("^[0-9]?[0-9]+$")) {
+        if (!priceField.getText().matches("^[1-9]?[0-9]{7}$")) {
             priceStatus.setVisible(true);
             priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -264,7 +264,7 @@ public class NewProductController implements Initializable {
         
         priceField.setOnKeyPressed(event -> {
 
-        if (!priceField.getText().matches("^[0-9]?[0-9]+$")) {
+        if (!priceField.getText().matches("^[1-9]?[0-9]{7}$")) {
             priceStatus.setVisible(true);
             priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -277,7 +277,7 @@ public class NewProductController implements Initializable {
         
         priceField.setOnKeyTyped(event -> {
 
-        if (!priceField.getText().matches("^[0-9]?[0-9]+$")) {
+        if (!priceField.getText().matches("^[1-9]?[0-9]{7}$")) {
             priceStatus.setVisible(true);
             priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }

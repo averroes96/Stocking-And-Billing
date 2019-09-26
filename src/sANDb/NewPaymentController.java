@@ -7,7 +7,9 @@ package sANDb;
 
 import Data.Employer;
 import static Include.Common.getConnection;
+import static Include.Common.getPrice;
 import static Include.Common.minimize;
+import static Include.Common.refExist;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +45,7 @@ public class NewPaymentController implements Initializable {
     
     @FXML private TextField paidField,restField,referenceField,colorField;
     @FXML Slider sizeSlider;
-    @FXML Label currentSize,min;
+    @FXML Label currentSize,min,refStatus,priceStatus;
     @FXML Button addPayment,cancel;
     
         SpecialAlert alert = new SpecialAlert();
@@ -89,7 +91,7 @@ public class NewPaymentController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return 0;
         }       
        
@@ -98,11 +100,11 @@ public class NewPaymentController implements Initializable {
        private boolean checkInputs()
     {
         if (paidField.getText().equals("") || restField.getText().equals("") || referenceField.getText().equals("") || colorField.equals("") || sizeSlider.equals("") )  {
-            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(productExist() == 0){
-            alert.show("Missing product", "No such product was found ! ", Alert.AlertType.WARNING);
+            alert.show("Missing product", "No such product was found ! ", Alert.AlertType.WARNING,false);
             return false;
         }
         
@@ -113,12 +115,12 @@ public class NewPaymentController implements Initializable {
             if(Integer.parseInt(paidField.getText()) > 0  && Integer.parseInt(restField.getText()) > 0 )
             return true;
             else{
-            alert.show("Error", "Paid and Rest should not have a negative value !", Alert.AlertType.ERROR);
+            alert.show("Error", "Paid and Rest should not have a negative value !", Alert.AlertType.ERROR,false);
             return false;
             }
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Price should be a decimal number (eg: 2000, 1000)", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should be a decimal number (eg: 2000, 1000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -141,7 +143,7 @@ public class NewPaymentController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -184,11 +186,11 @@ public class NewPaymentController implements Initializable {
 
                 resetWindow();
                 
-                alert.show("Pre-Payment Added", "Your Payment was successfully added !", Alert.AlertType.INFORMATION);
+                alert.show("Pre-Payment Added", "Your Payment was successfully added !", Alert.AlertType.INFORMATION,false);
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }
 
@@ -232,7 +234,119 @@ public class NewPaymentController implements Initializable {
         
             minimize(Action);
         
-        });        
+        });
+
+        referenceField.setOnKeyTyped(event -> {
+            
+            if(refExist(referenceField.getText())){
+                
+                referenceField.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                referenceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }             
+            
+        });
+        referenceField.setOnKeyReleased(event -> {
+
+            if(refExist(referenceField.getText())){
+                
+                referenceField.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                referenceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }            
+            
+        });
+        referenceField.setOnKeyPressed(event -> {
+
+            if(refExist(referenceField.getText())){
+                
+                referenceField.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                referenceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }            
+            
+        });
+        
+        paidField.setOnKeyReleased(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$") || !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }             
+            
+        });
+        paidField.setOnKeyPressed(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });
+        paidField.setOnKeyTyped(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]{7}$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });
+        
+        
+        restField.setOnKeyReleased(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$") || !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }             
+            
+        });
+        restField.setOnKeyPressed(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });
+        restField.setOnKeyTyped(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]{7}$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });         
         
     }    
     

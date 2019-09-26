@@ -270,7 +270,7 @@
 
                     </graphic>                     
                   </Button>
-                  <Button id="menu-btn" fx:id="btn_payment" layoutX="400.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectMenu" prefHeight="76.0" prefWidth="200.0" text="PAYMENTS" textFill="#dddddd">
+                  <Button id="menu-btn" fx:id="btn_payment" layoutX="400.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectMenu" prefHeight="76.0" prefWidth="200.0" text="VERSMENT" textFill="#dddddd">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -304,7 +304,7 @@
 
        
          </children></AnchorPane>
-      <AnchorPane fx:id="payments" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
+      <AnchorPane fx:id="payments" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
          <children>
             <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="457.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -312,7 +312,7 @@
                </image>
             </ImageView>
             <JFXTogglePane layoutX="120.0" layoutY="91.0" prefHeight="53.0" prefWidth="222.0" />
-            <TableView fx:id="paymentsTable" layoutX="37.0" layoutY="44.0" prefHeight="470.0" prefWidth="788.0" style="-fx-background-color: white; -fx-border-color: #000;">
+            <TableView fx:id="paymentsTable" layoutX="41.0" layoutY="91.0" prefHeight="400.0" prefWidth="788.0" style="-fx-background-color: white; -fx-border-color: #000;">
               <columns>
                 <TableColumn fx:id="payID" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="prodReference" prefWidth="116.0" text="PRODUCT" />
@@ -323,36 +323,52 @@
                   <TableColumn fx:id="payActions2" prefWidth="121.0" text="ACTION 2" />
               </columns>
             </TableView>
-            <Button id="green" fx:id="newPayButton" layoutX="218.0" layoutY="535.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="200.0" stylesheets="@Layout/custom.css" text="NEW PRE-PAYMENT">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-                <graphic>
-
-                   <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                         <Image url="@images/add.png" />
-                      </image>
-                   </ImageView>             
-
-                </graphic>                
-               
-            </Button>
-            <Button id="rich-blue" disable="true" layoutX="35.0" layoutY="534.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-                <graphic>
-
-                   <ImageView fitHeight="19.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                         <Image url="@images/print.png" />
-                      </image>
-                   </ImageView>             
-
-                </graphic>                
-            </Button>
-            <DatePicker fx:id="payDateField" editable="false" layoutX="651.0" layoutY="535.0" prefHeight="40.0" prefWidth="174.0" promptText="Select a date" />
+            <DatePicker fx:id="payDateField" editable="false" layoutX="335.0" layoutY="518.0" prefHeight="40.0" prefWidth="200.0" promptText="Select a date" />
+            <HBox layoutX="173.0" layoutY="14.0" prefHeight="68.0" prefWidth="525.0">
+               <children>
+                  <Button id="menu-btn" disable="true" mnemonicParsing="false" prefHeight="68.0" prefWidth="175.0" stylesheets="@Layout/buttons.css" text="PRINT TABLE" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                      <graphic>
+      
+                         <ImageView fitHeight="17.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                               <Image url="@images/print.png" />
+                            </image>
+                         </ImageView>             
+      
+                      </graphic>                
+                  </Button>
+                  <Button id="menu-btn" fx:id="newPayButton" mnemonicParsing="false" prefHeight="68.0" prefWidth="175.0" stylesheets="@Layout/custom.css" text="NEW VERSMENT" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                      <graphic>
+      
+                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                               <Image url="@images/payment.png" />
+                            </image>
+                         </ImageView>             
+      
+                      </graphic>                
+                     
+                  </Button>
+                  <Button id="menu-btn" fx:id="printVerse" layoutX="180.0" layoutY="10.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="175.0" stylesheets="@Layout/custom.css" text="PRINT VERSMENT" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_print_file_48px_2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
@@ -571,7 +587,7 @@
             </ButtonBar>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <TableView fx:id="sellsTable" layoutX="41.0" layoutY="85.0" prefHeight="421.0" prefWidth="788.0" style="-fx-background-color: white; -fx-border-color: #000;" stylesheets="@Layout/custom.css">
               <columns>

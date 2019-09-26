@@ -77,7 +77,7 @@ public class EmployerStatsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         } 
 
         series.setName("Sells");
@@ -143,7 +143,7 @@ public class EmployerStatsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         } 
 
         series.setName("Sells");        

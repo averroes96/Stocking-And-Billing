@@ -133,7 +133,7 @@ public class SellStatsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }         
         
     }
@@ -179,8 +179,6 @@ public class SellStatsController implements Initializable {
         PreparedStatement st;
         ResultSet rs;
         
-        System.out.println(query);
-        
         sellLineChart.getData().clear();
         XYChart.Series<String,Integer> series = new XYChart.Series<>();
 
@@ -207,7 +205,7 @@ public class SellStatsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         } 
 
         series.setName("Sells");
@@ -239,10 +237,10 @@ public class SellStatsController implements Initializable {
             for(String str : types){
 
               if(whereClause.equals("")){
-                  whereClause = " WHERE category = '" + str + "' " ;
+                  whereClause += " WHERE category = '" + str + "' " ;
               }
               else{
-                  whereClause = " AND category = '" + str + "' " ;
+                  whereClause += " AND category = '" + str + "' " ;
               }
                 
             }
@@ -282,7 +280,7 @@ public class SellStatsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         } 
 
         series.setName("Total Sum");
@@ -298,9 +296,9 @@ public class SellStatsController implements Initializable {
 
         startDate.getEditor().setText(String.valueOf(LocalDate.now().minusWeeks(1)));
         endDate.getEditor().setText(String.valueOf(LocalDate.now()));
-
-        System.out.println(startDate.getEditor().getText());
-        System.out.println(endDate.getEditor().getText());
+        
+        startDate.setValue(LocalDate.now().minusWeeks(1));
+        endDate.setValue(LocalDate.now());        
         
         getAllStats();
         loadLineChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
@@ -329,7 +327,7 @@ public class SellStatsController implements Initializable {
         
         if(endDate.getValue().compareTo(startDate.getValue()) > 0){
             
-        if(endDate.getValue().compareTo(startDate.getValue()) > 30){    
+        if(endDate.getValue().compareTo(startDate.getValue()) <= 30){    
         
         loadLineChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
         loadSumChart(startDate.getEditor().getText(), endDate.getEditor().getText(),selectedCats);
@@ -337,14 +335,14 @@ public class SellStatsController implements Initializable {
        }
         else {
             
-            alert.show("LARGE INTERVAL", "The larget allowed interval is 30 days ! Please make sure to select a smaller interval", Alert.AlertType.WARNING);
+            alert.show("LARGE INTERVAL", "The larget allowed interval is 30 days ! Please make sure to select a smaller interval", Alert.AlertType.WARNING,false);
             
         }
         
         }
         else {
             
-            alert.show("ILLEGAL INTERVAL", "Start date must be inferior than the end date !", Alert.AlertType.WARNING);
+            alert.show("ILLEGAL INTERVAL", "Start date must be inferior than the end date !", Alert.AlertType.WARNING,false);
             
         }        
         

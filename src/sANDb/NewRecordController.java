@@ -125,7 +125,7 @@ public class NewRecordController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return 1;
         }       
        
@@ -140,12 +140,12 @@ public class NewRecordController implements Initializable {
             return true;
             }
             else{
-                alert.show("Error", "Please enter a valid sum ! (eg: 2000, 10000)", Alert.AlertType.ERROR);
+                alert.show("Sum error", "Please enter a valid sum ! (eg: 2000, 10000)", Alert.AlertType.ERROR,false);
                 return false;
             }
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Paid salary should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR);
+            alert.show("Error", "Paid salary should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -191,7 +191,7 @@ public class NewRecordController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
         
         return record;
@@ -209,7 +209,7 @@ public class NewRecordController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -233,7 +233,7 @@ public class NewRecordController implements Initializable {
 
                 resetWindow();
                 
-                alert.show("Record Added", "Your record was successfully added !", Alert.AlertType.INFORMATION);               
+                alert.show("Record Added", "Your record was successfully added !", Alert.AlertType.INFORMATION,false);               
                 
                 }
                 else{
@@ -252,7 +252,7 @@ public class NewRecordController implements Initializable {
 
             }
             catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR,false);
             }
         }
 

@@ -19,8 +19,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,7 +71,7 @@ public class UpdateRecordController implements Initializable {
     private boolean checkInputs()
     {
         if (Integer.parseInt(paid.getText()) < 0) {
-            alert.show("Paid Value", "Paid Value must be a positive number !", Alert.AlertType.WARNING);
+            alert.show("Paid Value", "Paid Value must be a positive number !", Alert.AlertType.WARNING,false);
             return false;
         }     
        
@@ -83,7 +81,7 @@ public class UpdateRecordController implements Initializable {
             return true;
         }
         catch (NumberFormatException e) {
-            alert.show("Salary Error", "Paid value should be a decimal number (eg: 400, 1000)", Alert.AlertType.ERROR);
+            alert.show("Salary Error", "Paid value should be a decimal number (eg: 400, 1000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -119,7 +117,7 @@ public class UpdateRecordController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return 1;
         }       
        
@@ -133,7 +131,7 @@ public class UpdateRecordController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -154,7 +152,7 @@ public class UpdateRecordController implements Initializable {
                 
                 con.close();
 
-                alert.show("Record Updated", "This record was successfully updated !", Alert.AlertType.INFORMATION);
+                alert.show("Record Updated", "This record was successfully updated !", Alert.AlertType.INFORMATION,false);
                 
 
                         Stage stage = new Stage();
@@ -178,8 +176,8 @@ public class UpdateRecordController implements Initializable {
 
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (IOException | NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }        
         
@@ -213,7 +211,7 @@ public class UpdateRecordController implements Initializable {
                 stage.setScene(scene);  
                 stage.show();
             } catch (IOException ex) {
-                Logger.getLogger(UpdateEmployerController.class.getName()).log(Level.SEVERE, null, ex);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }
         });        
 

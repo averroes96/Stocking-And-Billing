@@ -19,8 +19,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -106,7 +104,7 @@ public class EmployerRecordsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
 
@@ -185,7 +183,7 @@ public class EmployerRecordsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
    
     }
@@ -242,7 +240,7 @@ public class EmployerRecordsController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
             } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }                        
 
                     });
@@ -399,7 +397,7 @@ public class EmployerRecordsController implements Initializable {
                         stage.setScene(scene);
                         stage.show();            
             } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }
 
         });

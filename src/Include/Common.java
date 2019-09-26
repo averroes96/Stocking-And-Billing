@@ -8,6 +8,7 @@ package Include;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,8 +17,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -48,7 +47,7 @@ public class Common implements Init {
             return con;
         }
         catch (SQLException ex) {
-            alert.show("Database down !", "An error occured while trying to connect to the database !", Alert.AlertType.ERROR);
+            alert.show("Database down !", "An error occured while trying to connect to the database !", Alert.AlertType.ERROR,true);
             return null;            
         }
     }
@@ -82,8 +81,8 @@ public class Common implements Init {
             in.close();
             out.close();
         }
-        catch(Exception e) {
-            e.getMessage();
+        catch(IOException e) {
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
 
         return createImagePath;
@@ -163,7 +162,7 @@ public class Common implements Init {
             
             return count;
         } catch (SQLException ex) {
-            Logger.getLogger(Common.class.getName()).log(Level.SEVERE, null, ex);
+            alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             return 0;
         }
     
@@ -174,7 +173,73 @@ public class Common implements Init {
         
         ((Stage)((Label)event.getSource()).getScene().getWindow()).setIconified(true);
         
-    }    
+    }
+
+    public static int getPrice(String ref){
+        
+        Connection con = getConnection();
+        String query = "SELECT * FROM product WHERE reference = ? LIMIT 1";
+        int targetedPrice = 0;
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            st.setString(1, ref);
+            rs = st.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                
+                targetedPrice = rs.getInt("price");
+                
+            }
+            
+            con.close();
+            
+            return targetedPrice;
+
+
+        }
+        catch (SQLException e) {
+            alert.show("Uknown Error", e.getMessage(), Alert.AlertType.ERROR,true);
+            return 0;
+        }         
+        
+    }
+
+    public static boolean refExist(String ref){
+        
+        Connection con = getConnection();
+        String query = "SELECT * FROM product WHERE reference = ? LIMIT 1";
+        boolean found = false ;
+
+        PreparedStatement st;
+        ResultSet rs;
+
+        try {
+            st = con.prepareStatement(query);
+            st.setString(1, ref);
+            rs = st.executeQuery();
+            int count = 0;
+            
+            if(rs.next()){
+                
+                found = true;
+            }
+            
+            con.close();
+            
+            return found;
+
+
+        }
+        catch (SQLException e) {
+            alert.show("Uknown error !", e.getMessage(), Alert.AlertType.ERROR,true);
+            return false;
+        }         
+        
+    }     
         
     
 }

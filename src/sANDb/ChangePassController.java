@@ -64,7 +64,7 @@ public class ChangePassController implements Initializable {
             
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return false;
         }
         
@@ -76,15 +76,15 @@ public class ChangePassController implements Initializable {
     private boolean checkInputs()
     {
         if (current.getText().trim().equals("") || newPass.getText().trim().equals("") || repeat.getText().trim().equals("")) {
-            alert.show("Missing required Fields", "Please fill all the required fields !", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please fill all the required fields !", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(!newPass.getText().matches("^[a-zA-Z0-9._-]{7,30}$")){
-            alert.show("Password error", "Password length must contain at least 7 to 30 character!", Alert.AlertType.WARNING);
+            alert.show("Password error", "Password length must contain at least 7 to 30 character!", Alert.AlertType.WARNING,false);
             return false;              
         }
         else if(!newPass.getText().equals(repeat.getText())){
-            alert.show("Passwords do not match", "New password do not match! ", Alert.AlertType.ERROR);
+            alert.show("Passwords do not match", "New password do not match! ", Alert.AlertType.ERROR,false);
             return false;           
         }
         
@@ -101,7 +101,7 @@ public class ChangePassController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -118,17 +118,17 @@ public class ChangePassController implements Initializable {
                 ps.executeUpdate();
                 con.close();
                 
-                alert.show("Password updated", employer.getFullname() + "'s password was successfully updated !", Alert.AlertType.INFORMATION);
+                alert.show("Password updated", employer.getFullname() + "'s password was successfully updated !", Alert.AlertType.INFORMATION,false);
                 save.getScene().getWindow().hide();
 
 
             }
             catch (NumberFormatException | SQLException e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }
             else{
-                alert.show("Wrong Password", "Wrong password ! Make sure the the current password is right", Alert.AlertType.ERROR);
+                alert.show("Wrong Password", "Wrong password ! Make sure the the current password is right", Alert.AlertType.ERROR,false);
             }
         }        
         

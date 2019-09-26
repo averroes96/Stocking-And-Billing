@@ -9,14 +9,13 @@ import Data.Employer;
 import static Include.Common.getConnection;
 import Include.SpecialAlert;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -87,7 +86,7 @@ public class LoginController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return null;
         }
         return null;
@@ -114,7 +113,7 @@ public class LoginController implements Initializable {
                 
   
         } catch (SQLException ex) {
-            alert.show("Database down !", "An error occured while trying to connect to the database !", Alert.AlertType.ERROR);
+            alert.show("Database down !", "An error occured while trying to connect to the database !", Alert.AlertType.ERROR,true);
             return false;
         }
 
@@ -154,17 +153,17 @@ public class LoginController implements Initializable {
                             }
                         });                          
                     } catch (IOException ex) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                        alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
                     }
                     
                 }
                 else{
                     
-                 alert.show("Error", "Wrong username or password !", Alert.AlertType.ERROR);
+                 alert.show("Error", "Wrong username or password !", Alert.AlertType.ERROR,false);
                     
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }        
         
         

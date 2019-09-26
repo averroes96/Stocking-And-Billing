@@ -4,7 +4,9 @@ package sANDb;
 import Data.Employer;
 import Data.Sell;
 import static Include.Common.getConnection;
+import static Include.Common.getPrice;
 import static Include.Common.minimize;
+import static Include.Common.refExist;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +48,7 @@ public class UpdateSellController implements Initializable {
     @FXML private TextField reference,price,color;
     @FXML private Slider size;
     @FXML private DatePicker date;
-    @FXML private Label selectedSize,minimize;
+    @FXML private Label selectedSize,minimize,priceStatus,refStatus;
   
     
     Employer employer = new Employer();
@@ -158,7 +160,7 @@ public class UpdateSellController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return 0;
         }       
        
@@ -168,11 +170,11 @@ public class UpdateSellController implements Initializable {
     private boolean checkInputs()
     {
         if (price.getText().equals("") || reference.getText().equals("") || color.equals("") || size.equals("") )  {
-            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(productExist() == 0){
-            alert.show("Missing product", "No such product was found ! ", Alert.AlertType.WARNING);
+            alert.show("Missing product", "No such product was found ! ", Alert.AlertType.WARNING,false);
             return false;
         }
         
@@ -181,12 +183,12 @@ public class UpdateSellController implements Initializable {
             if(Integer.parseInt(price.getText()) > 0)
             return true;
             else{
-            alert.show("Error", "Price should not have a negative value !", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should not have a negative value !", Alert.AlertType.ERROR,false);
             return false;
             }
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Price should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }        
@@ -199,7 +201,7 @@ public class UpdateSellController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -223,7 +225,7 @@ public class UpdateSellController implements Initializable {
                 
                 con.close();
 
-                alert.show("Sell Updated", "Your sell was successfully updated !", Alert.AlertType.INFORMATION);
+                alert.show("Sell Updated", "Your sell was successfully updated !", Alert.AlertType.INFORMATION,false);
                 
 
                         Stage stage = new Stage();
@@ -244,8 +246,8 @@ public class UpdateSellController implements Initializable {
 
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (IOException | NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }        
         
@@ -263,7 +265,63 @@ public class UpdateSellController implements Initializable {
         
             minimize(Action);
             
+        });
+        
+        reference.setOnKeyPressed(event -> {
+            
+            price.setText(String.valueOf(getPrice(reference.getText())));
+            if(refExist(reference.getText())){
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }            
+            
         });        
+
+        price.setOnKeyReleased(event -> {
+            
+        if (!price.getText().matches("^[1-9]?[0-9]{7}$")) {
+            priceStatus.setVisible(true);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+        });
+        
+        price.setOnKeyPressed(event -> {
+
+        if (!price.getText().matches("^[1-9]?[0-9]{7}$")) {
+            priceStatus.setVisible(true);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }         
+            
+        });
+        
+        price.setOnKeyTyped(event -> {
+
+        if (!price.getText().matches("^[1-9]?[0-9]{7}$")) {
+            priceStatus.setVisible(true);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }         
+            
+        });         
         
         
         

@@ -87,7 +87,7 @@ public class NewEmployerController implements Initializable {
                         selectedFile.toURI().toString(), 150, 150, true, true)));
             }
             catch (Exception e) {
-                alert.show("Error", "Failed to add Image", Alert.AlertType.ERROR);
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }
 
@@ -97,32 +97,32 @@ public class NewEmployerController implements Initializable {
     private boolean checkInputs()
     {
         if (fullname.getText().equals("") || salary.getText().equals("") || phone.getText().equals("")) {
-            alert.show("Missing required Fields", "Fullname and Salary and Phone fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Fullname and Salary and Phone fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(!fullname.getText().matches("^[\\p{L} .'-]+$")){
-            alert.show("Fullname not valid", "Please specify a valid fullname !", Alert.AlertType.WARNING);
+            alert.show("Fullname not valid", "Please specify a valid fullname !", Alert.AlertType.WARNING,false);
             return false;              
         }        
         else if(username.equals("") || password.equals("")){
-            alert.show("Missing required Fields", "Username and Password fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Username and Password fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;            
             
         }
         else if(!username.getText().matches("^[a-zA-Z0-9._-]{5,30}$")){
-            alert.show("Username error", "Username length must contain at least 5 to 30!", Alert.AlertType.WARNING);
+            alert.show("Username error", "Username length must contain at least 5 to 30!", Alert.AlertType.WARNING,false);
             return false;              
         }
         else if(!password.getText().matches("^[a-zA-Z0-9._-]{7,30}$")){
-            alert.show("Password error", "Password length must contain at least 7 to 30!", Alert.AlertType.WARNING);
+            alert.show("Password error", "Password length must contain at least 7 to 30!", Alert.AlertType.WARNING,false);
             return false;              
         }
         else if(!phone.getText().matches("^[5-7]?[0-9]{9}$")){
-            alert.show("Phone invalid", "Please enter a valid phone number !", Alert.AlertType.WARNING);
+            alert.show("Phone invalid", "Please enter a valid phone number !", Alert.AlertType.WARNING,false);
             return false;              
         }
         else if(!salary.getText().matches("^[1-9]?[0-9]+$")){
-            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR);
+            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR,false);
             return false;           
         }        
 
@@ -131,7 +131,7 @@ public class NewEmployerController implements Initializable {
             return true;
         }
         catch (NumberFormatException e) {
-            alert.show("Salary Error", "Salary should be a numeric number (eg: 400, 1000)", Alert.AlertType.ERROR);
+            alert.show("Salary Error", "Salary should be a numeric number (eg: 400, 1000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -162,7 +162,7 @@ public class NewEmployerController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return 0;
         }       
        
@@ -213,7 +213,7 @@ public class NewEmployerController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -249,16 +249,16 @@ public class NewEmployerController implements Initializable {
                 ps.executeUpdate();
                 con.close();
                 
-                alert.show("Employer Added", "Employer was successfully added !", Alert.AlertType.INFORMATION);
+                alert.show("Employer Added", "Employer was successfully added !", Alert.AlertType.INFORMATION,false);
 
 
             }
             catch (NumberFormatException | SQLException e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }
             else{
-                alert.show("Error", "This username is already taken by another employer ! Please specify another one", Alert.AlertType.ERROR);
+                alert.show("Username taken", "This username is already taken by another employer ! Please specify another one", Alert.AlertType.ERROR,false);
             }
         }
 

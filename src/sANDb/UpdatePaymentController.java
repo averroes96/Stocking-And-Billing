@@ -9,12 +9,14 @@ import Data.Employer;
 import Data.Payment;
 import static Include.Common.getConnection;
 import static Include.Common.minimize;
+import static Include.Common.refExist;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +48,7 @@ public class UpdatePaymentController implements Initializable {
     @FXML private Button saveButton,cancelButton;
     @FXML private TextField paidField,restField;
     @FXML private DatePicker dateField;
-    @FXML public Label min;
+    @FXML public Label min,refStatus,priceStatus;
 
     Employer employer = new Employer();
     
@@ -118,7 +120,7 @@ public class UpdatePaymentController implements Initializable {
     private boolean checkInputs()
     {
         if (restField.getText().equals("") || paidField.getText().equals(""))  {
-            alert.show("Missing required Fields", "Please precise both paid price and what rest!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please precise both paid price and what rest!", Alert.AlertType.WARNING,false);
             return false;
         }
         
@@ -128,7 +130,7 @@ public class UpdatePaymentController implements Initializable {
             return true;
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Price should be a decimal number (eg: 2000, 1000)", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should be a decimal number (eg: 2000, 1000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -142,7 +144,7 @@ public class UpdatePaymentController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -162,7 +164,7 @@ public class UpdatePaymentController implements Initializable {
                 
                 con.close();
 
-                alert.show("Payment and sell Updated", "Your pre-payment was successfully updated !", Alert.AlertType.INFORMATION);
+                alert.show("Payment and sell Updated", "Your pre-payment was successfully updated !", Alert.AlertType.INFORMATION,false);
                 
 
                         Stage stage = new Stage();
@@ -183,8 +185,8 @@ public class UpdatePaymentController implements Initializable {
 
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (IOException | NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }        
         
@@ -202,6 +204,70 @@ public class UpdatePaymentController implements Initializable {
             minimize(Action);
         
         });
+        
+        paidField.setOnKeyReleased(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$") || !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }             
+            
+        });
+        paidField.setOnKeyPressed(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });
+        paidField.setOnKeyTyped(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]{7}$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });
+        
+        
+        restField.setOnKeyReleased(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$") || !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }             
+            
+        });
+        restField.setOnKeyPressed(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]*$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });
+        restField.setOnKeyTyped(event -> {
+            
+        if (!paidField.getText().matches("^[1-9]?[0-9]{7}$")|| !restField.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+        }
+        else{
+            priceStatus.setVisible(false);
+        }            
+            
+        });         
+                
     
         
         

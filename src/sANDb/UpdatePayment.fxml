@@ -9,10 +9,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="371.0" prefWidth="350.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.UpdatePaymentController">
    <children>
-      <Button id="green" fx:id="saveButton" layoutX="75.0" layoutY="264.0" mnemonicParsing="false" onAction="#updatePay" prefHeight="40.0" prefWidth="200.0" text="SAVE">
+      <Button id="green" fx:id="saveButton" layoutX="86.0" layoutY="317.0" mnemonicParsing="false" onAction="#updatePay" prefHeight="40.0" prefWidth="200.0" text="SAVE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -20,42 +21,42 @@
              
             <ImageView fitHeight="22.0" fitWidth="20.0" layoutX="94.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/add.png" />
+                  <Image url="@images/icons8_save_60px_1.png" />
                </image>
             </ImageView>             
              
          </graphic>
       </Button>
-      <Button id="round-red" fx:id="cancelButton" layoutX="140.0" layoutY="317.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="70.0">
+      <Button id="return-btn" fx:id="cancelButton" cancelButton="true" layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#cancel" prefHeight="28.0" prefWidth="45.0">
           
          <graphic>
              
             <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="94.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/return.png" />
+                  <Image url="@images/icons8_left_filled_100px.png" />
                </image>
             </ImageView>             
              
          </graphic>          
           
       </Button>      
-      <TextField fx:id="paidField" layoutX="50.0" layoutY="56.0" prefHeight="40.0" prefWidth="250.0" promptText="Paid" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="paidField" layoutX="50.0" layoutY="85.0" prefHeight="40.0" prefWidth="250.0" promptText="Paid" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="restField" layoutX="50.0" layoutY="116.0" prefHeight="40.0" prefWidth="250.0" promptText="Rest" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="restField" layoutX="50.0" layoutY="134.0" prefHeight="40.0" prefWidth="250.0" promptText="Rest" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <DatePicker fx:id="dateField" editable="false" layoutX="100.0" layoutY="175.0" prefHeight="40.0" prefWidth="150.0" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="56.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+      <DatePicker fx:id="dateField" editable="false" layoutX="88.0" layoutY="220.0" prefHeight="40.0" prefWidth="175.0" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="56.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/payment.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="56.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="56.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/debt.png" />
          </image>
@@ -64,7 +65,7 @@
           
           <graphic>
               
-            <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="236.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="20.0" layoutX="236.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/reduce.png" />
                </image>
@@ -73,6 +74,20 @@
           </graphic>            
           
       </Label>
+      <Text fill="#dddddd" layoutX="106.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE VERSMENT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="74.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/payment.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="priceStatus" focusTraversable="false" layoutX="50.0" layoutY="186.0" prefHeight="17.0" prefWidth="250.0" style="-fx-alignment: center; -fx-background-color: red; -fx-background-radius: 10;" text="Please enter a valid paid and rest values !" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
    <stylesheets>
       <URL value="@Layout/buttons.css" />

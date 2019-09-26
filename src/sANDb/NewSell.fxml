@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="482.0" prefWidth="341.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.NewSellController">
    <children>
-      <Button id="green" fx:id="addSell" layoutX="103.0" layoutY="382.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" stylesheets="@Layout/buttons.css" text="ADD SELL">
+      <Button id="green" fx:id="addSell" layoutX="104.0" layoutY="425.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" stylesheets="@Layout/buttons.css" text="ADD SELL">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -27,7 +28,7 @@
          </graphic>          
          
       </Button>
-      <Button id="round-red" fx:id="cancel" layoutX="135.0" layoutY="433.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="35.0" prefWidth="70.0" stylesheets="@Layout/buttons.css">
+      <Button id="menu-btn" fx:id="cancel" layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="22.0" prefWidth="60.0" style="-fx-background-color: transparent;" stylesheets="@Layout/buttons.css">
          <font>
             <Font size="14.0" />
          </font>
@@ -35,56 +36,56 @@
              
             <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/return.png" />
+                  <Image url="@images/icons8_left_filled_100px.png" />
                </image>
             </ImageView>             
              
          </graphic>          
          
       </Button>
-      <TextField fx:id="reference" layoutX="46.0" layoutY="35.0" prefHeight="40.0" prefWidth="250.0" promptText="Reference" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="reference" layoutX="47.0" layoutY="78.0" prefHeight="40.0" prefWidth="250.0" promptText="Reference" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="color" layoutX="45.0" layoutY="173.0" prefHeight="40.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="color" layoutX="46.0" layoutY="216.0" prefHeight="40.0" prefWidth="250.0" promptText="Color" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <Slider fx:id="size" layoutX="45.0" layoutY="247.0" prefHeight="35.0" prefWidth="250.0" />
-      <Label layoutX="152.0" layoutY="231.0" text="SIZE" textFill="#dddddd">
+      <Slider fx:id="size" layoutX="46.0" layoutY="290.0" prefHeight="35.0" prefWidth="250.0" />
+      <Label focusTraversable="false" layoutX="153.0" layoutY="274.0" text="SIZE" textFill="#dddddd">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="price" layoutX="45.0" layoutY="104.0" prefHeight="40.0" prefWidth="250.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
+      <TextField fx:id="price" layoutX="46.0" layoutY="147.0" prefHeight="40.0" prefWidth="250.0" promptText="Price" style="-fx-padding: 0 0 0 40;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <Label fx:id="selectedSize" layoutX="152.0" layoutY="269.0" prefHeight="27.0" prefWidth="37.0" style="-fx-alignment: center;" textFill="#dddddd">
+      <Label fx:id="selectedSize" layoutX="153.0" layoutY="312.0" prefHeight="27.0" prefWidth="37.0" style="-fx-alignment: center;" textFill="#dddddd">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="55.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="50.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/price.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="55.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="50.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/reference.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="52.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="53.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/color.png" />
          </image>
       </ImageView>
-      <Label id="options" fx:id="minimize" layoutX="313.0" layoutY="4.0" prefHeight="21.0" prefWidth="28.0" style="-fx-alignment: center;">
+      <Label id="options" fx:id="minimize" layoutX="304.0" layoutY="4.0" prefHeight="32.0" prefWidth="37.0" style="-fx-alignment: center;">
           
           <graphic>
               
-            <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="312.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="312.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/reduce.png" />
                </image>
@@ -93,16 +94,30 @@
           </graphic>
           
       </Label>
-      <DatePicker fx:id="date" layoutX="63.0" layoutY="296.0" prefHeight="40.0" prefWidth="216.0" />
-      <Label fx:id="refStatus" layoutX="72.0" layoutY="81.0" prefHeight="17.0" prefWidth="199.0" style="-fx-background-color: red; -fx-alignment: center; -fx-background-radius: 10;" text="No such reference was found !" textFill="WHITE" visible="false">
+      <DatePicker fx:id="date" editable="false" layoutX="64.0" layoutY="339.0" prefHeight="40.0" prefWidth="216.0" />
+      <Label fx:id="refStatus" focusTraversable="false" layoutX="46.0" layoutY="124.0" prefHeight="17.0" prefWidth="250.0" style="-fx-background-color: red; -fx-alignment: center; -fx-background-radius: 10;" text="No such reference was found !" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="priceStatus" layoutX="47.0" layoutY="151.0" prefHeight="17.0" prefWidth="250.0" style="-fx-background-color: red; -fx-alignment: center; -fx-background-radius: 10;" text="Price should be a decimal number" textFill="WHITE" visible="false">
+      <Label fx:id="priceStatus" focusTraversable="false" layoutX="46.0" layoutY="193.0" prefHeight="17.0" prefWidth="250.0" style="-fx-background-color: red; -fx-alignment: center; -fx-background-radius: 10;" text="Price should be a decimal number" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Label>      
+      </Label>
+      <Label layoutX="138.0" layoutY="25.0" text="NEW SELL" textFill="#dddddd">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="27.0" fitWidth="37.0" layoutX="104.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/buy2.png" />
+         </image>
+      </ImageView>      
    </children>
+   <stylesheets>
+      <URL value="@Layout/custom.css" />
+      <URL value="@Layout/buttons.css" />
+   </stylesheets>
 </AnchorPane>

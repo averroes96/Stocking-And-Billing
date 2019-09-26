@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 
 public class NewBillController implements Initializable {
@@ -51,56 +52,43 @@ public class NewBillController implements Initializable {
         
     }
     
-    private void print(Node node) 
+    private void print(PrinterJob job, Node node) 
     {
-        // Define the Job Status Message
-        jobStatus.textProperty().unbind();
-        jobStatus.setText("Creating a printer job...");
+        // Set the Job Status Message
+        jobStatus.textProperty().bind(job.jobStatusProperty().asString());
          
-        // Create a printer job for the default printer
+        // Print the node
+        boolean printed = job.printPage(node);
+     
+        if (printed) 
+        {
+            job.endJob();
+        }
+    }
+    
+    private void pageSetup(Node node) 
+    {
+        // Create the PrinterJob
         PrinterJob job = PrinterJob.createPrinterJob();
          
-        if (job != null) 
+        if (job == null) 
         {
-            // Show the printer job status
-            jobStatus.textProperty().bind(job.jobStatusProperty().asString());
-             
-            // Print the node
-            boolean printed = job.printPage(node);
- 
-            if (printed) 
-            {
-                // End the printer job
-                job.endJob();
-            } 
-            else
-            {
-                // Write Error Message
-                jobStatus.textProperty().unbind();
-                jobStatus.setText("Printing failed.");
-            }
-        } 
-        else
-        {
-            // Write Error Message
-            jobStatus.setText("Could not create a printer job.");
+            return;
         }
-    }   
+         
+        // Show the page setup dialog
+        boolean proceed = job.showPageSetupDialog(this.billPane.getScene().getWindow());
+         
+        if (proceed) 
+        {
+            print(job, node);
+        }
+    }    
     
     
             public void handle(ActionEvent event) 
             {
-                //Get the Default Printer
-                Printer defaultprinter = Printer.getDefaultPrinter();
- 
-                if (defaultprinter != null) 
-                {
-                    print(billPane);
-                } 
-                else
-                {
-                    alert.show("No default printer !", "No default printer was found ! Make sure that the printer is connected !",Alert.AlertType.ERROR);
-                }       
+                    pageSetup(billPane);
             }    
     
     @Override

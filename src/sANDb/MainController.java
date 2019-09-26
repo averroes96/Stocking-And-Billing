@@ -117,7 +117,7 @@ public class MainController implements Initializable {
     @FXML private Button updateImage;
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
-    @FXML private Button newSellButton;
+    @FXML private Button newSellButton,printVerse;
     @FXML public Button newPayButton,addEmployerButton,updateEmployer,deleteEmployer,seeRecords,exBtn,newBillBtn,printProducts,day,week,month,total,sellStats,employerStats,btn_products, btn_sells, btn_employers, btn_payment,changePass;
     @FXML public Pane billPane;
     
@@ -184,7 +184,7 @@ public class MainController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
     
@@ -230,7 +230,7 @@ public class MainController implements Initializable {
 
         if(productsTable.getSelectionModel().getSelectedItem() == null)
         {
-            alert.show("Message", "Select the item that you want to update its image first", Alert.AlertType.INFORMATION);
+            alert.show("Information Message", "Select the item that you want to update its image first", Alert.AlertType.INFORMATION,false);
             return;
         }
 
@@ -276,7 +276,7 @@ public class MainController implements Initializable {
                 productsTable.refresh();
             }
             catch (Exception ex) {
-                alert.show("Error", "Failed to update Image", Alert.AlertType.ERROR);
+                alert.show("Error", "Failed to update Image", Alert.AlertType.ERROR,false);
             }
         }
 
@@ -304,11 +304,11 @@ public class MainController implements Initializable {
             }
         }
         else if (refField.getText().equals("")) {
-            alert.show("Missing required Fields", "Please enter product name", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please enter product name", Alert.AlertType.WARNING,false);
             return false;
         }
         else if (priceField.getText().equals("")) {
-            alert.show("Missing required Fields", "Please enter product price", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please enter product price", Alert.AlertType.WARNING,false);
             return false;
         }
 
@@ -317,12 +317,12 @@ public class MainController implements Initializable {
             if(Integer.parseInt(priceField.getText()) > 0)
             return true;
             else{
-            alert.show("Error", "Price should not have a negative value (eg: 4000, 1000)", Alert.AlertType.ERROR);
+            alert.show("Prcie Invalid", "Price should not have a negative value (eg: 4000, 1000)", Alert.AlertType.ERROR,false);
             return false;
             }
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Price should be a decimal number (eg: 4000, 1000)", Alert.AlertType.ERROR);
+            alert.show("Price invalid", "Price should be a decimal number (eg: 4000, 1000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }    
@@ -332,7 +332,7 @@ public class MainController implements Initializable {
 
         if(productsTable.getSelectionModel().getSelectedItem() == null)
         {
-            alert.show("Message", "Select the item that you want to update first", Alert.AlertType.INFORMATION);
+            alert.show("Information Message", "Select the item that you want to update first", Alert.AlertType.INFORMATION,true);
             return;
         }
         
@@ -375,11 +375,12 @@ public class MainController implements Initializable {
             
             alert.show("Product Successfully updated",
                     "Product information has been successfully updated",
-                    Alert.AlertType.INFORMATION);
+                    Alert.AlertType.INFORMATION,
+                    false);
         
         }
-        catch (Exception e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+        catch (NumberFormatException | SQLException e) {
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }   
     
@@ -446,7 +447,7 @@ public class MainController implements Initializable {
 
         if(productsTable.getSelectionModel().getSelectedItem() == null)
         {
-            alert.show("Message", "Select the item that you want to delete first", Alert.AlertType.INFORMATION);
+            alert.show("Information Message", "Select the item that you want to delete first", Alert.AlertType.INFORMATION,false);
             return;
         }
 
@@ -472,7 +473,7 @@ public class MainController implements Initializable {
             
             productsTable.refresh();
             
-            alert.show("PRODUCT DELETED", "Product was successfully deleted !", Alert.AlertType.INFORMATION);            
+            alert.show("PRODUCT DELETED", "Product was successfully deleted !", Alert.AlertType.INFORMATION,false);            
             
             if(data.size() > 0) {
                 showNextProduct();
@@ -492,9 +493,9 @@ public class MainController implements Initializable {
             }
             
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }    
     
@@ -536,7 +537,7 @@ public class MainController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
     
@@ -586,7 +587,7 @@ public class MainController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }        
         
     }   
@@ -626,12 +627,12 @@ public class MainController implements Initializable {
             
             getSellStats(sellDateField.getEditor().getText(),"");
             
-            alert.show("Sell deleted", "Sell was successfully delete !", Alert.AlertType.INFORMATION);
+            alert.show("Sell deleted", "Sell was successfully delete !", Alert.AlertType.INFORMATION,false);
             
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
     
@@ -665,7 +666,7 @@ public class MainController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
     
@@ -692,9 +693,9 @@ public class MainController implements Initializable {
             sellsTable.refresh();
             
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }    
 
@@ -759,19 +760,19 @@ public class MainController implements Initializable {
             
             employersTable.refresh();
             }
-                alert.show("Employer deleted", "Employer was successfully delete !", Alert.AlertType.INFORMATION);
+                alert.show("Employer deleted", "Employer was successfully delete !", Alert.AlertType.INFORMATION,false);
                 Common.deleteImage(selectedEmployer.getImage());                
             }
             else{
                 
-                alert.show("Last Admin !", "You can't delete this account because it's the last and only admin left ! In order to delete it make another employer an admin or create a new account.", Alert.AlertType.ERROR);
+                alert.show("Last Admin !", "You can't delete this account because it's the last and only admin left ! In order to delete it make another employer an admin or create a new account.", Alert.AlertType.ERROR,false);
                 
             }
             
         }
-        catch (Exception e) {
+        catch (IOException | SQLException e) {
             
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
 
@@ -813,7 +814,7 @@ public class MainController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
                 System.out.println(sell.getSellRef());        
         return sell;
@@ -852,7 +853,7 @@ public class MainController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }
     }
 
@@ -877,7 +878,7 @@ public class MainController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -908,8 +909,8 @@ public class MainController implements Initializable {
 
                 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         return 0;
 
@@ -1510,6 +1511,8 @@ public class MainController implements Initializable {
 
         });
         
+        printVerse.disableProperty().bind(Bindings.size(paymentsTable.getSelectionModel().getSelectedIndices()).isEqualTo(0));        
+        
         sellsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         newBillBtn.disableProperty().bind(Bindings.size(sellsTable.getSelectionModel().getSelectedIndices()).isEqualTo(0));
@@ -1529,7 +1532,7 @@ public class MainController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                     PreparedStatement ps;
@@ -1546,7 +1549,7 @@ public class MainController implements Initializable {
                 
             }
             catch (SQLException ex) {
-                alert.show("Error", ex.getMessage(), Alert.AlertType.ERROR);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }
             }
 
@@ -1555,7 +1558,7 @@ public class MainController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                     PreparedStatement ps;
@@ -1570,7 +1573,7 @@ public class MainController implements Initializable {
                 
             }
             catch (SQLException ex) {
-                alert.show("Error", ex.getMessage(), Alert.AlertType.ERROR);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }            
             
             String headerMsg = "-----------------------  H.S.Fashion's Bill Number : " + billID + "  -----------------------";
@@ -1602,30 +1605,6 @@ public class MainController implements Initializable {
             print(productsTable);
             
         } );
-        
-    /*    day.setOnAction(Action -> {
-        
-            getSellStats(sellDateField.getEditor().getText(),"");
-        
-        });
-        
-        week.setOnAction(Action -> {
-        
-            getSellStats("","WEEK");
-        
-        });
-
-        month.setOnAction(Action -> {
-        
-            getSellStats("","MONTH");
-        
-        });
-
-        total.setOnAction(Action -> {
-        
-            getSellStats("","ALL");
-        
-        }); */
 
         sellStats.setOnAction(Action -> {
         

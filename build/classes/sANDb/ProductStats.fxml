@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToolBar?>
@@ -13,7 +12,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -29,76 +27,62 @@
             <Image url="@images/icons8_combo_chart_filled_100px.png" />
          </image>
       </ImageView>
-      <BorderPane layoutX="60.0" layoutY="73.0" prefHeight="420.0" prefWidth="700.0">
+      <BorderPane layoutX="50.0" layoutY="72.0" prefHeight="420.0" prefWidth="700.0">
+         <center>
+            <PieChart fx:id="myChart" prefWidth="539.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+         </center>
          <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ToolBar focusTraversable="false" orientation="VERTICAL" prefHeight="447.0" prefWidth="174.0" style="-fx-border-color: darkgrey;">
-                     <items>
-                        <Label prefHeight="30.0" prefWidth="150.0" style="-fx-alignment: center;" text="START DATE" textFill="#3d4956">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <DatePicker fx:id="startDate" editable="false" prefHeight="40.0" prefWidth="150.0" />
-                        <Label prefHeight="30.0" prefWidth="150.0" style="-fx-alignment: center;" text="END DATE" textFill="#3d4956">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <DatePicker fx:id="endDate" editable="false" prefHeight="40.0" prefWidth="150.0" />
-                        <Separator prefHeight="30.0" prefWidth="150.0" />
-                        <Label layoutX="10.0" layoutY="179.0" prefHeight="30.0" prefWidth="150.0" style="-fx-alignment: center;" text="TYPE" textFill="#3d4956">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox fx:id="type" prefHeight="40.0" prefWidth="150.0" />
-                        <Separator layoutX="10.0" layoutY="284.0" prefHeight="30.0" prefWidth="150.0" />
-                        <Button id="rich-blue" fx:id="filter" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="FILTER">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                     </items>
-                  </ToolBar>
-               </children>
-            </VBox>
-         </left>
-         <top>
-            <ToolBar focusTraversable="false" prefHeight="53.0" prefWidth="585.0" style="-fx-border-color: darkgrey;" BorderPane.alignment="CENTER">
+            <ToolBar focusTraversable="false" orientation="VERTICAL" prefHeight="369.0" prefWidth="115.0" style="-fx-border-color: darkgrey;" BorderPane.alignment="CENTER">
                <items>
-                  <RadioButton fx:id="referencce" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" selected="true" text="Reference" textFill="#3d4956">
+                  <RadioButton fx:id="reference" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" selected="true" text="Reference" textFill="#3d4956">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="size" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Size" textFill="#3d4956">
+                  <RadioButton fx:id="size" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Size" textFill="#3d4956">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="brand" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Brand" textFill="#3d4956">
+                  <RadioButton fx:id="brand" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Brand" textFill="#3d4956">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="category" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Category" textFill="#3d4956">
+                  <RadioButton fx:id="category" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Category" textFill="#3d4956">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="color" layoutX="382.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Color" textFill="#3d4956">
+                  <RadioButton fx:id="color" layoutX="382.0" layoutY="16.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Color" textFill="#3d4956">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </RadioButton>
                </items>
             </ToolBar>
+         </left>
+         <top>
+            <ToolBar prefHeight="51.0" prefWidth="661.0" BorderPane.alignment="CENTER">
+               <items>
+                  <Button id="green" fx:id="filter" mnemonicParsing="false" prefHeight="41.0" prefWidth="105.0" text="FILTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
+                  <DatePicker fx:id="startDate" prefHeight="41.0" prefWidth="174.0" />
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_filled_sent_32px.png" />
+                     </image>
+                  </ImageView>
+                  <DatePicker fx:id="endDate" layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="174.0" />
+                  <Separator orientation="VERTICAL" prefHeight="41.0" prefWidth="41.0" />
+                  <ChoiceBox fx:id="type" prefHeight="41.0" prefWidth="120.0" />
+               </items>
+            </ToolBar>
          </top>
-         <center>
-            <PieChart fx:id="myChart" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-         </center>
       </BorderPane>
    </children>
    <stylesheets>

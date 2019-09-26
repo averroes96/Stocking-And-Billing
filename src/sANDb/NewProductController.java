@@ -16,6 +16,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -94,7 +95,7 @@ public class NewProductController implements Initializable {
                         selectedFile.toURI().toString(), 224, 224, true, true)));
             }
             catch (Exception e) {
-                alert.show("Error", "Failed to add Image", Alert.AlertType.ERROR);
+                alert.show("Uknown error", "Failed to add Image", Alert.AlertType.ERROR,true);
             }
         }
 
@@ -104,24 +105,24 @@ public class NewProductController implements Initializable {
     private boolean checkInputs()
     {
         if (refField.getText().equals("") && priceField.getText().equals("") && colorField.equals("") ) {
-            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;
         }
         else if (refField.getText().trim().equals("")) {
-            alert.show("Missing required Fields", "Please enter product's reference", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please enter product's reference", Alert.AlertType.WARNING,false);
             return false;
         }
         else if (priceField.getText().trim().equals("")) {
-            alert.show("Missing required Fields", "Please enter product's price", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please enter product's price", Alert.AlertType.WARNING,false);
             return false;
         }
         else if (colorField.getText().trim().equals("")) {
-            alert.show("Missing required Fields", "Please enter product's color", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Please enter product's color", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(minSize.getValue() > maxSize.getValue()){
             
-            alert.show("Size range", "Minimal size cannot be bigger than maximal size", Alert.AlertType.WARNING);
+            alert.show("Size range", "Minimal size cannot be bigger than maximal size", Alert.AlertType.WARNING,false);
             return false;            
             
         }
@@ -131,7 +132,7 @@ public class NewProductController implements Initializable {
             return true;
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Price should be a decimal number (eg: 40, 10)", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should be a decimal number (eg: 40, 10)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -179,7 +180,7 @@ public class NewProductController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -212,12 +213,12 @@ public class NewProductController implements Initializable {
                 
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
             }
             
-            alert.show("Product Added", "Your product was successfully added !", Alert.AlertType.INFORMATION);
+            alert.show("Product Added", "Your product was successfully added !", Alert.AlertType.INFORMATION,false);
             resetWindow();
         }
 
@@ -252,7 +253,7 @@ public class NewProductController implements Initializable {
 
         priceField.setOnKeyReleased(event -> {
             
-        if (!priceField.getText().matches("^[1-9]?[0-9]{7}$")) {
+        if (!priceField.getText().matches("^[1-9]?[0-9]$")) {
             priceStatus.setVisible(true);
             priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -264,7 +265,7 @@ public class NewProductController implements Initializable {
         
         priceField.setOnKeyPressed(event -> {
 
-        if (!priceField.getText().matches("^[1-9]?[0-9]{7}$")) {
+        if (!priceField.getText().matches("^[1-9]?[0-9]$")) {
             priceStatus.setVisible(true);
             priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }
@@ -277,7 +278,7 @@ public class NewProductController implements Initializable {
         
         priceField.setOnKeyTyped(event -> {
 
-        if (!priceField.getText().matches("^[1-9]?[0-9]{7}$")) {
+        if (!priceField.getText().matches("^[1-9]?[0-9]$")) {
             priceStatus.setVisible(true);
             priceField.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
         }

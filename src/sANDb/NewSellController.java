@@ -6,10 +6,11 @@
 package sANDb;
 
 import Data.Employer;
-import Data.Product;
 import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
+import static Include.Common.getPrice;
 import static Include.Common.minimize;
+import static Include.Common.refExist;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +35,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -94,7 +94,7 @@ public class NewSellController implements Initializable {
 
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             return 0;
         }       
        
@@ -104,11 +104,11 @@ public class NewSellController implements Initializable {
     private boolean checkInputs()
     {
         if (price.getText().equals("") || reference.getText().equals("") || color.equals("") || size.equals("") )  {
-            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Reference and Price and Color and Size fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(productExist() == 0){
-            alert.show("Missing product", "No such product was found ! ", Alert.AlertType.WARNING);
+            alert.show("Missing product", "No such product was found ! ", Alert.AlertType.WARNING,false);
             return false;
         }
         
@@ -117,12 +117,12 @@ public class NewSellController implements Initializable {
             if(Integer.parseInt(price.getText()) > 0)
             return true;
             else{
-            alert.show("Error", "Price should not have a negative value !", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should not have a negative value !", Alert.AlertType.ERROR,false);
             return false;
             }
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Price should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR);
+            alert.show("Error", "Price should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -144,7 +144,7 @@ public class NewSellController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -167,12 +167,12 @@ public class NewSellController implements Initializable {
 
                 resetWindow();
                 
-                alert.show("Sell Added", "Your sell was successfully added !", Alert.AlertType.INFORMATION);               
+                alert.show("Sell Added", "Your sell was successfully added !", Alert.AlertType.INFORMATION,false);               
 
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
         }
 
@@ -195,73 +195,7 @@ public class NewSellController implements Initializable {
                         stage.setScene(scene);
                         stage.show();               
             
-    }
-    
-    public int getPrice(String ref){
-        
-        Connection con = getConnection();
-        String query = "SELECT * FROM product WHERE reference = ? LIMIT 1";
-        int targetedPrice = 0;
-
-        PreparedStatement st;
-        ResultSet rs;
-
-        try {
-            st = con.prepareStatement(query);
-            st.setString(1, ref);
-            rs = st.executeQuery();
-            int count = 0;
-            while (rs.next()) {
-                
-                targetedPrice = rs.getInt("price");
-                
-            }
-            
-            con.close();
-            
-            return targetedPrice;
-
-
-        }
-        catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
-            return 0;
-        }         
-        
-    }
-    
-    public boolean refExist(String ref){
-        
-        Connection con = getConnection();
-        String query = "SELECT * FROM product WHERE reference = ? LIMIT 1";
-        boolean found = false ;
-
-        PreparedStatement st;
-        ResultSet rs;
-
-        try {
-            st = con.prepareStatement(query);
-            st.setString(1, ref);
-            rs = st.executeQuery();
-            int count = 0;
-            
-            if(rs.next()){
-                
-                found = true;
-            }
-            
-            con.close();
-            
-            return found;
-
-
-        }
-        catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
-            return false;
-        }         
-        
-    }    
+    }   
     
     
     
@@ -291,6 +225,18 @@ public class NewSellController implements Initializable {
         reference.setOnKeyTyped(event -> {
             
             price.setText(String.valueOf(getPrice(reference.getText())));
+            if(refExist(reference.getText())){
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+                refStatus.setVisible(false);
+                
+            }
+            else{
+                
+                reference.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+                refStatus.setVisible(true);
+                
+            }             
             
         });
         reference.setOnKeyReleased(event -> {
@@ -330,52 +276,41 @@ public class NewSellController implements Initializable {
         
         price.setOnKeyReleased(event -> {
             
-            try{
-                
-                Integer.parseInt(price.getText());
-                
-                if(Integer.parseInt(price.getText()) < 0){
-                    
-                    priceStatus.setVisible(true);
-                    
-                }
-                else{
-                    
-                    priceStatus.setVisible(false);
-                    
-                }
-                        
-            }
-            catch(NumberFormatException e){
-                
-                    priceStatus.setVisible(true);
-            }
+        if (!price.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }             
             
         });
         price.setOnKeyPressed(event -> {
-
-            try{
-                
-                Integer.parseInt(price.getText());
-                
-                if(Integer.parseInt(price.getText()) < 0){
-                    
-                    priceStatus.setVisible(true);
-                    
-                }
-                else{
-                    
-                    priceStatus.setVisible(false);
-                    
-                }
-                        
-            }
-            catch(NumberFormatException e){
-                
-                    priceStatus.setVisible(true);
-            }         
             
-        });        
+        if (!price.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }            
+            
+        });
+        price.setOnKeyTyped(event -> {
+            
+        if (!price.getText().matches("^[1-9]?[0-9]*$")) {
+            priceStatus.setVisible(true);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            priceStatus.setVisible(false);
+            price.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }            
+            
+        });         
+        
         
         
     }    

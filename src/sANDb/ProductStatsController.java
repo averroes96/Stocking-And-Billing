@@ -14,8 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 
@@ -38,6 +37,8 @@ public class ProductStatsController implements Initializable {
     @FXML public ChoiceBox type;
     @FXML public Button filter;
     
+    private ToggleGroup columns = new ToggleGroup();
+    
     private ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
     private ObservableList<String> typeList = FXCollections.observableArrayList("All","Sold","In Stock");    
     
@@ -49,7 +50,7 @@ public class ProductStatsController implements Initializable {
         
         try {
             Connection con = getConnection();
-            String query = "SELECT " + target + ", count(" + target  +") FROM product WHERE sold = 0 Group by " + target + " ORDER BY count(" + target  +") LIMIT 10";
+            String query = "SELECT " + target + ", count(" + target  +") FROM product WHERE sold = 0 Group by " + target + " ORDER BY count(" + target  +") DESC LIMIT 10";
             PreparedStatement st;
             ResultSet rs;
             
@@ -70,7 +71,7 @@ public class ProductStatsController implements Initializable {
                 });
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SellStatsController.class.getName()).log(Level.SEVERE, null, ex);
+            alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
         }        
         
     }
@@ -157,7 +158,7 @@ public class ProductStatsController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }       
         
     }    
@@ -170,13 +171,33 @@ public class ProductStatsController implements Initializable {
         endDate.setConverter(dateFormatter());
         type.setItems(typeList);
         type.setValue("All");
+        type.getSelectionModel().select(0);
+        
+        reference.setToggleGroup(columns);
+        size.setToggleGroup(columns);
+        color.setToggleGroup(columns);
+        category.setToggleGroup(columns);
+        brand.setToggleGroup(columns);
         
         loadChart("reference");
         
         filter.setOnAction(Action -> {
             
-            filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),"category");
-            
+            if(reference.isSelected()){
+            filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),reference.getText());
+            }
+            if(size.isSelected()){
+            filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),size.getText());
+            }  
+            if(color.isSelected()){
+            filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),color.getText());
+            }  
+            if(category.isSelected()){
+            filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),category.getText());
+            }  
+            if(brand.isSelected()){
+            filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),brand.getText());
+            }              
         });
         
         

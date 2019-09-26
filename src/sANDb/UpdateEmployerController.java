@@ -14,9 +14,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -126,7 +125,7 @@ public class UpdateEmployerController implements Initializable {
 
             }
             catch (Exception ex) {
-                alert.show("Error", "Failed to update Image", Alert.AlertType.ERROR);
+                alert.show("Error", "Failed to update Image", Alert.AlertType.ERROR,true);
             }
         }
 
@@ -135,15 +134,15 @@ public class UpdateEmployerController implements Initializable {
     private boolean checkInputs()
     {
         if (fullname.getText().trim().equals("") || salary.getText().trim().equals("") || phone.getText().trim().equals("")) {
-            alert.show("Missing required Fields", "Fullname and Salary and Phone fields cannot be empty!", Alert.AlertType.WARNING);
+            alert.show("Missing required Fields", "Fullname and Salary and Phone fields cannot be empty!", Alert.AlertType.WARNING,false);
             return false;
         }
         else if(!fullname.getText().matches("^[\\p{L} .'-]+$")){
-            alert.show("Fullname not valid", "Please specify a valid fullname !", Alert.AlertType.WARNING);
+            alert.show("Fullname not valid", "Please specify a valid fullname !", Alert.AlertType.WARNING,false);
             return false;              
         }
         else if(!salary.getText().matches("^[1-9]?[0-9]+$")){
-            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR);
+            alert.show("Salary not valid", "Salary should not have a negative value !", Alert.AlertType.ERROR,false);
             return false;           
         }
        
@@ -153,7 +152,7 @@ public class UpdateEmployerController implements Initializable {
             return true;
         }
         catch (NumberFormatException e) {
-            alert.show("Salary Error", "Price should be a decimal number (eg: 400, 1000)", Alert.AlertType.ERROR);
+            alert.show("Salary Error", "Price should be a decimal number (eg: 400, 1000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }    
@@ -163,7 +162,7 @@ public class UpdateEmployerController implements Initializable {
         if (checkInputs()) {
             if(!admin.isSelected() && adminsCount() == 1 && selectedEmployer.getAdmin() == 1){
             
-                alert.show("Last Admin !", "This employer is the last administrator, In order to take his admin's previliges create another admin or promote another one !", Alert.AlertType.INFORMATION);                            
+                alert.show("Last Admin !", "This employer is the last administrator, In order to take his admin's previliges create another admin or promote another one !", Alert.AlertType.INFORMATION,false);                            
                 
             }
             else{
@@ -172,7 +171,7 @@ public class UpdateEmployerController implements Initializable {
                 Connection con = getConnection();
 
                 if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR);
+                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
                 }
 
                 PreparedStatement ps;
@@ -198,7 +197,7 @@ public class UpdateEmployerController implements Initializable {
                 
                 con.close();
 
-                alert.show("Employer Updated", "This Employer was successfully updated !", Alert.AlertType.INFORMATION);
+                alert.show("Employer Updated", "This Employer was successfully updated !", Alert.AlertType.INFORMATION,false);
                 
 
                         Stage stage = new Stage();
@@ -226,8 +225,8 @@ public class UpdateEmployerController implements Initializable {
 
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            catch (IOException | NumberFormatException | SQLException e) {
+                alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
             }
             }
 
@@ -282,7 +281,7 @@ public class UpdateEmployerController implements Initializable {
                             }
                         });                
             } catch (IOException ex) {
-                Logger.getLogger(UpdateEmployerController.class.getName()).log(Level.SEVERE, null, ex);
+                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }
         });
 

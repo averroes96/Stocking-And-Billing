@@ -88,12 +88,12 @@ public class ExEmployersController implements Initializable {
             
             exTable.refresh();
             
-                alert.show("Employer re-assigned", "Employer was successfully re-assigned !", Alert.AlertType.INFORMATION);
+                alert.show("Employer re-assigned", "Employer was successfully re-assigned !", Alert.AlertType.INFORMATION,false);
 
         }
         catch (SQLException e) {
             
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }        
         
     
@@ -130,7 +130,7 @@ public class ExEmployersController implements Initializable {
             con.close();
         }
         catch (SQLException e) {
-            alert.show("Error", e.getMessage(), Alert.AlertType.ERROR);
+            alert.show("Uknown error", e.getMessage(), Alert.AlertType.ERROR,true);
         }        
         
     }

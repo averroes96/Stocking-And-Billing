@@ -10,6 +10,7 @@ import static Include.Common.adminsCount;
 import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
 import Include.SpecialAlert;
+import JR.JasperReporter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +56,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
@@ -113,8 +115,8 @@ public class MainController implements Initializable {
     @FXML private DatePicker payDateField;    
     @FXML private Label productImg,picLabel,fullnameLabel,phoneLabel,salaryLabel,joinedLabel;
     @FXML private Label idField,selectedSize,sum,totalProdSold,weekSum,weekSells,monthSum,monthSells,allSum,allSells,revSum,revTotal;    
-    @FXML private Button addProd,productStats;
-    @FXML private Button updateImage;
+    @FXML public Button addProd,productStats,printPayments,printEmployers,printSells;
+    @FXML public Button updateImage;
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
     @FXML private Button newSellButton,printVerse;
@@ -1326,19 +1328,6 @@ public class MainController implements Initializable {
                             Stage stage = new Stage();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployerRecords.fxml"));
                             AnchorPane root = (AnchorPane)loader.load();
-                            EmployerRecordsController erControl = (EmployerRecordsController)loader.getController();
-                            erControl.getInfo(employer, thisEmployer);
-                            erControl.fillTheTable(employer,ldt.getMonth().getValue());
-                            erControl.fillFields(employer);
-                            erControl.stats(employer, ldt.getMonth().getValue());
-                            erControl.header.setText(employer.getFullname() + "'s Records");
-                            Scene scene = new Scene(root);
-                            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-                            stage.initStyle(StageStyle.TRANSPARENT);
-                            scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
-                            scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
-                            stage.setScene(scene);                         
-                            stage.show();
                             root.setOnMousePressed(new EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
@@ -1352,7 +1341,20 @@ public class MainController implements Initializable {
                                     stage.setX(event.getScreenX() - xOffset);
                                     stage.setY(event.getScreenY() - yOffset);
                                 }
-                            });                            
+                            });                             
+                            EmployerRecordsController erControl = (EmployerRecordsController)loader.getController();
+                            erControl.getInfo(employer, thisEmployer);
+                            erControl.fillTheTable(employer,ldt.getMonth().getValue());
+                            erControl.fillFields(employer);
+                            erControl.stats(employer, ldt.getMonth().getValue());
+                            erControl.header.setText(employer.getFullname() + "'s Records");
+                            Scene scene = new Scene(root);
+                            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                            stage.initStyle(StageStyle.TRANSPARENT);
+                            scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
+                            scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
+                            stage.setScene(scene);                         
+                            stage.showAndWait();                           
                         } catch (IOException ex) {
                             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1361,7 +1363,7 @@ public class MainController implements Initializable {
         changePass.setOnAction(Action -> {
             
                         try {
-
+                            
                             Employer employer = employersTable.getSelectionModel().getSelectedItem();
                             Stage stage = new Stage();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("ChangePass.fxml"));
@@ -1373,8 +1375,23 @@ public class MainController implements Initializable {
                             stage.initStyle(StageStyle.TRANSPARENT);
                             scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
                             scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
-                            stage.setScene(scene);                         
-                            stage.show();                           
+                            stage.setScene(scene);
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.showAndWait();
+                            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    xOffset = event.getSceneX();
+                                    yOffset = event.getSceneY();
+                                }
+                            });
+                            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    stage.setX(event.getScreenX() - xOffset);
+                                    stage.setY(event.getScreenY() - yOffset);
+                                }
+                            });                              
                         } catch (IOException ex) {
                             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1517,6 +1534,14 @@ public class MainController implements Initializable {
         
         newBillBtn.disableProperty().bind(Bindings.size(sellsTable.getSelectionModel().getSelectedIndices()).isEqualTo(0));
         
+        printProducts.disableProperty().bind(Bindings.size(productsTable.getItems()).isEqualTo(0));
+        
+        printPayments.disableProperty().bind(Bindings.size(paymentsTable.getItems()).isEqualTo(0));
+        
+        printEmployers.disableProperty().bind(Bindings.size(employersTable.getItems()).isEqualTo(0));
+        
+        printSells.disableProperty().bind(Bindings.size(sellsTable.getItems()).isEqualTo(0));
+        
         Tooltip.install(
                 billPane, 
                 new Tooltip("In order to add a new bill select the sells you want to bill"));
@@ -1599,12 +1624,6 @@ public class MainController implements Initializable {
             }
         
         });
-        
-        printProducts.setOnAction(Action -> {
-        
-            print(productsTable);
-            
-        } );
 
         sellStats.setOnAction(Action -> {
         
@@ -1673,7 +1692,15 @@ public class MainController implements Initializable {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        });        
+        });
+
+        printSells.setOnAction(Action -> {
+        
+            JasperReporter jr = new JasperReporter();
+            jr.params.put("sell_date", dateField.getEditor().getText());
+            jr.ShowReport("");
+        
+        });
                 
         
         
@@ -1794,41 +1821,6 @@ public class MainController implements Initializable {
         
         
     }
-    
-    private void print(Node node) 
-    {
-        // Define the Job Status Message
-        printProducts.textProperty().unbind();
-        printProducts.setText("Creating a printer job...");
-         
-        // Create a printer job for the default printer
-        PrinterJob job = PrinterJob.createPrinterJob();
-         
-        if (job != null) 
-        {
-            // Show the printer job status
-            printProducts.textProperty().bind(job.jobStatusProperty().asString());
-             
-            // Print the node
-            boolean printed = job.printPage(node);
- 
-            if (printed) 
-            {
-                // End the printer job
-                job.endJob();
-            } 
-            else
-            {
-                // Write Error Message
-                printProducts.textProperty().unbind();
-                printProducts.setText("Printing failed.");
-            }
-        } 
-        else
-        {
-            // Write Error Message
-            printProducts.setText("Could not create a printer job.");
-        }
-    }    
+  
     
 }

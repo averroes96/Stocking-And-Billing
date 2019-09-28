@@ -34,7 +34,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -55,7 +54,7 @@ public class NewRecordController implements Initializable {
     @FXML public TextField paid;
     @FXML public ChoiceBox absPres;
     @FXML public Button addButton,returnButton;
-    @FXML public Label min;
+    @FXML public Label min,paidStatus;
     
     private Employer employer = new Employer();
     private Employer selectedEmployer = new Employer();
@@ -145,7 +144,7 @@ public class NewRecordController implements Initializable {
             }
         }
         catch (NumberFormatException e) {
-            alert.show("Error", "Paid salary should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR,false);
+            alert.show("Error", "Paid amount should be a decimal number (eg: 2000, 10000)", Alert.AlertType.ERROR,false);
             return false;
         }
     }
@@ -251,8 +250,8 @@ public class NewRecordController implements Initializable {
                 }
 
             }
-            catch (Exception e) {
-                alert.show("Error", e.getMessage(), Alert.AlertType.ERROR,false);
+            catch (IOException | NumberFormatException | SQLException e) {
+                alert.show("Uknown Error", e.getMessage(), Alert.AlertType.ERROR,false);
             }
         }
 
@@ -293,6 +292,43 @@ public class NewRecordController implements Initializable {
         
             minimize(Action);
         
+        });
+
+        paid.setOnKeyPressed(Action -> {
+            
+        if (!paid.getText().matches("^[0-9]?[0-9]+$")) {
+            paidStatus.setVisible(true);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            paidStatus.setVisible(false);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        paid.setOnKeyTyped(Action -> {
+            
+        if (!paid.getText().matches("^[0-9]?[0-9]+$")) {
+            paidStatus.setVisible(true);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            paidStatus.setVisible(false);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        }); 
+        paid.setOnKeyReleased(Action -> {
+            
+        if (!paid.getText().matches("^[0-9]?[0-9]+$")) {
+            paidStatus.setVisible(true);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            paidStatus.setVisible(false);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
         });        
         
         

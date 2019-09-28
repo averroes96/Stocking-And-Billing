@@ -9,6 +9,7 @@ import Data.Employer;
 import Data.Record;
 import static Include.Common.dateFormatter;
 import static Include.Common.getConnection;
+import static Include.Common.minimize;
 import Include.SpecialAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +32,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -43,6 +45,7 @@ public class UpdateRecordController implements Initializable {
     @FXML public TextField paid;
     @FXML public ChoiceBox absPres;
     @FXML public Button returnButton,saveButton;
+    @FXML public Label min,paidStatus;
     
     private Employer employer = new Employer();
     private Employer selectedEmp = new Employer();
@@ -213,7 +216,52 @@ public class UpdateRecordController implements Initializable {
             } catch (IOException ex) {
                 alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }
+        });
+        
+        min.setOnMouseClicked(Action -> {
+        
+            minimize(Action);
+        
+        });
+        
+       paid.setOnKeyPressed(Action -> {
+            
+        if (!paid.getText().matches("^[0-9]?[0-9]+$")) {
+            paidStatus.setVisible(true);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            paidStatus.setVisible(false);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        });
+        paid.setOnKeyTyped(Action -> {
+            
+        if (!paid.getText().matches("^[0-9]?[0-9]+$")) {
+            paidStatus.setVisible(true);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            paidStatus.setVisible(false);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
+        }); 
+        paid.setOnKeyReleased(Action -> {
+            
+        if (!paid.getText().matches("^[0-9]?[0-9]+$")) {
+            paidStatus.setVisible(true);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:red;-fx-padding:0 0 0 40");
+        }
+        else{
+            paidStatus.setVisible(false);
+            paid.setStyle("-fx-border-width: 2; -fx-border-color:green;-fx-padding:0 0 0 40");
+        }
+            
         });        
+
+        
 
         
         

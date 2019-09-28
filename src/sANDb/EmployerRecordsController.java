@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -62,6 +64,9 @@ public class EmployerRecordsController implements Initializable {
     
     private Employer selectedEmployer = new Employer();
     private Employer employer = new Employer();
+    
+    private double xOffset = 0;
+    private double yOffset = 0;
     
     public void getInfo(Employer employer, Employer admin){
         
@@ -239,6 +244,20 @@ public class EmployerRecordsController implements Initializable {
                         scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
                         stage.setScene(scene);
                         stage.show();
+                            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    xOffset = event.getSceneX();
+                                    yOffset = event.getSceneY();
+                                }
+                            });
+                            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    stage.setX(event.getScreenX() - xOffset);
+                                    stage.setY(event.getScreenY() - yOffset);
+                                }
+                            });                         
             } catch (IOException ex) {
                 alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }                        
@@ -395,7 +414,22 @@ public class EmployerRecordsController implements Initializable {
                         scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
                         scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());                          
                         stage.setScene(scene);
-                        stage.show();            
+                        stage.show();
+                            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    xOffset = event.getSceneX();
+                                    yOffset = event.getSceneY();
+                                }
+                            });
+                            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    stage.setX(event.getScreenX() - xOffset);
+                                    stage.setY(event.getScreenY() - yOffset);
+                                }
+                            });                         
+                        
             } catch (IOException ex) {
                 alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
             }

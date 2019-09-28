@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sellBill" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ce7422b-06f5-4267-b013-60cf923a66d0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#008080">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="3415a097-d199-41d3-8bfa-86ca4a0740ce"/>
+	<parameter name="sell_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select * FROM sell,product where sell.prod_id = product.prod_id AND sell_date = $P{sell_date};]]>
+	</queryString>
+	<field name="sell_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sellPrice" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sell_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="emp_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prod_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hasPayment" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="facture_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="reference" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="size" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="brand" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="add_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="color" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="imageURL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sold" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="sell_id_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{sell_id}]]></variableExpression>
+	</variable>
+	<variable name="sellPrice_1" class="java.lang.Integer" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{sellPrice}]]></variableExpression>
+	</variable>
+	<variable name="sell_id_2" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{sell_id}]]></variableExpression>
+	</variable>
+	<variable name="sellPrice_2" class="java.lang.Integer" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{sellPrice}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="145" y="20" width="260" height="48" uuid="4c6e4981-fe6d-4906-b1d0-ed902c1e3950"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="24"/>
+				</textElement>
+				<text><![CDATA[H.S.FASHION]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="210" y="44" width="134" height="35" uuid="14bc9f4f-5fba-4a4c-bd1e-8daf0a111362"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="d3032a6d-c34d-4e9b-a98d-c23ae9e4041c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[sell_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="d2aafef9-d74e-4b7b-9a29-74a6a720b8a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[sellPrice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="50c628a7-e746-46ee-a67b-f6cfeac11192"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="b3845209-0bca-4903-b87e-bc9f403072d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[reference]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="449b2e2d-fbb0-401d-99da-e6974ca36c9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[color]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="ee4933f6-df5c-4cfa-8ce0-32bb78b6cb2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sell_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="c3b0b228-f637-45f1-a314-fe0683090698"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sellPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="39e3373e-2f37-400b-a8a9-6ced7732d308"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{size}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="af46dbd6-ba8c-4828-962c-1ec3559bdd57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="20" uuid="e2c8a314-7d66-42c6-b077-ac3163d58e9b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="19" width="87" height="20" uuid="402beafb-46b3-4da0-aae0-99b1f7333c0e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total sells :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="19" width="69" height="20" uuid="d7353931-af89-4c3d-b2f3-b7c7b87a4544"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sell_id_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="19" width="79" height="20" uuid="0a26a624-39cf-41e3-9e0e-ca8ad3be66d1"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total sum :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="279" y="19" width="100" height="20" uuid="f9d22f29-6cd9-4763-bf23-d3f37433b30d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sellPrice_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="420" y="0" width="80" height="20" uuid="cf9e64d2-ddf4-420b-9f17-e14242f6ace8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="0" width="40" height="20" uuid="506bad92-cfbe-4057-bb7e-8f7b575159ff"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

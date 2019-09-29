@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.EmployerStatsController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.EmployerStatsController">
    <children>
       <Text fill="#dddddd" layoutX="435.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EMPLOYER'S STATS">
          <font>
@@ -25,54 +28,7 @@
             <Image url="@images/icons8_statistics_filled_100px.png" />
          </image>
       </ImageView>
-      <BorderPane layoutX="18.0" layoutY="73.0" prefHeight="378.0" prefWidth="959.0">
-         <left>
-            <SplitPane dividerPositions="0.15" focusTraversable="false" orientation="VERTICAL" prefHeight="375.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="198.0">
-                     <children>
-                        <Text fill="#3d4956" layoutX="77.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FILTER">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="52.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8_filter_60px.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #3D4956;">
-                     <children>
-                        <DatePicker fx:id="startDate" editable="false" layoutX="24.0" layoutY="44.0" prefHeight="40.0" prefWidth="150.0" />
-                        <Text fill="#dddddd" layoutX="81.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="54.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8_start_48px.png" />
-                           </image>
-                        </ImageView>
-                        <DatePicker fx:id="endDate" editable="false" layoutX="24.0" layoutY="154.0" prefHeight="40.0" prefWidth="150.0" />
-                        <Text fill="#dddddd" layoutX="85.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="END">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="59.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8_end_60px_1.png" />
-                           </image>
-                        </ImageView>
-                        <ChoiceBox fx:id="type" layoutX="24.0" layoutY="241.0" prefHeight="40.0" prefWidth="150.0" />
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
-         </left>
+      <BorderPane layoutX="21.0" layoutY="163.0" prefHeight="500.0" prefWidth="959.0">
          <center>
             <BarChart fx:id="sellsPerEmployer" prefHeight="378.0" prefWidth="410.0" BorderPane.alignment="CENTER">
                <xAxis>
@@ -90,6 +46,26 @@
                </font>
             </Text>
          </top>
+         <bottom>
+            <Pane prefHeight="133.0" prefWidth="959.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+         </bottom>
       </BorderPane>
+      <ToolBar layoutX="226.0" layoutY="62.0" prefHeight="80.0" prefWidth="550.0" style="-fx-padding: 10; -fx-background-radius: 10;">
+         <items>
+            <DatePicker fx:id="startDate" editable="false" prefHeight="40.0" prefWidth="150.0" />
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_arrow_60px.png" />
+               </image>
+            </ImageView>
+            <DatePicker fx:id="endDate" editable="false" prefHeight="40.0" prefWidth="150.0" />
+            <Separator orientation="VERTICAL" prefHeight="40.0" prefWidth="20.0" />
+            <ChoiceBox fx:id="type" prefHeight="40.0" prefWidth="150.0" />
+         </items>
+      </ToolBar>
    </children>
+   <stylesheets>
+      <URL value="@Layout/custom.css" />
+      <URL value="@Layout/buttons.css" />
+   </stylesheets>
 </AnchorPane>

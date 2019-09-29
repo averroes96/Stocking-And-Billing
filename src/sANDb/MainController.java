@@ -1697,7 +1697,7 @@ public class MainController implements Initializable {
         printSells.setOnAction(Action -> {
         
             JasperReporter jr = new JasperReporter();
-            jr.params.put("sell_date", dateField.getEditor().getText());
+            jr.params.put("sell_date", sellDateField.getEditor().getText());
             jr.ShowReport("");
         
         });

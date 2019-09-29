@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -136,7 +137,7 @@ public class EmployerStatsController implements Initializable {
                 for(final XYChart.Data<String, Integer> data : series.getData()){
             
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-                Tooltip.install(data.getNode(), new Tooltip(String.valueOf(data.getYValue().intValue())));//To change body of generated methods, choose Tools | Templates.
+                Tooltip.install(data.getNode(), new Tooltip(data.getYValue().toString()));//To change body of generated methods, choose Tools | Templates.
             });
         }            
             
@@ -154,11 +155,13 @@ public class EmployerStatsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        loadBarChart("");
+        loadBarChart(" AND sell_date BETWEEN curdate() AND date(curdate() - INTERVAL 7 day)");
         startDate.setConverter(dateFormatter());
+        startDate.getEditor().setText(LocalDate.now().minusWeeks(1).toString());
         endDate.setConverter(dateFormatter());
+        endDate.getEditor().setText(LocalDate.now().toString());
         type.setItems(typeList);
-        type.setValue("ALL");
+        type.getSelectionModel().select(0);
 
         type.setOnAction(Action -> {
         

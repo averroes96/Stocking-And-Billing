@@ -8,21 +8,16 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="S&B.jar" size="678168" download="eager" />
+    <jar href="S&B.jar" size="674344" download="eager" />
     <jar href="lib\commons-beanutils-1.9.4.jar" size="246918" download="eager" />
     <jar href="lib\commons-collections4-4.4.jar" size="751914" download="eager" />
     <jar href="lib\commons-digester-2.1.jar" size="196768" download="eager" />
     <jar href="lib\commons-digester3-3.2.jar" size="241614" download="eager" />
     <jar href="lib\commons-logging-1.2.jar" size="61829" download="eager" />
+    <jar href="lib\ecj-4.3.1.jar" size="1830791" download="eager" />
     <jar href="lib\jasperreports-6.9.0.jar" size="5597248" download="eager" />
-    <jar href="lib\jasperreports-annotation-processors-6.9.0.jar" size="19238" download="eager" />
-    <jar href="lib\jasperreports-chart-customizers-6.9.0.jar" size="44997" download="eager" />
-    <jar href="lib\jasperreports-chart-themes-6.9.0.jar" size="180584" download="eager" />
-    <jar href="lib\jasperreports-custom-visualization-6.9.0.jar" size="122827" download="eager" />
     <jar href="lib\jasperreports-fonts-6.9.0.jar" size="2480420" download="eager" />
-    <jar href="lib\jasperreports-functions-6.9.0.jar" size="32647" download="eager" />
     <jar href="lib\jasperreports-javaflow-6.9.0.jar" size="5545011" download="eager" />
-    <jar href="lib\jasperreports-metadata-6.9.0.jar" size="9948" download="eager" />
     <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
   </resources>

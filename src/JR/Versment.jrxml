@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Versment" pageWidth="550" pageHeight="350" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="510" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="548b53b7-101f-4231-9bb8-d24f77a8bd55">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="payID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM payment,sell,product WHERE pay_id = $P{payID}]]>
+	</queryString>
+	<field name="pay_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="paid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rest" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sell_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sellPrice" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sell_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="emp_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prod_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hasPayment" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="facture_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="reference" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="size" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="brand" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="add_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="color" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="imageURL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sold" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="6" width="227" height="61" uuid="02faa504-954c-49c7-b31e-6bd0fdb939f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Serif" size="48" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Versement]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="386" y="0" width="124" height="25" uuid="508f6c72-1ae9-4f1a-8ad7-63571d248b06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="77" height="67" uuid="6390a82c-14dd-4faa-9895-2cef81bb0c1a"/>
+				<imageExpression><![CDATA["C:\\Users\\med\\Pictures\\hsf.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="107" splitType="Stretch">
+			<staticText>
+				<reportElement x="143" y="13" width="107" height="26" uuid="3b32ddea-3559-4814-b57e-c4764944f50d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="250" y="39" width="114" height="26" uuid="88dd742c-616c-4a08-81c3-ed0076033ebf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{size}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="65" width="114" height="26" uuid="79d38c04-3dd5-4203-8dbc-e172219791cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="13" width="114" height="26" uuid="480957af-3d57-460e-8fe3-48a22eeafd05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reference}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="143" y="39" width="107" height="26" uuid="1ceede6a-11c7-4733-a574-a8ca85c3c811"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIZE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="65" width="107" height="26" uuid="c41f16ab-dd37-4372-bac4-4a1fb69da895"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COLOR :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="170" height="28" uuid="1c402cf6-745b-4c05-aa80-12083cbd3d9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[VERSMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="0" width="170" height="28" uuid="fc9c4e13-08d3-4f02-8e27-a905f40310f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PAID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="170" height="28" uuid="84b5fe34-a121-47dc-9445-5b00827a2d27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LEFT]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement x="170" y="0" width="170" height="70" uuid="c4ebe32f-e635-4811-a60a-fc8d2c14f991"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="170" height="70" uuid="e494bc01-b751-4937-b04c-fce0721e9d90"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rest}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="170" height="70" uuid="ca3d91ea-ab48-445a-97e6-37c198a6785b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pay_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

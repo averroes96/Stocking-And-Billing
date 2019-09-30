@@ -587,7 +587,7 @@
             </ButtonBar>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <TableView fx:id="sellsTable" layoutX="41.0" layoutY="85.0" prefHeight="421.0" prefWidth="788.0" style="-fx-background-color: white; -fx-border-color: #000;" stylesheets="@Layout/custom.css">
               <columns>

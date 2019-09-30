@@ -10,8 +10,6 @@ import Include.SpecialAlert;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javax.swing.JFrame;
 import net.sf.jasperreports.engine.JRException;
@@ -39,8 +37,10 @@ public class JasperReporter extends JFrame{
         
         Connection conn = getConnection();
         
+        if(type.equals("sellsReport")){
+        
         try {
-            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\sellBill.jrxml");
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\sellDay.jrxml");
             JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
             JRViewer viewer = new JRViewer(jp);
             viewer.setOpaque(true);
@@ -50,7 +50,60 @@ public class JasperReporter extends JFrame{
             this.setSize(900, 500);
             this.setVisible(true);
         } catch (JRException ex) {
-            Logger.getLogger(JasperReporter.class.getName()).log(Level.SEVERE, null, ex);
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }
+        }
+        else if(type.equals("productsReport")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\products.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);
+            this.setVisible(true);
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
+        }
+        else if(type.equals("versement")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\versment.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);            
+            this.setVisible(true);
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
+        }
+        else if(type.equals("paymentsReport")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\payReport.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);
+            this.setVisible(true);
+            
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
         }
 
         

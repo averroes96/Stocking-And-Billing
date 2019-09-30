@@ -33,7 +33,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -1698,9 +1697,32 @@ public class MainController implements Initializable {
         
             JasperReporter jr = new JasperReporter();
             jr.params.put("sell_date", sellDateField.getEditor().getText());
-            jr.ShowReport("");
+            jr.ShowReport("sellsReport");
         
         });
+        
+        printProducts.setOnAction(Action -> {
+        
+            JasperReporter jr = new JasperReporter();
+            jr.ShowReport("productsReport");
+        
+        });
+        printVerse.setOnAction(Action -> {
+            
+            
+            JasperReporter jr = new JasperReporter();
+            jr.params.put("payID", paymentsTable.getSelectionModel().getSelectedItem().getPayID());
+            jr.ShowReport("versement");
+        
+        });
+        printPayments.setOnAction(Action -> {
+            
+            
+            JasperReporter jr = new JasperReporter();
+            jr.params.put("pDate", sellDateField.getEditor().getText());
+            jr.ShowReport("paymentsReport");
+        
+        });        
                 
         
         

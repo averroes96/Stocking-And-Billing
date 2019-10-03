@@ -22,8 +22,8 @@ A javaFX/MySql desktop application for managing small shoe store
 - See employers stats
 
 ### Admin login : 
-  . Username : admin
-  . Password : admin
+  - Username : admin
+  - Password : admin
 
 ## Important :
 - Import 'DB.sql' using xampp's phpMyAdmin.

@@ -33,7 +33,7 @@ public class JasperReporter extends JFrame{
         
     }
 
-    public void ShowReport(String type){
+    public void ShowReport(String type,String query){
         
         Connection conn = getConnection();
         
@@ -105,6 +105,79 @@ public class JasperReporter extends JFrame{
         }            
             
         }
+        else if(type.equals("sellBill")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\sellBill.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);
+            this.setVisible(true);
+            
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
+        } 
+        else if(type.equals("employersList")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\EmployersList.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);
+            this.setVisible(true);
+            
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
+        }
+        else if(type.equals("employer")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\Employer.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);
+            this.setVisible(true);
+            
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
+        }
+        else if(type.equals("records")){
+            
+        try {
+            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\med\\Documents\\NetBeansProjects\\S&B\\src\\JR\\Records.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(report, params,conn);
+            JRViewer viewer = new JRViewer(jp);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+            
+            this.add(viewer);
+            this.setSize(900, 500);
+            this.setVisible(true);
+            
+        } catch (JRException ex) {
+            alert.show("JR Error", ex.getMessage(), Alert.AlertType.ERROR, true);
+        }            
+            
+        }        
+        
 
         
     }

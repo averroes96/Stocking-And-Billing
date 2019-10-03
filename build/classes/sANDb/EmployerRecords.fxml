@@ -103,7 +103,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Pane layoutX="279.0" layoutY="437.0" prefHeight="139.0" prefWidth="700.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+      <Pane layoutX="279.0" layoutY="437.0" prefHeight="139.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10;">
          <children>
             <Text fill="#3d4956" layoutX="26.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Days Absent this month :">
                <font>
@@ -146,6 +146,18 @@
             </ImageView>
          </graphic>
       </Label>
+      <Button id="rich-blue" fx:id="printRecords" layoutX="733.0" layoutY="480.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="192.0" text="PRINT RECORDS">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="109.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_print_file_48px_2.png" />
+               </image>
+            </ImageView>
+         </graphic>         
+      </Button>
    </children>
    <stylesheets>
       <URL value="@Layout/custom.css" />

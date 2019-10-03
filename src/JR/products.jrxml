@@ -46,6 +46,9 @@
 	<variable name="reference_1" class="java.lang.Integer" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{reference}]]></variableExpression>
 	</variable>
+	<variable name="price_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{price}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -60,6 +63,7 @@
 			</staticText>
 			<textField pattern="dd/MM/yyyy h.mm a">
 				<reportElement x="453" y="0" width="100" height="20" uuid="0dab82bb-3ede-4ec8-8f07-bea6b0bba7f6"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
@@ -144,9 +148,9 @@
 			<textField>
 				<reportElement x="237" y="0" width="79" height="20" uuid="2b2f52b8-100e-4fd4-8f5e-6b7966ddab63"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{price} + ".00 DA"]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement x="316" y="0" width="79" height="20" uuid="3936f4ad-1043-4903-9ff4-c80e15b85097"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{add_date}]]></textFieldExpression>
@@ -182,7 +186,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="105" splitType="Stretch">
+		<band height="139" splitType="Stretch">
+			<rectangle>
+				<reportElement x="158" y="103" width="237" height="23" uuid="7829c6ec-3e48-41b8-9b2a-853b235123b9"/>
+			</rectangle>
 			<rectangle>
 				<reportElement x="158" y="83" width="237" height="20" uuid="b9dbb8e4-864a-4019-8004-fa61f32bec17"/>
 			</rectangle>
@@ -206,7 +213,7 @@
 			<textField>
 				<reportElement x="284" y="63" width="100" height="20" uuid="0adbf3d6-bb71-470a-9a86-cb807a61f4d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{prod_id_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{prod_id_1} + " Product(s)"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="181" y="83" width="103" height="20" uuid="630012e8-1e6a-4ab9-99c0-8aac1919c769"/>
@@ -218,7 +225,19 @@
 			<textField>
 				<reportElement x="284" y="83" width="100" height="20" uuid="3be1f629-324c-4f29-9c1e-85f7f970174b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{reference_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{reference_1} + " Product(s)"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="181" y="103" width="103" height="23" uuid="af02df5b-0a10-4ddc-bb63-0911a03c46b8"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sum :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="284" y="103" width="111" height="23" uuid="8fea5e03-2956-456c-b4ba-67d15c6a998d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{price_1} + ".00 DA"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

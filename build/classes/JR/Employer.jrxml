@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Employer" pageWidth="595" pageHeight="300" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cfd0a91b-e39d-4dc3-9375-aa65ce4f3a1b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM employers WHERE emp_id = $P{empID}]]>
+	</queryString>
+	<field name="emp_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fullname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telephone" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="salary" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="joined_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="admin" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="active" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="username" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="password" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="emp_image" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="75" height="65" uuid="921808fb-4b0d-40d8-bc09-79e4eb2e4cff"/>
+				<imageExpression><![CDATA["C:\\Users\\med\\Pictures\\hsf.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="470a931a-b42d-43f4-8d45-74db5f45da7a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[H.S.FASHION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="20" width="225" height="35" uuid="594ce0df-6b14-4bba-b3dc-1718f61bfcdf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="24"/>
+				</textElement>
+				<text><![CDATA[Employer card]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="166" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="17" width="141" height="131" uuid="b84f68dc-7155-4497-b87f-90cf76e33c0b"/>
+				<imageExpression><![CDATA[$F{emp_image}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="305" y="32" width="213" height="39" uuid="e3e111d1-5d36-4e05-b7db-06cf0fdafad6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fullname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="162" y="32" width="143" height="39" forecolor="#006666" uuid="0c9677a0-43ca-4dd4-bda7-ab271ed6fc5f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="18"/>
+				</textElement>
+				<text><![CDATA[FULLNAME :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="71" width="143" height="34" forecolor="#006666" uuid="a7cbc553-fef7-485e-8449-5fed5ed34477"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="18"/>
+				</textElement>
+				<text><![CDATA[JOIEND DATE :]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="305" y="71" width="213" height="34" uuid="c0aa02f6-0805-4764-8e20-17e9d7ad68bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{joined_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="162" y="105" width="143" height="32" forecolor="#006666" uuid="cec0e874-7744-4b83-a5ff-5c4c955e3a39"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="18"/>
+				</textElement>
+				<text><![CDATA[SALARY :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="305" y="107" width="213" height="30" uuid="08bc6e58-2a10-4f2d-b626-f3fcc28220e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salary} + "  DA"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

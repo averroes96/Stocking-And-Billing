@@ -10,6 +10,7 @@ import Data.Record;
 import static Include.Common.getConnection;
 import static Include.Common.minimize;
 import Include.SpecialAlert;
+import JR.JasperReporter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -54,7 +55,7 @@ public class EmployerRecordsController implements Initializable {
     @FXML public TableColumn<Record, Integer> payment;
     @FXML public TableColumn recordAct1,recordAct2;
     @FXML public Label fullname,image,phone,daysAbsent,paidAmount,prodSold,salary,joinDate,minButton,header;
-    @FXML public Button newRecordButton,returnButton;
+    @FXML public Button newRecordButton,returnButton,printRecords;
     
     private SpecialAlert alert = new SpecialAlert();
     
@@ -439,6 +440,52 @@ public class EmployerRecordsController implements Initializable {
         minButton.setOnMouseClicked(Action ->{
         
             minimize(Action);
+        
+        });
+        
+        printRecords.setOnAction(Action -> {
+        
+            JasperReporter jr = new JasperReporter();
+            jr.params.put("empID", selectedEmployer.getEmpID());
+            
+            if(selectedMonth.getSelectionModel().getSelectedItem().equals("January")){
+                jr.params.put("month", 1);               
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("February")){
+                jr.params.put("month", 2);               
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("Mars")){
+                jr.params.put("month", 3);                
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("April")){
+                jr.params.put("month", 4);                
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("May")){
+                jr.params.put("month", 5);               
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("June")){
+                jr.params.put("month", 6);                
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("July")){
+                jr.params.put("month", 7);                 
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("August")){
+                jr.params.put("month", 8);                
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("September")){
+                jr.params.put("month", 9);                
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("October")){
+                jr.params.put("month", 10);                 
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("November")){
+                jr.params.put("month", 11);                
+            }
+            else if(selectedMonth.getSelectionModel().getSelectedItem().equals("December")){
+                jr.params.put("month", 12);               
+            }             
+
+            jr.ShowReport("records","");        
         
         });
         

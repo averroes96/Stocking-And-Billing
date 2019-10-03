@@ -114,7 +114,7 @@ public class MainController implements Initializable {
     @FXML private DatePicker payDateField;    
     @FXML private Label productImg,picLabel,fullnameLabel,phoneLabel,salaryLabel,joinedLabel;
     @FXML private Label idField,selectedSize,sum,totalProdSold,weekSum,weekSells,monthSum,monthSells,allSum,allSells,revSum,revTotal;    
-    @FXML public Button addProd,productStats,printPayments,printEmployers,printSells;
+    @FXML public Button addProd,productStats,printPayments,printEmployers,printSells,printEmployer;
     @FXML public Button updateImage;
     @FXML private Button updateProduct; 
     @FXML private Button deleteProduct;
@@ -286,23 +286,7 @@ public class MainController implements Initializable {
     private boolean checkInputs()
     {
         if (refField.getText().equals("") && priceField.getText().equals("")) {
-            try {
-                //alert.show("Missing required Fields", "Reference and Price fields cannot be empty!", Alert.AlertType.WARNING);                        ((Node)event.getSource()).getScene().getWindow().hide();
-                Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MyAlert.fxml"));
-                AnchorPane root = (AnchorPane)loader.load();
-                MyAlertController maControl = (MyAlertController)loader.getController();
-                maControl.setAlert("warning_alert", "Missing required Fields", "Reference and Price fields cannot be empty!");
-                        Scene scene = new Scene(root);
-                        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
-                        stage.setScene(scene);
-                        stage.show();
-                        return false;
-            } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            alert.show("Missing required Fields", "Reference and Price fields cannot be empty!", Alert.AlertType.WARNING,false);
         }
         else if (refField.getText().equals("")) {
             alert.show("Missing required Fields", "Please enter product name", Alert.AlertType.WARNING,false);
@@ -1544,85 +1528,6 @@ public class MainController implements Initializable {
         Tooltip.install(
                 billPane, 
                 new Tooltip("In order to add a new bill select the sells you want to bill"));
-        
-        newBillBtn.setOnAction(Action -> {
-            ObservableList<Sell> billList = sellsTable.getSelectionModel().getSelectedItems();
-            int billID = insertBill();
-            int factureSum = 0;
-     
-            for(Sell e : billList){
-            try {
-
-                Connection con = getConnection();
-
-                if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
-                }
-
-                    PreparedStatement ps;
-
-                    ps = con.prepareStatement("UPDATE sell SET facture_id = ? WHERE sell_id = ?");
-                    ps.setInt(1, billID);
-                    ps.setInt(2, e.getSellID());
-
-                    ps.executeUpdate();               
-                
-                    con.close();
-                    
-                    factureSum += e.getSellPrice();
-                
-            }
-            catch (SQLException ex) {
-                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
-            }
-            }
-
-            try {
-
-                Connection con = getConnection();
-
-                if(con == null) {
-                    alert.show("Connection Error", "Failed to connect to database server", Alert.AlertType.ERROR,true);
-                }
-
-                    PreparedStatement ps;
-
-                    ps = con.prepareStatement("UPDATE facture SET sum = ? WHERE facture_id = ?");
-                    ps.setInt(1, factureSum);
-                    ps.setInt(2, billID);
-
-                    ps.executeUpdate();               
-                
-                    con.close();
-                
-            }
-            catch (SQLException ex) {
-                alert.show("Uknown error", ex.getMessage(), Alert.AlertType.ERROR,true);
-            }            
-            
-            String headerMsg = "-----------------------  H.S.Fashion's Bill Number : " + billID + "  -----------------------";
-            headerMsg += "\n\n\n Date :  " + LocalDate.now().toString();
-            
-            String footerMsg = "\n\t\t\t\t\t\t Total : " + factureSum;
-            footerMsg += "\n\n----------------------------  Thanks for your visit :)  ----------------------------";
-            try {
-                Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBill.fxml"));
-                AnchorPane root = (AnchorPane)loader.load();
-                NewBillController upControl = (NewBillController)loader.getController();
-                upControl.setInfo(billList,headerMsg,footerMsg);
-                Scene scene = new Scene(root);
-                scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-                stage.initStyle(StageStyle.TRANSPARENT);                
-                scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
-                scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
-                stage.setScene(scene);            
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        });
 
         sellStats.setOnAction(Action -> {
         
@@ -1697,14 +1602,14 @@ public class MainController implements Initializable {
         
             JasperReporter jr = new JasperReporter();
             jr.params.put("sell_date", sellDateField.getEditor().getText());
-            jr.ShowReport("sellsReport");
+            jr.ShowReport("sellsReport","");
         
         });
         
         printProducts.setOnAction(Action -> {
         
             JasperReporter jr = new JasperReporter();
-            jr.ShowReport("productsReport");
+            jr.ShowReport("productsReport","");
         
         });
         printVerse.setOnAction(Action -> {
@@ -1712,7 +1617,7 @@ public class MainController implements Initializable {
             
             JasperReporter jr = new JasperReporter();
             jr.params.put("payID", paymentsTable.getSelectionModel().getSelectedItem().getPayID());
-            jr.ShowReport("versement");
+            jr.ShowReport("versement","");
         
         });
         printPayments.setOnAction(Action -> {
@@ -1720,7 +1625,36 @@ public class MainController implements Initializable {
             
             JasperReporter jr = new JasperReporter();
             jr.params.put("pDate", sellDateField.getEditor().getText());
-            jr.ShowReport("paymentsReport");
+            jr.ShowReport("paymentsReport","");
+        
+        });
+        newBillBtn.setOnAction(Action -> {
+            String selectedSells = "";
+            
+            for(Sell sell : sellsTable.getSelectionModel().getSelectedItems()){
+            
+                selectedSells += sell.getSellID() + ",";
+            
+            }
+            selectedSells = selectedSells.substring(0, selectedSells.length() - 1);
+            JasperReporter jr = new JasperReporter();
+            jr.params.put("selectedSells", selectedSells);                        
+            jr.ShowReport("sellBill","");            
+        
+        });
+        printEmployers.setOnAction(Action -> {
+        
+            JasperReporter jr = new JasperReporter();
+            jr.ShowReport("employersList","");
+        
+        });
+        printEmployer.setOnAction(Action -> {
+            
+            
+            JasperReporter jr = new JasperReporter();
+            jr.params.put("empID", employersTable.getSelectionModel().getSelectedItem().getEmpID());
+            jr.ShowReport("employer","");
+            
         
         });        
                 

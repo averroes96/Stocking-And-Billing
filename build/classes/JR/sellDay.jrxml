@@ -108,7 +108,7 @@
 			</staticText>
 			<textField pattern="dd/MM/yyyy h.mm a">
 				<reportElement x="421" y="0" width="134" height="35" uuid="14bc9f4f-5fba-4a4c-bd1e-8daf0a111362"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -117,8 +117,9 @@
 				<reportElement x="0" y="0" width="87" height="69" uuid="c17fd789-57e7-4261-8878-7aba3045e3e4"/>
 				<imageExpression><![CDATA["C:\\Users\\med\\Pictures\\hsf.png"]]></imageExpression>
 			</image>
-			<textField>
-				<reportElement x="233" y="59" width="100" height="20" uuid="68d55001-6dde-4534-986d-87b1ae0830cc"/>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="180" y="59" width="185" height="20" uuid="68d55001-6dde-4534-986d-87b1ae0830cc"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{sell_date}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -175,7 +176,7 @@
 			<textField>
 				<reportElement x="111" y="0" width="111" height="20" uuid="c3b0b228-f637-45f1-a314-fe0683090698"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{sellPrice}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sellPrice} + ".00 DA"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="222" y="0" width="111" height="20" uuid="39e3373e-2f37-400b-a8a9-6ced7732d308"/>
@@ -224,7 +225,7 @@
 			<textField>
 				<reportElement x="128" y="53" width="69" height="20" uuid="d7353931-af89-4c3d-b2f3-b7c7b87a4544"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{sell_id_2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{sell_id_2} + " Sell(s)"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="365" y="53" width="79" height="20" uuid="0a26a624-39cf-41e3-9e0e-ca8ad3be66d1"/>
@@ -236,7 +237,7 @@
 			<textField>
 				<reportElement x="452" y="53" width="76" height="20" uuid="f9d22f29-6cd9-4763-bf23-d3f37433b30d"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{sellPrice_2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{sellPrice_2} + ".00 DA"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="41" y="53" width="87" height="20" uuid="402beafb-46b3-4da0-aae0-99b1f7333c0e"/>

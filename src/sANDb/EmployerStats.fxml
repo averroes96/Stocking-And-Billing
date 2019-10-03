@@ -12,11 +12,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.EmployerStatsController">
+<AnchorPane id="AnchorPane" prefHeight="565.0" prefWidth="1000.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sANDb.EmployerStatsController">
    <children>
       <Text fill="#dddddd" layoutX="435.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EMPLOYER'S STATS">
          <font>
@@ -28,9 +27,9 @@
             <Image url="@images/icons8_statistics_filled_100px.png" />
          </image>
       </ImageView>
-      <BorderPane layoutX="21.0" layoutY="163.0" prefHeight="500.0" prefWidth="959.0">
+      <BorderPane layoutX="21.0" layoutY="163.0" prefHeight="402.0" prefWidth="959.0">
          <center>
-            <BarChart fx:id="sellsPerEmployer" prefHeight="378.0" prefWidth="410.0" BorderPane.alignment="CENTER">
+            <BarChart fx:id="sellsPerEmployer" prefHeight="462.0" prefWidth="959.0" BorderPane.alignment="CENTER">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>
@@ -46,9 +45,6 @@
                </font>
             </Text>
          </top>
-         <bottom>
-            <Pane prefHeight="133.0" prefWidth="959.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-         </bottom>
       </BorderPane>
       <ToolBar layoutX="226.0" layoutY="62.0" prefHeight="80.0" prefWidth="550.0" style="-fx-padding: 10; -fx-background-radius: 10;">
          <items>

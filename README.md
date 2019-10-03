@@ -21,6 +21,12 @@ A javaFX/MySql desktop application for managing small shoe store
 - Add/update/remove records
 - See employers stats
 
+### Admin login : 
+  Username : admin
+  Password : admin
+
 ## Important :
 - Import 'DB.sql' using xampp's phpMyAdmin.
 - Create a folder in your 'Documents' folder name it "sandb-files" where you'll store products/employers images.
+
+

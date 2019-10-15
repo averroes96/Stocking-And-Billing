@@ -46,7 +46,7 @@ CREATE TABLE `employers` (
 --
 
 INSERT INTO `employers` (`emp_id`, `fullname`, `telephone`, `salary`, `joined_date`, `admin`, `active`, `username`, `password`, `emp_image`) VALUES
-(7, 'Admin admin', 0, 2500, '2019-10-03', 1, 1, 'admin', 'admin', '');
+(7, 'Admin admin', 555555555, 2500, '2019-10-03', 1, 1, 'admin', 'admin', '');
 
 -- --------------------------------------------------------
 

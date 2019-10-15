@@ -68,7 +68,7 @@
 		<band height="166" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="17" width="141" height="131" uuid="b84f68dc-7155-4497-b87f-90cf76e33c0b"/>
-				<imageExpression><![CDATA[$F{emp_image}]]></imageExpression>
+				<imageExpression><![CDATA[( ($F{emp_image}.equals("")) ? "C:\\Users\\med\\Documents\\sandb-files\\user.png" : $F{emp_image} )]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="305" y="32" width="213" height="39" uuid="e3e111d1-5d36-4e05-b7db-06cf0fdafad6"/>

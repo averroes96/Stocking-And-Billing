@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +44,6 @@ public class ProductStatsController implements Initializable {
     private ObservableList<String> typeList = FXCollections.observableArrayList("All","Sold","In Stock");    
     
     private SpecialAlert alert = new SpecialAlert();
-    
     
     
     public void loadChart(String target){
@@ -168,9 +168,12 @@ public class ProductStatsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         startDate.setConverter(dateFormatter());
+        startDate.getEditor().setText(LocalDate.now().minusDays(30).toString());
         endDate.setConverter(dateFormatter());
+        endDate.getEditor().setText(LocalDate.now().toString());
+        startDate.setValue(LocalDate.now().minusDays(30));
+        endDate.setValue(LocalDate.now());          
         type.setItems(typeList);
-        type.setValue("All");
         type.getSelectionModel().select(0);
         
         reference.setToggleGroup(columns);
@@ -182,6 +185,8 @@ public class ProductStatsController implements Initializable {
         loadChart("reference");
         
         filter.setOnAction(Action -> {
+            
+        if(endDate.getValue().compareTo(startDate.getValue()) > 0){            
             
             if(reference.isSelected()){
             filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),reference.getText());
@@ -197,7 +202,13 @@ public class ProductStatsController implements Initializable {
             }  
             if(brand.isSelected()){
             filter(startDate.getEditor().getText(),startDate.getEditor().getText(), type.getValue().toString(),brand.getText());
-            }              
+            }
+        }
+        else {
+            
+            alert.show("ILLEGAL INTERVAL", "Start date must be inferior than the end date !", Alert.AlertType.WARNING,false);
+            
+        }  
         });
         
         

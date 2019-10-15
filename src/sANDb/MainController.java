@@ -389,7 +389,7 @@ public class MainController implements Initializable {
             productImg.setText("");
             productImg.setGraphic(new ImageView(new Image(
                     new File(data.get(index).getImage()).toURI().toString(),
-                    150, 150, true, true)));
+                    175, 175, true, true)));
         }        
         
         
@@ -403,8 +403,10 @@ public class MainController implements Initializable {
         joinedLabel.setText(employersList.get(index).getJoinDate());       
 
         if (employersList.get(index).getImage().equals("")) {
-            picLabel.setGraphic(null);
-            picLabel.setText("No image found");
+            picLabel.setText("");
+            picLabel.setGraphic(new ImageView(new Image(
+                    new File("C:\\Users\\med\\Documents\\sandb-files\\user.png").toURI().toString(),
+                    200, 200, true, true)));
         }
         else {
             picLabel.setText("");
@@ -933,7 +935,7 @@ public class MainController implements Initializable {
         
         sizes.addAll(15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44);
         
-        categories.addAll("All","Sandal","Fillete","Soiree","Sabot","Chaussure","Moccasin");
+        categories.addAll("All","Sandal","Fillete","Soiree","Sabot","Chaussure","Moccasin","Ballerine","Basquette","Other");
         catChoice.setItems(categories);
         catChoice.getSelectionModel().selectFirst();
         catChoice.setOnAction(Action -> {
@@ -1584,14 +1586,7 @@ public class MainController implements Initializable {
                 scene.getStylesheets().add(getClass().getResource("Layout/custom.css").toExternalForm());
                 scene.getStylesheets().add(getClass().getResource("Layout/buttons.css").toExternalForm());
                 stage.setScene(scene);
-                stage.show();
-                root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        stage.setX(event.getScreenX() - xOffset);
-                        stage.setY(event.getScreenY() - yOffset);
-                    } 
-                });
+                stage.showAndWait();
             } catch (IOException ex) {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }

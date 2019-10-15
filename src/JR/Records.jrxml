@@ -208,8 +208,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( ($F{absent}.intValue() == 1 ) ? "Absent" : "Present" )
-    ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( ($F{absent}.intValue() == 1 ) ? "Absent" : "Present" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="78" height="38" uuid="354eb2fb-de50-4fbd-a548-af00fa990905"/>
@@ -237,7 +236,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount} + ".00  DA" ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount} + ".00  DA"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

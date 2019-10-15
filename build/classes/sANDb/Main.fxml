@@ -304,7 +304,7 @@
 
        
          </children></AnchorPane>
-      <AnchorPane fx:id="payments" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="payments" layoutY="85.0" prefHeight="616.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="457.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -371,7 +371,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="employers" layoutY="85.0" prefHeight="616.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="657.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -587,7 +587,7 @@
             </ButtonBar>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="615.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
+      <AnchorPane fx:id="sells" layoutY="85.0" prefHeight="616.0" prefWidth="870.0" style="-fx-background-color: #3D4956;" visible="false">
          <children>
             <TableView fx:id="sellsTable" layoutX="41.0" layoutY="85.0" prefHeight="421.0" prefWidth="788.0" style="-fx-background-color: white; -fx-border-color: #000;" stylesheets="@Layout/custom.css">
               <columns>

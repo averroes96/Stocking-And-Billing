@@ -29,4 +29,7 @@ A javaFX/MySql desktop application for managing small shoe store
 - Import 'DB.sql' using xampp's phpMyAdmin.
 - Create a folder in your 'Documents' folder name it "sandb-files" where you'll store products/employers images.
 
+## Note:
+This app is outdated, check my new version https://github.com/averroes96/GDP
+
 
